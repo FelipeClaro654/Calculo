@@ -1,0 +1,104 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @processo.numero %>
+</p>
+
+<p>
+  <strong>Data distribuicao:</strong>
+  <%= @processo.data_distribuicao %>
+</p>
+
+<p>
+  <strong>Data citacao:</strong>
+  <%= @processo.data_citacao %>
+</p>
+
+<p>
+  <strong>Vara:</strong>
+  <%= @processo.vara %>
+</p>
+
+<p>
+  <strong>Tipo processo:</strong>
+  <%= @processo.tipo_processo %>
+</p>
+
+<p>
+  <strong>Data base:</strong>
+  <%= @processo.data_base %>
+</p>
+
+<p>
+  <strong>Sentenca:</strong>
+  <%= @processo.sentenca %>
+</p>
+
+<p>
+  <strong>Re:</strong>
+  <%= @processo.re %>
+</p>
+
+<p>
+  <strong>Acordao:</strong>
+  <%= @processo.acordao %>
+</p>
+
+<p>
+  <strong>Base calculo autor:</strong>
+  <%= @processo.base_calculo_autor %>
+</p>
+
+<p>
+  <strong>Tabela atualizacao:</strong>
+  <%= @processo.tabela_atualizacao_id %>
+</p>
+
+<p>
+  <strong>Cbpm ipesp:</strong>
+  <%= @processo.cbpm_ipesp_id %>
+</p>
+
+<p>
+  <strong>Cbpm ipesp valor:</strong>
+  <%= @processo.cbpm_ipesp_valor %>
+</p>
+
+<p>
+  <strong>Periodo inicial:</strong>
+  <%= @processo.periodo_inicial %>
+</p>
+
+<p>
+  <strong>Periodo final:</strong>
+  <%= @processo.periodo_final %>
+</p>
+
+<p>
+  <strong>Juros:</strong>
+  <%= @processo.juros %>
+</p>
+
+<p>
+  <strong>Tipo juros:</strong>
+  <%= @processo.tipo_juros_id %>
+</p>
+
+<p>
+  <strong>Cruz iamspe:</strong>
+  <%= @processo.cruz_iamspe_id %>
+</p>
+
+<p>
+  <strong>Cruz iamspe valor:</strong>
+  <%= @processo.cruz_iamspe_valor %>
+</p>
+
+<p>
+  <strong>Data calculo:</strong>
+  <%= @processo.data_calculo_id %>
+</p>
+
+<%= link_to 'Edit', edit_processo_path(@processo) %> |
+<%= link_to 'Back', processos_path %>

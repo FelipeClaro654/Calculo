@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  numero,: MyString
+  data_distribuicao: 
+  data_citacao: 
+  vara,: MyString
+  tipo_processo,: MyString
+  data_base,: MyString
+  sentenca,: MyString
+  re,: MyString
+  acordao,: MyString
+  base_calculo_autor,: MyString
+  tabela_atualizacao_id: 
+  cbpm_ipesp_id: 
+  cbpm_ipesp_valor: 
+  periodo_inicial: 
+  periodo_final: 
+  juros: 
+  tipo_juros_id: 
+  cruz_iamspe_id: 
+  cruz_iamspe_valor: 
+  data_calculo_id: 1
+
+two:
+  numero,: MyString
+  data_distribuicao: 
+  data_citacao: 
+  vara,: MyString
+  tipo_processo,: MyString
+  data_base,: MyString
+  sentenca,: MyString
+  re,: MyString
+  acordao,: MyString
+  base_calculo_autor,: MyString
+  tabela_atualizacao_id: 
+  cbpm_ipesp_id: 
+  cbpm_ipesp_valor: 
+  periodo_inicial: 
+  periodo_final: 
+  juros: 
+  tipo_juros_id: 
+  cruz_iamspe_id: 
+  cruz_iamspe_valor: 
+  data_calculo_id: 1

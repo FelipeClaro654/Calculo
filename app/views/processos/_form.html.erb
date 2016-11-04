@@ -1,0 +1,117 @@
+<%= form_for(processo) do |f| %>
+  <% if processo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(processo.errors.count, "error") %> prohibited this processo from being saved:</h2>
+
+      <ul>
+      <% processo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :numero %>
+    <%= f.text_field :numero %>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_distribuicao %>
+    <%= f.text_field :data_distribuicao %>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_citacao %>
+    <%= f.text_field :data_citacao %>
+  </div>
+
+  <div class="field">
+    <%= f.label :vara %>
+    <%= f.text_field :vara %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tipo_processo %>
+    <%= f.text_field :tipo_processo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_base %>
+    <%= f.text_field :data_base %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sentenca %>
+    <%= f.text_field :sentenca %>
+  </div>
+
+  <div class="field">
+    <%= f.label :re %>
+    <%= f.text_field :re %>
+  </div>
+
+  <div class="field">
+    <%= f.label :acordao %>
+    <%= f.text_field :acordao %>
+  </div>
+
+  <div class="field">
+    <%= f.label :base_calculo_autor %>
+    <%= f.text_field :base_calculo_autor %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tabela_atualizacao_id %>
+    <%= f.collection_select :tabela_atualizacao_id, TabelaAtualizacao.all, :id, :nome, include_blank: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cbpm_ipesp_id %>
+    <%= f.collection_select :cbpm_ipesp_id, CbpmIpesp.all, :id, :nome, include_blank: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cbpm_ipesp_valor %>
+    <%= f.text_field :cbpm_ipesp_valor %>
+  </div>
+
+  <div class="field">
+    <%= f.label :periodo_inicial %>
+    <%= f.text_field :periodo_inicial %>
+  </div>
+
+  <div class="field">
+    <%= f.label :periodo_final %>
+    <%= f.text_field :periodo_final %>
+  </div>
+
+  <div class="field">
+    <%= f.label :juros %>
+    <%= f.text_field :juros %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tipo_juros_id %>
+    <%= f.collection_select :tipo_juros_id, TipoJuro.all, :id, :nome, include_blank: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cruz_iamspe_id %>
+    <%= f.collection_select :tipo_juros_id, TipoJuro.all, :id, :nome, include_blank: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cruz_iamspe_valor %>
+    <%= f.text_field :cruz_iamspe_valor %>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_calculo_id %>
+    <%= f.number_field :data_calculo_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
