@@ -1,4 +1,21 @@
 class Processo < ApplicationRecord
+  validates :numero, uniqueness: true, presence: true
+  validates :data_distribuicao, presence: true
+  validates :data_citacao, presence: true
+  validates :vara, presence: true
+  validates :tipo_processo, presence: true
+  validates :data_base, presence: true
+  validates :sentenca, presence: true
+  validates :re, presence: true
+  validates :acordao, presence: true
+  validates :base_calculo_autor, presence: true
+  validates :data_base, presence: true
+  validates :cbpm_ipesp_valor, presence: true
+  validates :periodo_inicial, presence: true
+  validates :periodo_final, presence: true
+  validates :juros, presence: true
+  validates :cruz_iamspe_valor, presence: true
+
   has_many :autor, :dependent => :destroy
   accepts_nested_attributes_for :autor, reject_if: :all_blank, allow_destroy: true
   belongs_to :cbpm_ipesp

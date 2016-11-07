@@ -1,0 +1,3 @@
+$(function () {
+    $(".calendario").datetimepicker();
+});

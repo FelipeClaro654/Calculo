@@ -1,96 +1,147 @@
 <%= simple_form_for @processo do |f| %>
   <% if processo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(processo.errors.count, "error") %> prohibited this processo from being saved:</h2>
-
+    <div class="alert alert-danger alert-dismissible pull-right" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h2>
+        <%= pluralize(processo.errors.count, "erro(s)") %> encontrado(s):
+      </h2>
       <ul>
-      <% processo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% processo.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
+
+
   <% end %>
 
+  <div class="row">
     <%= f.input :numero, class: "form-control" %>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :data_distribuicao %>
+        <%= f.text_field :data_distribuicao,
+            class: "form-control date required calendario",
+            :placeholder => "__/__/__" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.input :data_distribuicao %>
   </div>
 
-  <div class="field">
-    <%= f.input :data_citacao %>
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :data_citacao %>
+      <%= f.text_field :data_citacao, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.input :vara %>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.input :tipo_processo %>
   </div>
 
-  <div class="field">
-    <%= f.input :data_base %>
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :data_base %>
+      <%= f.text_field :data_base, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.input :sentenca %>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.input :re %>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.input :acordao %>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.input :base_calculo_autor %>
   </div>
 
-  <div class="field">
-    <%= f.collection_select :tabela_atualizacao_id,
-        TabelaAtualizacao.all, :id, :nome, include_blank: false %>
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :tabela_atualizacao_id %>
+      <%= f.collection_select :tabela_atualizacao_id,
+          TabelaAtualizacao.all, :id, :nome,
+          {:include_blank => false}, {:class => 'form-control'} %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.collection_select :cbpm_ipesp_id,
-        CbpmIpesp.all, :id, :nome, include_blank: false %>
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :cbpm_ipesp_id %>
+      <%= f.collection_select :cbpm_ipesp_id,
+          CbpmIpesp.all, :id, :nome,
+          {:include_blank => false}, {:class => 'form-control'} %>
+    </div>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.input :cbpm_ipesp_valor %>
   </div>
 
-  <div class="field">
-    <%= f.input :periodo_inicial %>
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :periodo_inicial %>
+      <%= f.text_field :periodo_inicial, class: "form-control",
+          :placeholder => "__/__/__", :data => {:provide => 'datepicker' }%>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.input :periodo_final %>
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :periodo_final %>
+      <%= f.text_field :periodo_final, class: "form-control",
+          :placeholder => "__/__/__", :data => {:provide => 'datepicker' }%>
+    </div>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.input :juros %>
   </div>
 
-  <div class="field">
-    <%= f.collection_select :tipo_juro_id,
-        TipoJuro.all, :id, :nome, include_blank: false %>
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :tipo_juro_id %>
+      <%= f.collection_select :tipo_juro_id,
+          TipoJuro.all, :id, :nome,
+          {:include_blank => false}, {:class => 'form-control'} %>
+    </div>
+
   </div>
 
-  <div class="field">
-    <%= f.collection_select :cruz_iamspe_id, CruzIamspe.all, :id, :nome, include_blank: false %>
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :cruz_iamspe_id %>
+      <%= f.collection_select :cruz_iamspe_id,
+          CruzIamspe.all, :id, :nome,
+          {:include_blank => false}, {:class => 'form-control'} %>
+    </div>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.input :cruz_iamspe_valor %>
   </div>
 
-  <div class="field">
-    <%= f.collection_select :data_calculo_id,
-        DataCalculo.all, :id, :nome, include_blank: false %>
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :data_calculo_id %>
+      <%= f.collection_select :data_calculo_id,
+          DataCalculo.all, :id, :nome,
+          {:include_blank => false}, {:class => 'form-control'} %>
+    </div>
   </div>
 
   <div id="autors">
