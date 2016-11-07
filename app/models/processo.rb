@@ -1,6 +1,6 @@
 class Processo < ApplicationRecord
-  has_many :autors, :dependent => :destroy
-  accepts_nested_attributes_for :autors, reject_if: :all_blank, allow_destroy: true
+  has_many :autor, :dependent => :destroy
+  accepts_nested_attributes_for :autor, reject_if: :all_blank, allow_destroy: true
   belongs_to :cbpm_ipesp
   belongs_to :cruz_iamspe
   belongs_to :data_calculo

@@ -17,7 +17,7 @@ class CreateProcessos < ActiveRecord::Migration[5.0]
       t.date :periodo_inicial
       t.date :periodo_final
       t.decimal :juros
-      t.integer :tipo_juros_id
+      t.integer :tipo_juro_id
       t.integer :cruz_iamspe_id
       t.decimal :cruz_iamspe_valor
       t.integer :data_calculo_id

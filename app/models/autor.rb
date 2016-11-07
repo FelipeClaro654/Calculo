@@ -1,3 +1,3 @@
 class Autor < ApplicationRecord
-  belongs_to :Processo
+  belongs_to :processo
 end

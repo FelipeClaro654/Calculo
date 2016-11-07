@@ -1,3 +1,3 @@
 class TabelaAtualizacao < ApplicationRecord
-    has_many :Processo
+    has_many :processo
 end

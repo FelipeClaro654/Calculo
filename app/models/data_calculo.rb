@@ -1,3 +1,3 @@
 class DataCalculo < ApplicationRecord
-    has_many :Processo
+    has_many :processo
 end

@@ -5,6 +5,7 @@ class ProcessosController < ApplicationController
   # GET /processos.json
   def index
     @processos = Processo.all
+    @tabela_atualizacao = TabelaAtualizacao.all
   end
 
   # GET /processos/1
@@ -25,7 +26,6 @@ class ProcessosController < ApplicationController
   # POST /processos.json
   def create
     @processo = Processo.new(processo_params)
-
     respond_to do |format|
       if @processo.save
         format.html { redirect_to @processo, notice: 'Processo was successfully created.' }
@@ -86,9 +86,9 @@ class ProcessosController < ApplicationController
                                       :periodo_inicial,
                                       :periodo_final,
                                       :juros,
-                                      :tipo_juros_id,
+                                      :tipo_juro_id,
                                       :cruz_iamspe_id,
                                       :cruz_iamspe_valor,
-                                      :data_calculo_id)
+                                      :data_calculo_id, autors_attributes: [:id, :nome])
     end
 end

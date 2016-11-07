@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20161104132519) do
     t.integer  "processo_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["processo_id"], name: "index_autors_on_processo_id", using: :btree
   end
 
   create_table "cbpm_ipesps", force: :cascade do |t|
@@ -58,7 +57,7 @@ ActiveRecord::Schema.define(version: 20161104132519) do
     t.date     "periodo_inicial"
     t.date     "periodo_final"
     t.decimal  "juros"
-    t.integer  "tipo_juros_id"
+    t.integer  "tipo_juro_id"
     t.integer  "cruz_iamspe_id"
     t.decimal  "cruz_iamspe_valor"
     t.integer  "data_calculo_id"
@@ -78,5 +77,4 @@ ActiveRecord::Schema.define(version: 20161104132519) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "autors", "processos"
 end
