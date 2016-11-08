@@ -1,3 +1,5 @@
 $(function () {
-    $(".calendario").datetimepicker();
+    $(".container .calendario").datetimepicker({
+        format: "DD/MM/YYYY"
+    });
 });

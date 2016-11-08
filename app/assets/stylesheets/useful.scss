@@ -1,0 +1,54 @@
+@for $i from 1 through 50 {
+  .padding-left-#{$i}{
+      padding-left: #{$i}px !important;
+  }
+}
+
+@for $i from 1 through 50 {
+  .padding-right-#{$i}{
+      padding-right: #{$i}px !important;
+  }
+}
+
+@for $i from 1 through 50 {
+  .margin-left-#{$i}{
+      margin-left: #{$i}px !important;
+  }
+}
+
+@for $i from 1 through 50 {
+  .neg-margin-left-#{$i}{
+      margin-left: -#{$i}px !important;
+  }
+}
+
+@for $i from 1 through 50 {
+  .margin-right-#{$i}{
+      margin-right: #{$i}px !important;
+  }
+}
+
+@for $i from 1 through 50 {
+  .neg-margin-right-#{$i}{
+      margin-right: -#{$i}px !important;
+  }
+}
+
+@for $i from 1 through 100 {
+  .width-percent-#{$i}{
+      width: #{$i}% !important;
+  }
+}
+
+.bg-custom-warning{
+    background: $custom-warning;
+}
+
+.bg-custom-primary{
+    background: $custom-primary;
+    color: white;
+    &:hover{
+        background: darken($custom-primary, 20);
+        color: white;
+    }
+}

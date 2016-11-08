@@ -1,9 +1,108 @@
-.input-group-addon:not(:first-child):not(:last-child),
-.input-group-btn:not(:first-child):not(:last-child),
-.input-group .form-control:not(:first-child):not(:last-child) {
-  border-radius: 5px;
+abbr[title]{
+  display: none;
 }
 
-.input-group.date{
-  width: 100%;
+input[type=text],
+input[type=number],
+select{
+    height: 22px !important;
+    border-radius: 0 !important;
+    font-size: 9px !important;
+    padding: 5px !important;
+}
+
+label{
+    font-size: 9px;
+    margin-top: -3px;
+    font-weight: 500 !important;
+}
+
+.container{
+    width: 1100px !important;
+    float: left;
+    margin-left: 30px;
+}
+
+.navbar-collapse.collapse {
+  display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+  float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: -15px !important;
+}
+
+.navbar-right {
+  float: right!important;
+}
+
+.navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar-nav {
+    margin: 0;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: white;
+    background-color: $secondary;
+}
+
+.custom-menu{
+    min-width: 1200px !important;
+    background: $primary;
+
+    .navbar-nav > li > a {
+        color: white;
+    }
+
+    .custom-brand{
+        .navbar-nav {
+            width: 80px;
+        }
+    }
+
+    .custom-nav{
+        li,a{
+            height: 50px;
+        }
+    }
+}
+
+.form-horizontal .control-label {
+    padding-top: 7px;
+    float: left;
+}
+
+select {
+    padding-left: 1px !important;
+    -moz-appearance: none; /* Remove estilo padrão do FireFox */
+    -webkit-appearance: none;
+    background:  image-url("arrow.png") no-repeat right !important;
+}
+
+.panel{
+    font-size: 10px;
+}
+
+.alert{
+    font-size: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    ul{
+        height: 66px;
+        overflow-y: scroll;
+    }
+}
+.help-block{
+    font-size: 9px;
+    margin-top: -1px;
 }

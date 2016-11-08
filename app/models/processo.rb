@@ -2,6 +2,7 @@ class Processo < ApplicationRecord
   validates :numero, uniqueness: true, presence: true
   validates :data_distribuicao, presence: true
   validates :data_citacao, presence: true
+  validates :forum, presence: true
   validates :vara, presence: true
   validates :tipo_processo, presence: true
   validates :data_base, presence: true
@@ -15,6 +16,7 @@ class Processo < ApplicationRecord
   validates :periodo_final, presence: true
   validates :juros, presence: true
   validates :cruz_iamspe_valor, presence: true
+  validates :processo_autor, presence: true
 
   has_many :autor, :dependent => :destroy
   accepts_nested_attributes_for :autor, reject_if: :all_blank, allow_destroy: true

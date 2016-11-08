@@ -3,6 +3,8 @@ class CreateProcessos < ActiveRecord::Migration[5.0]
     create_table :processos do |t|
       t.string :numero
       t.date :data_distribuicao
+      t.string :processo_autor
+      t.string :forum
       t.date :data_citacao
       t.string :vara
       t.string :tipo_processo
