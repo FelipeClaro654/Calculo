@@ -9,7 +9,7 @@ pt-BR:
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
     models:
       tabela_atualizacao: "Tabela Atualização"
-
+      cbpm_ipesp: "CBPM / IAMSPE"
     attributes:
       processo:
         data_distribuicao: "Distribuição"
@@ -20,8 +20,12 @@ pt-BR:
         acordao: "Acordão Fls."
         autor: "Autor(a)"
         re: "Ré(u)"
+        numero: "Número"
+        data_base: "Data Base"
+        processo_autor: "Autor"
         base_calculo_autor: "Base de Cálculo do Autor(a) Fls."
-        
+        tabela_atualizacao_id: "Tabela Atualização"
+        cbpm_ipesp_id: "CBPM / IAMSPE"
   date:
     abbr_day_names:
     - Dom

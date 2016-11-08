@@ -98,11 +98,12 @@ select {
     right: 0;
     top: 0;
     ul{
-        height: 66px;
+        max-height: 68px;
         overflow-y: scroll;
     }
 }
 .help-block{
     font-size: 9px;
-    margin-top: -1px;
+    margin-top: -2px;
+    position: absolute;
 }
