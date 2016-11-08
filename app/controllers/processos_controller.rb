@@ -25,10 +25,11 @@ class ProcessosController < ApplicationController
   # POST /processos
   # POST /processos.json
   def create
+      byebug
     @processo = Processo.new(processo_params)
     respond_to do |format|
       if @processo.save
-        format.html { redirect_to @processo, notice: 'Processo was successfully created.' }
+        format.html { redirect_to :back, notice: 'Processo was successfully created.' }
         format.json { render :show, status: :created, location: @processo }
       else
         format.html { render :new }
@@ -72,6 +73,8 @@ class ProcessosController < ApplicationController
       params.require(:processo).permit(
                                       :numero,
                                       :data_distribuicao,
+                                      :processo_autor,
+                                      :forum,
                                       :data_citacao,
                                       :vara,
                                       :tipo_processo,
@@ -89,6 +92,7 @@ class ProcessosController < ApplicationController
                                       :tipo_juro_id,
                                       :cruz_iamspe_id,
                                       :cruz_iamspe_valor,
-                                      :data_calculo_id, autors_attributes: [:id, :nome])
+                                      :data_calculo_id,
+                                      autors_attributes: [:id, :nome])
     end
 end

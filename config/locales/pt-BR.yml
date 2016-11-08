@@ -25,7 +25,8 @@ pt-BR:
         processo_autor: "Autor"
         base_calculo_autor: "Base de Cálculo do Autor(a) Fls."
         tabela_atualizacao_id: "Tabela Atualização"
-        cbpm_ipesp_id: "CBPM / IAMSPE"
+        cbpm_ipesp_id: "Previdência"
+        cruz_iamspe_id: "Assist. Médica"
   date:
     abbr_day_names:
     - Dom
