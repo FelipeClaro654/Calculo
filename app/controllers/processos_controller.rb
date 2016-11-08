@@ -93,6 +93,6 @@ class ProcessosController < ApplicationController
                                       :cruz_iamspe_id,
                                       :cruz_iamspe_valor,
                                       :data_calculo_id,
-                                      autors_attributes: [:id, :nome])
+                                      autors_attributes: [:id, :nome, :_destroy])
     end
 end
