@@ -169,7 +169,7 @@
             </div>
         </div>
         <div class="col-xs-4">
-            <div class="panel panel-default">
+            <div class="panel panel-default panel-autor">
               <div class="panel-heading">
                 <h6 class="panel-title">
                     <strong>Inserir Autores</strong>
@@ -180,7 +180,8 @@
                   <div id="autors">
                       <%= f.simple_fields_for :autors do |a| %>
                           <%= render 'autor_fields', :f => a %>
-                              <%= link_to_add_association "add task", f, :autors %>
+                              <%= link_to_add_association "Adicionar", f, :autors,
+                                    :class => "btn btn-success pull-right btn-xs btn-add-autor" %>
                           </div>
                       <% end %>
 
