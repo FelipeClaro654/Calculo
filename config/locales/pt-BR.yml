@@ -23,10 +23,12 @@ pt-BR:
         numero: "Número"
         data_base: "Data Base"
         processo_autor: "Autor"
+        tipo_processo: "Tipo de Ação"
         base_calculo_autor: "Base de Cálculo do Autor(a) Fls."
         tabela_atualizacao_id: "Tabela Atualização"
         cbpm_ipesp_id: "Previdência"
         cruz_iamspe_id: "Assist. Médica"
+        data_calculo_id: "Data cálculo"
   date:
     abbr_day_names:
     - Dom

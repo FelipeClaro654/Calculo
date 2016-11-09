@@ -34,6 +34,13 @@
   }
 }
 
+
+@for $i from 1 through 50 {
+  .margin-top-#{$i}{
+      margin-top: #{$i}px !important;
+  }
+}
+
 @for $i from 1 through 100 {
   .width-percent-#{$i}{
       width: #{$i}% !important;

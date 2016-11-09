@@ -5,7 +5,6 @@ class ProcessosController < ApplicationController
   # GET /processos.json
   def index
     @processos = Processo.all
-    @tabela_atualizacao = TabelaAtualizacao.all
   end
 
   # GET /processos/1
@@ -16,6 +15,7 @@ class ProcessosController < ApplicationController
   # GET /processos/new
   def new
     @processo = Processo.new
+    @tabela_atualizacao = TabelaAtualizacao.all
   end
 
   # GET /processos/1/edit
@@ -25,14 +25,13 @@ class ProcessosController < ApplicationController
   # POST /processos
   # POST /processos.json
   def create
-      byebug
     @processo = Processo.new(processo_params)
     respond_to do |format|
       if @processo.save
         format.html { redirect_to :back, notice: 'Processo was successfully created.' }
         format.json { render :show, status: :created, location: @processo }
       else
-        format.html { render :new }
+        format.html { render :new, collection:@tabela_atualizacao }
         format.json { render json: @processo.errors, status: :unprocessable_entity }
       end
     end
