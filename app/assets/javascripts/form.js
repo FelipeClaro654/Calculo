@@ -3,6 +3,12 @@ $(function () {
         format: "DD/MM/YYYY"
     });
 
+    $('#autors').on('cocoon:before-insert', function(e, insertedItem) {
+        insertedItem.find(".calendario").datetimepicker({
+            format: "DD/MM/YYYY"
+        });
+    });
+
     $(".has-error input").focus(function () {
         var parent = $(this).parents(".form-group");
         parent.removeClass('has-error');

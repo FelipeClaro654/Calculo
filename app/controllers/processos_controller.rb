@@ -85,13 +85,11 @@ class ProcessosController < ApplicationController
                                       :tabela_atualizacao_id,
                                       :cbpm_ipesp_id,
                                       :cbpm_ipesp_valor,
-                                      :periodo_inicial,
-                                      :periodo_final,
                                       :juros,
                                       :tipo_juro_id,
                                       :cruz_iamspe_id,
                                       :cruz_iamspe_valor,
                                       :data_calculo_id,
-                                      autors_attributes: [:id, :nome, :_destroy])
+                                      autors_attributes: [:id, :nome, :periodo_inicial, :periodo_final, :_destroy])
     end
 end

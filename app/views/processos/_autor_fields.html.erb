@@ -1,5 +1,19 @@
 <div class="nested-fields ">
-    <%= f.input :nome %>
+    <div class="row">
+        <div class="col-xs-6">
+            <%= f.input :nome %>
+        </div>
+        <div class="col-xs-3">
+            <%= f.input :periodo_inicial, label: "Período",
+            as: :string,
+            :input_html => { :placeholder => "__/__/__", :class => "calendario" }%>
+        </div>
+        <div class="col-xs-3">
+            <%= f.input :periodo_final,
+            as: :string,
+            :input_html => { :placeholder => "__/__/__", :class => "calendario" }%>
+        </div>
+    </div>
     <hr>
     <%= link_to_remove_association "Remover", f,
           :class => "btn btn-danger pull-right btn-xs margin-left-5 btn-remove-autor"%>

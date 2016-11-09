@@ -37,11 +37,11 @@ label:not(.checkbox, .radio):after {
 }
 
 .btn-add-autor{
-    margin-top: -16px;
+    margin: -46px 64px;
 }
 
 .btn-remove-autor{
-    margin-top: -16px;
+    margin-top: -46px;
 }
 
 .panel-autor{
@@ -49,6 +49,6 @@ label:not(.checkbox, .radio):after {
         min-height: 150px;
         max-height: 428px;
         overflow-x: scroll;
-        overflow-x: hidden;
+        overflow-x: visible;
     }
 }

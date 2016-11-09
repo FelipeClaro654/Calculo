@@ -16,8 +16,6 @@ class CreateProcessos < ActiveRecord::Migration[5.0]
       t.integer :tabela_atualizacao_id
       t.integer :cbpm_ipesp_id
       t.decimal :cbpm_ipesp_valor
-      t.date :periodo_inicial
-      t.date :periodo_final
       t.decimal :juros
       t.integer :tipo_juro_id
       t.integer :cruz_iamspe_id

@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(version: 20161108180901) do
 
   create_table "autors", force: :cascade do |t|
     t.string   "nome"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.date     "periodo_inicial"
+    t.date     "periodo_final"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "processo_id"
   end
 
@@ -56,8 +58,6 @@ ActiveRecord::Schema.define(version: 20161108180901) do
     t.integer  "tabela_atualizacao_id"
     t.integer  "cbpm_ipesp_id"
     t.decimal  "cbpm_ipesp_valor"
-    t.date     "periodo_inicial"
-    t.date     "periodo_final"
     t.decimal  "juros"
     t.integer  "tipo_juro_id"
     t.integer  "cruz_iamspe_id"

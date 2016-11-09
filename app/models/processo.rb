@@ -12,13 +12,10 @@ class Processo < ApplicationRecord
   validates :base_calculo_autor, presence: true
   validates :data_base, presence: true
   validates :cbpm_ipesp_valor, presence: true
-  validates :periodo_inicial, presence: true
-  validates :periodo_final, presence: true
   validates :juros, presence: true
   validates :cruz_iamspe_valor, presence: true
   validates :processo_autor, presence: true
-
-  has_many :autors, :dependent => :destroy
+  has_many :autors, :dependent => :destroy, :inverse_of => :processo
   accepts_nested_attributes_for :autors, reject_if: :all_blank, allow_destroy: true
   belongs_to :cbpm_ipesp
   belongs_to :cruz_iamspe
