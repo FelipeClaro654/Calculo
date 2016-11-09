@@ -4,6 +4,9 @@ $(function () {
     });
 
     $('#autors').on('cocoon:before-insert', function(e, insertedItem) {
+        if(!$(".btn-add-autor").hasClass('btn-add-autor-position')){
+            $(".btn-add-autor").addClass('btn-add-autor-position');
+        }
         insertedItem.find(".calendario").datetimepicker({
             format: "DD/MM/YYYY"
         });
