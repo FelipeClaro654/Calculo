@@ -34,6 +34,14 @@ label:not(.checkbox, .radio):after {
     .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
         height: 52px;
     }
+
+    .percent-symbol{
+        position: absolute;
+        z-index: 2;
+        right: 5px;
+        font-size: 10px;
+        top: 0;
+    }
 }
 
 .btn-add-autor-position{

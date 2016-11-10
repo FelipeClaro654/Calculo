@@ -85,6 +85,9 @@
                 <%= f.input :juros,
                 as: :string,
                 :input_html => { :placeholder => "Valor %" }%>
+                <div class="percent-symbol margin-top-28">
+                    %
+                </div>
             </div>
             <div class="col-xs-2">
                 <%= f.collection_select :tipo_juro_id,
@@ -105,6 +108,9 @@
                 <%= f.input :cbpm_ipesp_valor, label: "%",
                 as: :string,
                 :input_html => { :placeholder => "Valor %" }%>
+                <div class="percent-symbol margin-top-28">
+                    %
+                </div>
             </div>
             <div class="col-xs-2">
                 <%= f.label :cruz_iamspe_id %>
@@ -118,6 +124,9 @@
                 <%= f.text_field :cruz_iamspe_valor,
                 class: "form-control",
                     placeholder: "Valor %" %>
+                    <div class="percent-symbol margin-top-28">
+                        %
+                    </div>
                 </div>
                 <div class="col-xs-2">
                     <label>A partir de</label>
