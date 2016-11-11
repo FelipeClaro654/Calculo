@@ -28,7 +28,7 @@ class ProcessosController < ApplicationController
     @processo = Processo.new(processo_params)
     respond_to do |format|
       if @processo.save
-        format.html { redirect_to :back, notice: 'Processo was successfully created.' }
+        format.html { render :edit, notice: 'Processo was successfully created.' }
         format.json { render :show, status: :created, location: @processo }
       else
         format.html { render :new, collection:@tabela_atualizacao }
@@ -62,6 +62,7 @@ class ProcessosController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_processo
       @processo = Processo.find(params[:id])

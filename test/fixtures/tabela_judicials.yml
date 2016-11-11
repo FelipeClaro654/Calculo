@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mes: MyString
+  ano: MyString
+  valor: 9.99
+  status: MyString
+
+two:
+  mes: MyString
+  ano: MyString
+  valor: 9.99
+  status: MyString

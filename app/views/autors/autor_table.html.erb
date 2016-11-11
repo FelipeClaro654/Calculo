@@ -1,0 +1,54 @@
+<div class="row">
+    <table>
+        <thead>
+            <th>
+                Período
+            </th>
+            <th>
+                Data da Obrigação
+            </th>
+            <th>
+                Principal Bruto Mensal
+            </th>
+            <th>
+                Índice da Data da Obrigação
+            </th>
+            <th>
+                Índice da Data da Atualização
+                <%= @autor.processo.data_base %>
+            </th>
+            <th>
+                Principal Bruto Atualizado
+            </th>
+            <th>
+                Desconto da Previdência
+                <%= @autor.processo.cbpm_ipesp.nome %> -
+                <%= @autor.processo.cbpm_ipesp_valor %>
+                <br>
+                <%= @autor.processo.cruz_iamspe.nome %> -
+                <%= @autor.processo.cruz_iamspe_valor %>
+            </th>
+            <th>
+                Principal Líquido Atualizado
+            </th>
+            <th>
+                Nº de Meses
+            </th>
+            <th>
+                Juros - <%= @autor.processo.juros %> - <%= @autor.processo.tipo_juro.nome %>
+                <br>
+                a partir da <%= @autor.processo.data_calculo.nome %>
+                <br>
+                <% if @autor.processo.data_calculo.nome == "Data" %>
+                    <%= @autor.processo.data_base %>
+                <% else %>
+                    <%= @autor.processo.data_citacao %>
+                <% end %>
+            </th>
+            <th>
+                Hon. Adv. 10% do Valor Total:
+                ---
+            </th>
+        </thead>
+    </table>
+</div>

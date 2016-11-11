@@ -161,9 +161,13 @@
                 </div>
                 <div class="panel-body">
                     <div id="autors">
-                        <%= f.simple_fields_for :autors do |a| %>
-                            <%= render 'autor_fields', :f => a %>
+
+                        <% unless @processo.autors.empty?
+                            @processo.autors.each do |a| %>
+                                <%=link_to a.nome, :controller => :autors, :action => :show_autor_table, :autor => a.id%>
+                            <% end %>
                         <% end %>
+
                         <%= link_to_add_association "Adicionar", f, :autors,
                         :class => "btn btn-success pull-right btn-xs btn-add-autor" %>
                     </div>

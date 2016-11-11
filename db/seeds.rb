@@ -6,18 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-TabelaAtualizacao.create!(nome: 'PCA-E')
-TabelaAtualizacao.create!(nome: 'TPDJSP')
+# coding: utf-8
 
-CbpmIpesp.create!(nome: 'CBPM')
-CbpmIpesp.create!(nome: 'IPESP')
-CbpmIpesp.create!(nome: 'MISTO')
-
-TipoJuro.create!(nome: 'am')
-TipoJuro.create!(nome: 'aa')
-
-CruzIamspe.create!(nome: 'Cruz Azul')
-CruzIamspe.create!(nome: 'IAMSPE')
-
-DataCalculo.create!(nome: 'Data')
-DataCalculo.create!(nome: 'Citação')
+%w{
+  selects_form tabela_fazenda tabela_judicial tabela_opv
+}.each do |part|
+  require File.expand_path(File.dirname(__FILE__))+"/seeds/#{part}.rb"
+end

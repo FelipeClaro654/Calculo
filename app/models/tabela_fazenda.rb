@@ -1,0 +1,2 @@
+class TabelaFazenda < ApplicationRecord
+end

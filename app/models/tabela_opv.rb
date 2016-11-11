@@ -1,0 +1,2 @@
+class TabelaOpv < ApplicationRecord
+end
