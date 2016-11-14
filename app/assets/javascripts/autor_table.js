@@ -1,7 +1,7 @@
 $(function () {
     $(".periodo-value").change(function() {
         var parent = $(this).parents("tr"),
-            a = parseFloat($(this).val()),
+            a = parseFloat($(this).val().replace(",", ".")),
             b = parseFloat(parent.find(".indice-tabela").html()),
             c = parseFloat(parent.find(".indice-atualizacao").html()),
             d = parseFloat(((a / b)*c)),
