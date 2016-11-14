@@ -1,5 +1,5 @@
 $(function () {
-    $(".periodo-value").change(function() {
+    $(document).on("change",".periodo-value", function() {
         var parent = $(this).parents("tr"),
             a = parseFloat($(this).val().replace(",", ".")),
             b = parseFloat(parent.find(".indice-tabela").html()),
@@ -16,7 +16,7 @@ $(function () {
         parent.find(".liquido-atualizado").html(f.toFixed(2));
         parent.find(".juros").html(h.toFixed(2));
         parent.find(".honorario").html(i.toFixed(2));
-        
+
         if(parent.data("pagamento-id") === ""){
             $.ajax({
                 url: '/autors/salva_pagamentos/',
