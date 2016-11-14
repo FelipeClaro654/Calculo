@@ -11,14 +11,13 @@ $(function () {
             h = parseFloat(d*g*(0.5/100)),
             i = (d+h)*(10/100);
 
-        parent.find(".bruto-atualizado").html(d.toFixed(2));
+        parent.find(".bruto-atualizacao").html(d.toFixed(2));
         parent.find(".previdencia").html(e.toFixed(2));
         parent.find(".liquido-atualizado").html(f.toFixed(2));
         parent.find(".juros").html(h.toFixed(2));
         parent.find(".honorario").html(i.toFixed(2));
-
+        
         if(parent.data("pagamento-id") === ""){
-            debugger;
             $.ajax({
                 url: '/autors/salva_pagamentos/',
                 type: 'post',
@@ -50,7 +49,7 @@ $(function () {
                     periodo_final: parent.find(".periodo-final").html().replace(/^\s+|\s+$/gm,''),
                     periodo_value: parent.find(".periodo-value").val(),
                     indice_tabela: parent.find(".indice-tabela").html(),
-                    bruto_atualizacao: parent.find(".indice-atualizacao").html(),
+                    bruto_atualizacao: parent.find(".bruto-atualizacao").html(),
                     previdencia: parent.find(".previdencia").html(),
                     liquido_atualizado: parent.find(".liquido-atualizado").html(),
                     meses: parent.find(".meses").html(),

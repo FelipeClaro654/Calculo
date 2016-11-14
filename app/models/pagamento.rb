@@ -2,7 +2,6 @@ class Pagamento < ApplicationRecord
     belongs_to :autor
 
     def self.gravar_pagamento(params)
-        byebug
         @pagamento = Pagamento.new(
                                     autor_id: params[:autor_id],
                                     table_index: params[:table_index],

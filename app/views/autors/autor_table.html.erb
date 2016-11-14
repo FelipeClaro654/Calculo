@@ -160,8 +160,6 @@
                 <% if @pagamentos.where(table_index: index).count() > 0
                         @row = @pagamentos.where(table_index: index)
                 %>
-                <%byebug%>
-                
                     <tr data-pagamento-id="<%= @row[0].id %>" data-table-index="<%= index %>">
                         <td class="periodo-inicial">
                             <%= @row[0].periodo_inicial %>
@@ -197,47 +195,16 @@
                             <%= @row[0].honorario %>
                         </td>
                     </tr>
-                <% end %>
-                <% if index == 0 %>
-                    <tr data-pagamento-id="" data-table-index="<%= index %>">
-                        <td class="periodo-inicial">
-                            <%= p.strftime("%e") %> a
-                            <%= p.end_of_month.strftime("%d/%m/%y") %>
-                        </td>
-                        <td class="periodo-final">
-                            <%= I18n.t("date.abbr_month_names")[(p + 1.month).month] %>
-                            <%= p.strftime("/%y") %>
-                        </td>
-                        <td>
-                            <input class="periodo-value" type="text" name="name" value="">
-                        </td>
-                        <td class="indice-tabela">
-                            <%= @tabela.where(mes: "\t"+ p.strftime("%m") + "\t").where(ano: "\t"+ p.strftime("%Y") + "\t")[0].valor %>
-                        </td>
-                        <td class="indice-atualizacao">
-                            58.570367
-                        </td>
-                        <td class="bruto-atualizacao">
-                        </td>
-                        <td class="previdencia">
-                        </td>
-                        <td class="liquido-atualizado">
-                        </td>
-                        <td class="meses"> <%= @meses %>
-                        </td>
-                        <td class="juros">
-                        </td>
-                        <td class="honorario">
-                        </td>
-                    </tr>
+
                 <% else %>
-                    <% if  I18n.t("date.abbr_month_names")[p.month] == "Dez" %>
-                        <tr data-pagamento-id="">
+                    <% if index == 0 %>
+                        <tr data-pagamento-id="" data-table-index="<%= index %>">
                             <td class="periodo-inicial">
-                                13ºSal <%= p.end_of_month.strftime("/%y") %>
+                                <%= p.strftime("%e") %> a
+                                <%= p.end_of_month.strftime("%d/%m/%y") %>
                             </td>
                             <td class="periodo-final">
-                                <%= I18n.t("date.abbr_month_names")[p.month] %>
+                                <%= I18n.t("date.abbr_month_names")[(p + 1.month).month] %>
                                 <%= p.strftime("/%y") %>
                             </td>
                             <td>
@@ -262,42 +229,73 @@
                             <td class="honorario">
                             </td>
                         </tr>
+                    <% else %>
+                        <% if  I18n.t("date.abbr_month_names")[p.month] == "Dez" %>
+                            <tr data-pagamento-id="" data-table-index="<%= index %>">
+                                <td class="periodo-inicial">
+                                    13ºSal <%= p.end_of_month.strftime("/%y") %>
+                                </td>
+                                <td class="periodo-final">
+                                    <%= I18n.t("date.abbr_month_names")[p.month] %>
+                                    <%= p.strftime("/%y") %>
+                                </td>
+                                <td>
+                                    <input class="periodo-value" type="text" name="name" value="">
+                                </td>
+                                <td class="indice-tabela">
+                                    <%= @tabela.where(mes: "\t"+ p.strftime("%m") + "\t").where(ano: "\t"+ p.strftime("%Y") + "\t")[0].valor %>
+                                </td>
+                                <td class="indice-atualizacao">
+                                    58.570367
+                                </td>
+                                <td class="bruto-atualizacao">
+                                </td>
+                                <td class="previdencia">
+                                </td>
+                                <td class="liquido-atualizado">
+                                </td>
+                                <td class="meses"> <%= @meses %>
+                                </td>
+                                <td class="juros">
+                                </td>
+                                <td class="honorario">
+                                </td>
+                            </tr>
+                        <% end %>
+                        <tr data-pagamento-id="" data-table-index="<%= index %>">
+                            <td class="periodo-inicial">
+                                <%= I18n.t("date.abbr_month_names")[p.month] %>
+                                <%= p.strftime("/%y") %>
+                            </td>
+                            <td class="periodo-final">
+                                <%= I18n.t("date.abbr_month_names")[(p + 1.month).month] %>
+                                <%= (p + 1.month).strftime("/%y") %>
+                            </td>
+                            <td>
+                                <input class="periodo-value" type="text" name="name" value="">
+                            </td>
+                            <td class="indice-tabela">
+                                <%= @tabela.where(mes: "\t"+ p.strftime("%m") + "\t").where(ano: "\t"+ p.strftime("%Y") + "\t")[0].valor %>
+                            </td>
+                            <td class="indice-atualizacao">
+                                58.570367
+                            </td>
+                            <td class="bruto-atualizacao">
+                            </td>
+                            <td class="previdencia">
+                            </td>
+                            <td class="liquido-atualizado">
+                            </td>
+                            <td class="meses"> <%= @meses %>
+                            </td>
+                            <td class="juros">
+                            </td>
+                            <td class="honorario">
+                            </td>
+                        </tr>
                     <% end %>
-                    <tr data-pagamento-id="">
-                        <td class="periodo-inicial">
-                            <%= I18n.t("date.abbr_month_names")[p.month] %>
-                            <%= p.strftime("/%y") %>
-                        </td>
-                        <td class="periodo-final">
-                            <%= I18n.t("date.abbr_month_names")[(p + 1.month).month] %>
-                            <%= (p + 1.month).strftime("/%y") %>
-                        </td>
-                        <td>
-                            <input class="periodo-value" type="text" name="name" value="">
-                        </td>
-                        <td class="indice-tabela">
-                            <%= @tabela.where(mes: "\t"+ p.strftime("%m") + "\t").where(ano: "\t"+ p.strftime("%Y") + "\t")[0].valor %>
-                        </td>
-                        <td class="indice-atualizacao">
-                            58.570367
-                        </td>
-                        <td class="bruto-atualizacao">
-                        </td>
-                        <td class="previdencia">
-                        </td>
-                        <td class="liquido-atualizado">
-                        </td>
-                        <td class="meses"> <%= @meses %>
-                        </td>
-                        <td class="juros">
-                        </td>
-                        <td class="honorario">
-                        </td>
-                    </tr>
                 <% end %>
-
             <% end %>
-
         </tbody>
     </table>
 </div>

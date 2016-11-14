@@ -45,5 +45,6 @@ class AutorsController < ApplicationController
 
     def salva_pagamentos
         @pagamento = Pagamento.gravar_pagamento(params)
+        head :ok
     end
 end
