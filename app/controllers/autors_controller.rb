@@ -12,12 +12,31 @@ class AutorsController < ApplicationController
                @periodos.push(@inicio)
                @inicio = @inicio.beginning_of_month + 1.month
             end
+            @tabela = @autor.processo.tabela_atualizacao.nome
+            range_anos = (@autor.periodo_final.year) - (@autor.periodo_inicial.year)
+            anos = []
 
-            @periodos.push(@inicio)
+            (0..range_anos).each_with_index do |r, index|
+                anos.push("\t"+(@autor.periodo_inicial.year + index).to_s + "\t")
+            end
+            @meses = month_difference(@autor.periodo_inicial, @autor.periodo_final)
 
+            if @tabela == "PCA-E"
+                @tabela = TabelaOpv.where("ano IN (?)", anos)
+            else
+                @tabela = TabelaJudicial.where("ano IN (?)", anos)
+            end
             render 'autor_table'
         else
             format.html { redirect_to @autor.processo, notice: "Informe o ID do Autor" }
         end
+    end
+
+    def month_difference(data_a, data_b)
+        difference = 0.0
+        if data_a.year != data_b.year
+            difference += (data_b - data_a).to_f / 30.4375
+        end
+        difference.round(2)
     end
 end
