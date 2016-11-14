@@ -16,5 +16,52 @@ $(function () {
         parent.find(".liquido-atualizado").html(f.toFixed(2));
         parent.find(".juros").html(h.toFixed(2));
         parent.find(".honorario").html(i.toFixed(2));
+
+        if(parent.data("pagamento-id") === ""){
+            debugger;
+            $.ajax({
+                url: '/autors/salva_pagamentos/',
+                type: 'post',
+                data: {
+                    autor_id: $("#autor_id").val(),
+                    table_index: parent.data("table-index"),
+                    periodo_inicial: parent.find(".periodo-inicial").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
+                    periodo_final: parent.find(".periodo-final").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
+                    periodo_value: parent.find(".periodo-value").val(),
+                    indice_tabela: parent.find(".indice-tabela").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
+                    bruto_atualizacao: parent.find(".bruto-atualizacao").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
+                    previdencia: parent.find(".previdencia").html(),
+                    liquido_atualizado: parent.find(".liquido-atualizado").html(),
+                    meses: parent.find(".meses").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
+                    juros: parent.find(".juros").html(),
+                    honorario: parent.find(".honorario").html()
+                }
+            })
+            .done(function() {
+                console.log("success");
+            });
+        }else{
+            $.ajax({
+                url: '/autors/editar_pagamentos/',
+                type: 'post',
+                data: {
+                    id: parent.data("pagamento-id"),
+                    periodo_inicial: parent.find(".periodo-inicial").html().replace(/^\s+|\s+$/gm,''),
+                    periodo_final: parent.find(".periodo-final").html().replace(/^\s+|\s+$/gm,''),
+                    periodo_value: parent.find(".periodo-value").val(),
+                    indice_tabela: parent.find(".indice-tabela").html(),
+                    bruto_atualizacao: parent.find(".indice-atualizacao").html(),
+                    previdencia: parent.find(".previdencia").html(),
+                    liquido_atualizado: parent.find(".liquido-atualizado").html(),
+                    meses: parent.find(".meses").html(),
+                    juros: parent.find(".juros").html(),
+                    honorario: parent.find(".honorario").html()
+                }
+            }).done(function () {
+
+            });
+        }
+
+
     });
 });

@@ -26,6 +26,9 @@ class AutorsController < ApplicationController
             else
                 @tabela = TabelaJudicial.where("ano IN (?)", anos)
             end
+
+            @pagamentos = Pagamento.where(autor_id: @autor.id)
+
             render 'autor_table'
         else
             format.html { redirect_to @autor.processo, notice: "Informe o ID do Autor" }
@@ -38,5 +41,9 @@ class AutorsController < ApplicationController
             difference += (data_b - data_a).to_f / 30.4375
         end
         difference.round(2)
+    end
+
+    def salva_pagamentos
+        @pagamento = Pagamento.gravar_pagamento(params)
     end
 end

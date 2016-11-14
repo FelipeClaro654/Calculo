@@ -8,12 +8,12 @@
       </li>
 
       <li>
-        <strong>Data Distribuicao:</strong>
+        <strong>Data Distribuição:</strong>
         <%= @autor.processo.data_distribuicao %>
       </li>
 
       <li>
-        <strong>Data Citacao:</strong>
+        <strong>Data Citação:</strong>
         <%= @autor.processo.data_citacao %>
       </li>
 
@@ -34,7 +34,7 @@
       </li>
 
       <li>
-        <strong>Sentenca Fls.:</strong>
+        <strong>Sentença Fls.:</strong>
         <%= @autor.processo.sentenca %>
       </li>
 
@@ -55,7 +55,7 @@
       </li>
 
       <li>
-        <strong>Tabela Atualizacao:</strong>
+        <strong>Tabela Atualização:</strong>
         <%= @autor.processo.tabela_atualizacao_id %>
       </li>
 
@@ -100,6 +100,8 @@
 <hr>
 <h5> <strong>Autor(a):</strong> <%= @autor.nome %></h5>
 <h5> <strong>Período:</strong> <%= @autor.periodo_inicial %> até <%= @autor.periodo_final %> </h5>
+
+<%= hidden_field_tag :autor_id, @autor.id %>
 
 <div class="row">
     <table class="table">
@@ -155,13 +157,54 @@
         </thead>
         <tbody>
             <% @periodos.each_with_index do |p , index| %>
-                <% if index == 0 %>
-                    <tr>
+                <% if @pagamentos.where(table_index: index).count() > 0
+                        @row = @pagamentos.where(table_index: index)
+                %>
+                <%byebug%>
+                
+                    <tr data-pagamento-id="<%= @row[0].id %>" data-table-index="<%= index %>">
+                        <td class="periodo-inicial">
+                            <%= @row[0].periodo_inicial %>
+                        </td>
+                        <td class="periodo-final">
+                            <%= @row[0].periodo_final %>
+                        </td>
                         <td>
+                            <input class="periodo-value" type="text" name="name" value="<%= @row[0].periodo_value %>">
+                        </td>
+                        <td class="indice-tabela">
+                            <%= @row[0].indice_tabela %>
+                        </td>
+                        <td class="indice-atualizacao">
+                            58.570367
+                        </td>
+                        <td class="bruto-atualizacao">
+                            <%= @row[0].bruto_atualizacao %>
+                        </td>
+                        <td class="previdencia">
+                            <%= @row[0].previdencia %>
+                        </td>
+                        <td class="liquido-atualizado">
+                            <%= @row[0].liquido_atualizado %>
+                        </td>
+                        <td class="meses">
+                            <%= @row[0].meses %>
+                        </td>
+                        <td class="juros">
+                            <%= @row[0].juros %>
+                        </td>
+                        <td class="honorario">
+                            <%= @row[0].honorario %>
+                        </td>
+                    </tr>
+                <% end %>
+                <% if index == 0 %>
+                    <tr data-pagamento-id="" data-table-index="<%= index %>">
+                        <td class="periodo-inicial">
                             <%= p.strftime("%e") %> a
                             <%= p.end_of_month.strftime("%d/%m/%y") %>
                         </td>
-                        <td>
+                        <td class="periodo-final">
                             <%= I18n.t("date.abbr_month_names")[(p + 1.month).month] %>
                             <%= p.strftime("/%y") %>
                         </td>
@@ -174,7 +217,7 @@
                         <td class="indice-atualizacao">
                             58.570367
                         </td>
-                        <td class="bruto-atualizado">
+                        <td class="bruto-atualizacao">
                         </td>
                         <td class="previdencia">
                         </td>
@@ -189,11 +232,11 @@
                     </tr>
                 <% else %>
                     <% if  I18n.t("date.abbr_month_names")[p.month] == "Dez" %>
-                        <tr>
-                            <td>
+                        <tr data-pagamento-id="">
+                            <td class="periodo-inicial">
                                 13ºSal <%= p.end_of_month.strftime("/%y") %>
                             </td>
-                            <td>
+                            <td class="periodo-final">
                                 <%= I18n.t("date.abbr_month_names")[p.month] %>
                                 <%= p.strftime("/%y") %>
                             </td>
@@ -206,7 +249,7 @@
                             <td class="indice-atualizacao">
                                 58.570367
                             </td>
-                            <td class="bruto-atualizado">
+                            <td class="bruto-atualizacao">
                             </td>
                             <td class="previdencia">
                             </td>
@@ -220,12 +263,12 @@
                             </td>
                         </tr>
                     <% end %>
-                    <tr>
-                        <td>
+                    <tr data-pagamento-id="">
+                        <td class="periodo-inicial">
                             <%= I18n.t("date.abbr_month_names")[p.month] %>
                             <%= p.strftime("/%y") %>
                         </td>
-                        <td>
+                        <td class="periodo-final">
                             <%= I18n.t("date.abbr_month_names")[(p + 1.month).month] %>
                             <%= (p + 1.month).strftime("/%y") %>
                         </td>
@@ -238,7 +281,7 @@
                         <td class="indice-atualizacao">
                             58.570367
                         </td>
-                        <td class="bruto-atualizado">
+                        <td class="bruto-atualizacao">
                         </td>
                         <td class="previdencia">
                         </td>

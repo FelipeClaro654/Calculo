@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  autor: one
+  table_index: 1
+  periodo_inicial: MyString
+  periodo_final: MyString
+  periodo_value: 9.99
+  indice_tabela: 9.99
+  bruto_atualizacao: 9.99
+  previdencia: 9.99
+  liquido_atualizado: 9.99
+  meses: 9.99
+  juros: 9.99
+  honorario: 9.99
+
+two:
+  autor: two
+  table_index: 1
+  periodo_inicial: MyString
+  periodo_final: MyString
+  periodo_value: 9.99
+  indice_tabela: 9.99
+  bruto_atualizacao: 9.99
+  previdencia: 9.99
+  liquido_atualizado: 9.99
+  meses: 9.99
+  juros: 9.99
+  honorario: 9.99

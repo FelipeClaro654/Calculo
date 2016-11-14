@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161110170428) do
+ActiveRecord::Schema.define(version: 20161114164727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,24 @@ ActiveRecord::Schema.define(version: 20161110170428) do
     t.string   "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pagamentos", force: :cascade do |t|
+    t.integer  "autor_id"
+    t.integer  "table_index"
+    t.string   "periodo_inicial"
+    t.string   "periodo_final"
+    t.decimal  "periodo_value"
+    t.decimal  "indice_tabela"
+    t.decimal  "bruto_atualizacao"
+    t.decimal  "previdencia"
+    t.decimal  "liquido_atualizado"
+    t.decimal  "meses"
+    t.decimal  "juros"
+    t.decimal  "honorario"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["autor_id"], name: "index_pagamentos_on_autor_id", using: :btree
   end
 
   create_table "processos", force: :cascade do |t|
@@ -106,4 +124,5 @@ ActiveRecord::Schema.define(version: 20161110170428) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "pagamentos", "autors"
 end
