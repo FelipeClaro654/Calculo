@@ -44,7 +44,11 @@ class AutorsController < ApplicationController
     end
 
     def salva_pagamentos
-        @pagamento = Pagamento.gravar_pagamento(params)
+        if params[:pagamento_id].present?
+            @pagamento = Pagamento.editar_pagamento(params)
+        else
+            @pagamento = Pagamento.gravar_pagamento(params)
+        end
         head :ok
     end
 end
