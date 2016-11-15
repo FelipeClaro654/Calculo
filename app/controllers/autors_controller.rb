@@ -9,8 +9,13 @@ class AutorsController < ApplicationController
             @inicio = @autor.periodo_inicial
 
             while @inicio < @autor.periodo_final do
-               @periodos.push(@inicio)
-               @inicio = @inicio.beginning_of_month + 1.month
+                if @inicio.month == 11
+                    @periodos.push(["13ºSal " + @inicio.strftime("/%y"),
+                                    "Dez " + @inicio.strftime("/%y"),
+                                    12, @inicio.year])
+                end
+                @periodos.push(@inicio)
+                @inicio = @inicio.beginning_of_month + 1.month
             end
             @tabela = @autor.processo.tabela_atualizacao.nome
             range_anos = (@autor.periodo_final.year) - (@autor.periodo_inicial.year)
