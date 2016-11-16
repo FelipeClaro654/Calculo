@@ -153,26 +153,41 @@
             </div>
         </div>
         <div class="col-xs-5">
-            <div class="panel panel-default panel-autor">
-                <div class="panel-heading">
-                    <h6 class="panel-title">
-                        <strong>Inserir Autores</strong>
-                    </h6>
-                </div>
-                <div class="panel-body">
-                    <div id="autors">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">
+                            <strong></strong>
+                        </h6>
+                    </div>
+                    <div class="panel-body">
 
-                        <% unless @processo.autors.empty?
-                            @processo.autors.each do |a| %>
-                                <%=link_to a.nome, :controller => :autors, :action => :show_autor_table, :autor => a.id%>
-                            <% end %>
-                        <% end %>
-
-                        <%= link_to_add_association "Adicionar", f, :autors,
-                        :class => "btn btn-success pull-right btn-xs btn-add-autor" %>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="panel panel-default panel-autor">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">
+                            <strong>Inserir Autores</strong>
+                        </h6>
+                    </div>
+                    <div class="panel-body">
+                        <div id="autors">
+
+                            <% unless @processo.autors.empty?
+                                @processo.autors.each do |a| %>
+                                    <%=link_to a.nome, :controller => :autors, :action => :show_autor_table, :autor => a.id%>
+                                <% end %>
+                            <% end %>
+
+                            <%= link_to_add_association "Adicionar", f, :autors,
+                            :class => "btn btn-success pull-right btn-xs btn-add-autor" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 <% end %>

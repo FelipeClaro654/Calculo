@@ -1,4 +1,29 @@
 $(function () {
+
+    Autor_Table ={
+        update_totals: function () {
+            var totals = [  $(".bruto-atualizacao"),
+                            $(".previdencia"),
+                            $(".liquido"),
+                            $(".juros"),
+                            $(".honorario") ];
+
+            $.each(totals, function (i, e) {
+                var t = 0;
+                $.each(this, function (i, e) {
+                    t += parseFloat($(e).html());
+                })
+                totals[i] = t;
+            });
+
+            $(".total-bruto-atualizacao").html(totals[0].toFixed(2));
+            $(".total-previdencia").html(totals[1].toFixed(2));
+            $(".total-liquido").html(totals[2].toFixed(2));
+            $(".total-juros").html(totals[3].toFixed(2));
+            $(".total-honorario").html(totals[4].toFixed(2));
+        }
+    }
+
     $(document).on("change",".periodo-value", function() {
         var parent = $(this).parents("tr"),
             a = parseFloat($(this).val().replace(",", ".")),
@@ -57,10 +82,11 @@ $(function () {
                     honorario: parent.find(".honorario").html()
                 }
             }).done(function () {
-
+                console.log("success");
             });
         }
-
-
+        Autor_Table.update_totals();
     });
+
+    Autor_Table.update_totals();
 });

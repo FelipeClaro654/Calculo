@@ -1,5 +1,7 @@
 <div class="panel panel-default">
-  <div class="panel-heading">Dados Processo</div>
+  <div class="panel-heading">
+      <strong>Dados Processo</strong>
+  </div>
   <div class="panel-body">
       <ul class="list-inline">
       <li>
@@ -266,6 +268,34 @@
                 <% end %>
             <% end %>
         </tbody>
+        <tfoot>
+            <tr>
+                <th class="">
+                </th>
+                <th class="">
+                </th>
+                <th>
+                </th>
+                <th class="">
+                </th>
+                <th class="">
+                    TOTAL:
+                </th>
+                <th class="total-bruto-atualizacao">
+
+                </th>
+                <th class="total-previdencia">
+                </th>
+                <th class="total-liquido-atualizado">
+                </th>
+                <th class="">
+                </th>
+                <th class="total-juros">
+                </th>
+                <th class="total-honorario">
+                </th>
+            </tr>
+        </tfoot>
     </table>
     <% if @pagamentos.count == 0 %>
         <%= javascript_tag "$('.periodo-value').not(':eq(0)').val('100')" %>
