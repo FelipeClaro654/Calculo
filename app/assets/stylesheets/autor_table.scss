@@ -1,0 +1,14 @@
+.autor-table{
+    th{
+        text-align: right !important;
+    }
+    td{
+        text-align: right !important;
+        vertical-align: middle !important;
+        padding: 3px !important;
+        .periodo-value{
+            text-align: right;
+            width: 100%;
+        }
+    }
+}

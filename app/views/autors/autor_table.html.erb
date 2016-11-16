@@ -104,7 +104,7 @@
 <%= hidden_field_tag :autor_id, @autor.id %>
 
 <div class="row">
-    <table class="table">
+    <table class="table autor-table">
         <thead>
             <th>
                 Período
@@ -119,7 +119,7 @@
                 Índice da <br> Data da <br> Obrigação
             </th>
             <th>
-                Índice da <br>Data da <br>Atualização
+                Índice da <br>Data da <br>Atualização <br>
                 <%= @autor.processo.data_base %>
             </th>
             <th>
