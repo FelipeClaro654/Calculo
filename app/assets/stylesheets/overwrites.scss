@@ -88,6 +88,16 @@ select {
     -moz-appearance: none; /* Remove estilo padrão do FireFox */
     -webkit-appearance: none;
     background:  image-url("arrow.png") no-repeat right !important;
+    &.ui-datepicker-month,
+    &.ui-datepicker-year {
+        font-size: 12px !important;
+        line-height: 13px;
+        padding: 0 0 0 2px !important;
+    }
+}
+
+.ui-datepicker{
+    z-index: 5 !important;
 }
 
 .panel{

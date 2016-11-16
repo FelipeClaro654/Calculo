@@ -16,6 +16,7 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
+//= require jquery.ui.all
 //= require cocoon
 //= require_tree .
 //= require turbolinks

@@ -1,6 +1,11 @@
 $(document).on('turbolinks:load', function() {
-    $(".calendario").datetimepicker({
-        format: "DD/MM/YYYY"
+    $(".calendario").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        format: "DD/MM/YYYY",
+        onClose: function(dateText, inst) {
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+        }
     });
 
     $('#autors').on('cocoon:before-insert', function(e, insertedItem) {
