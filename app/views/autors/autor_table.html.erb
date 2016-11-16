@@ -158,11 +158,12 @@
             </th>
         </thead>
         <tbody>
-            <% @periodos.each_with_index do |p , index| %>
-                <% if @pagamentos.where(table_index: index).count() > 0
-                        @row = @pagamentos.where(table_index: index)
+            <% @periodos.each_with_index do |p , p_index| %>
+                <%
+                if @pagamentos.where(table_index: p_index).count() > 0
+                        @row = @pagamentos.where(table_index: p_index)
                 %>
-                    <tr data-pagamento-id="<%= @row[0].id %>" data-table-index="<%= index %>">
+                    <tr data-pagamento-id="<%= @row[0].id %>" data-table-index="<%= p_index %>">
                         <td class="periodo-inicial">
                             <%= @row[0].periodo_inicial %>
                         </td>
@@ -199,9 +200,14 @@
                     </tr>
 
                 <% else %>
+                    <%  @value = ""
+                        if p_index == 1
+                            @value = "-"
+                        end
+                    %>
                     <% if p.kind_of?(Array)  %>
 
-                        <tr data-pagamento-id="" data-table-index="<%= index %>">
+                        <tr data-pagamento-id="" data-table-index="<%= p_index %>">
                             <td class="periodo-inicial">
                                 <%= p[0] %>
                             </td>
@@ -209,31 +215,36 @@
                                 <%= p[1]%>
                             </td>
                             <td>
-                                <input class="periodo-value" type="text" name="name" value="">
+                                <input class="periodo-value" type="text" name="name" value="<%=@value%>">
                             </td>
                             <td class="indice-tabela">
-
                                 <%= @tabela.where(mes: "\t"+ p[2].to_s + "\t").where(ano: "\t"+ p[3].to_s + "\t")[0].valor %>
                             </td>
                             <td class="indice-atualizacao">
                                 <%= @indice_atualizacao %>
                             </td>
                             <td class="bruto-atualizacao">
+                                <%=@value%>
                             </td>
                             <td class="previdencia">
+                                <%=@value%>
                             </td>
                             <td class="liquido-atualizado">
+                                <%=@value%>
                             </td>
                             <td class="meses">
                                 <%= @meses %>
                             </td>
                             <td class="juros">
+                                <%=@value%>
                             </td>
                             <td class="honorario">
+                                <%=@value%>
                             </td>
                         </tr>
                     <% else %>
-                        <tr data-pagamento-id="" data-table-index="<%= index %>">
+
+                        <tr data-pagamento-id="" data-table-index="<%= p_index %>">
                             <td class="periodo-inicial">
                                 <%= I18n.t("date.abbr_month_names")[p.month] %>
                                 <%= p.strftime("/%y") %>
@@ -243,7 +254,7 @@
                                 <%= (p + 1.month).strftime("/%y") %>
                             </td>
                             <td>
-                                <input class="periodo-value" type="text" name="name" value="">
+                                <input class="periodo-value" type="text" name="name" value="<%=@value%>">
                             </td>
                             <td class="indice-tabela">
                                 <%= @tabela.where(mes: "\t"+ p.strftime("%m") + "\t").where(ano: "\t"+ p.strftime("%Y") + "\t")[0].valor %>
@@ -252,17 +263,22 @@
                                 <%= @indice_atualizacao %>
                             </td>
                             <td class="bruto-atualizacao">
+                                <%=@value%>
                             </td>
                             <td class="previdencia">
+                                <%=@value%>
                             </td>
                             <td class="liquido-atualizado">
+                                <%=@value%>
                             </td>
                             <td class="meses">
                                 <%= @meses %>
                             </td>
                             <td class="juros">
+                                <%=@value%>
                             </td>
                             <td class="honorario">
+                                <%=@value%>
                             </td>
                         </tr>
                     <% end %>
@@ -300,6 +316,6 @@
     </table>
     <% if @pagamentos.count == 0 %>
         <%= javascript_tag "$('.periodo-value').not(':eq(0)').val('100')" %>
-        <%= javascript_tag "$('.periodo-value').not(':eq(0)').trigger('change')" %>
+        <%= javascript_tag "$('.periodo-value').trigger('change')" %>
     <% end %>
 </div>

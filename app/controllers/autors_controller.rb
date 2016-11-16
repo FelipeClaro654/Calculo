@@ -26,8 +26,6 @@ class AutorsController < ApplicationController
             end
             @meses = month_difference(@autor.periodo_inicial, @autor.periodo_final)
 
-            byebug
-
             if @tabela == "PCA-E"
                 @tabela = TabelaOpv.where("ano IN (?)", anos)
                 @indice_atualizacao =

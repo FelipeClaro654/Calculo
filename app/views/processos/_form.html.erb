@@ -52,7 +52,7 @@
                 as: :string,
                 :input_html => {
                     :placeholder => "__/__/__",
-                    :value =>  @processo.data_distribuicao.strftime('%d/%m/%Y').to_s,
+                    :value => @processo.data_distribuicao.blank? ? '' : @processo.data_distribuicao.strftime('%d/%m/%Y'),
                     :class => "calendario"
                 }
                 %>
@@ -62,7 +62,7 @@
                 as: :string,
                 :input_html => {
                     :placeholder => "__/__/__",
-                    :value =>  @processo.data_citacao.strftime('%d/%m/%Y').to_s,
+                    :value =>  @processo.data_citacao.blank? ? '' : @processo.data_citacao.strftime('%d/%m/%Y'),
                     :class => "calendario"
                 } %>
             </div>
@@ -87,7 +87,7 @@
                 as: :string,
                 :input_html => {
                     :placeholder => "__/__/__",
-                    :value =>  @processo.data_base.strftime('%d/%m/%Y').to_s,
+                    :value =>  @processo.data_base.blank? ? '' : @processo.data_base.strftime('%d/%m/%Y'),
                     :class => "calendario"
                 } %>
             </div>
