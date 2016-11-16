@@ -49,12 +49,22 @@
             </div>
             <div class="col-xs-2">
                 <%= f.input :data_distribuicao,
-                as: :string, :input_html => { :placeholder => "__/__/__", :class => "calendario" }%>
+                as: :string,
+                :input_html => {
+                    :placeholder => "__/__/__",
+                    :value =>  @processo.data_distribuicao.strftime('%d/%m/%Y').to_s,
+                    :class => "calendario"
+                }
+                %>
             </div>
             <div class="col-xs-2">
                 <%= f.input :data_citacao,
                 as: :string,
-                :input_html => { :placeholder => "__/__/__", :class => "calendario" }%>
+                :input_html => {
+                    :placeholder => "__/__/__",
+                    :value =>  @processo.data_citacao.strftime('%d/%m/%Y').to_s,
+                    :class => "calendario"
+                } %>
             </div>
             <div class="col-xs-2">
                 <%= f.input :sentenca %>
@@ -75,7 +85,11 @@
             <div class="col-xs-2">
                 <%= f.input :data_base,
                 as: :string,
-                :input_html => { :placeholder => "__/__/__", :class => "calendario" }%>
+                :input_html => {
+                    :placeholder => "__/__/__",
+                    :value =>  @processo.data_base.strftime('%d/%m/%Y').to_s,
+                    :class => "calendario"
+                } %>
             </div>
             <div class="col-xs-2">
                 <label>Índice da Data Base</label>

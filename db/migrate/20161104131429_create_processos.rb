@@ -8,7 +8,7 @@ class CreateProcessos < ActiveRecord::Migration[5.0]
       t.date :data_citacao
       t.string :vara
       t.string :tipo_processo
-      t.string :data_base
+      t.date :data_base
       t.string :sentenca
       t.string :re
       t.string :acordao

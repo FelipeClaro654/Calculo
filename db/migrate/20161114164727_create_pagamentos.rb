@@ -7,6 +7,7 @@ class CreatePagamentos < ActiveRecord::Migration[5.0]
       t.string :periodo_final
       t.decimal :periodo_value
       t.decimal :indice_tabela
+      t.decimal :indice_atualizacao
       t.decimal :bruto_atualizacao
       t.decimal :previdencia
       t.decimal :liquido_atualizado

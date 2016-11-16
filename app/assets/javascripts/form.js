@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-    $(".container .calendario").datetimepicker({
+    $(".calendario").datetimepicker({
         format: "DD/MM/YYYY"
     });
 

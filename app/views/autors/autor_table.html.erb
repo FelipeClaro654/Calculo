@@ -176,7 +176,7 @@
                             <%= @row[0].indice_tabela %>
                         </td>
                         <td class="indice-atualizacao">
-                            58.570367
+                            <%= @indice_atualizacao %>
                         </td>
                         <td class="bruto-atualizacao">
                             <%= @row[0].bruto_atualizacao %>
@@ -216,7 +216,7 @@
                                 <%= @tabela.where(mes: "\t"+ p[2].to_s + "\t").where(ano: "\t"+ p[3].to_s + "\t")[0].valor %>
                             </td>
                             <td class="indice-atualizacao">
-                                58.570367
+                                <%= @indice_atualizacao %>
                             </td>
                             <td class="bruto-atualizacao">
                             </td>
@@ -224,7 +224,8 @@
                             </td>
                             <td class="liquido-atualizado">
                             </td>
-                            <td class="meses"> <%= @meses %>
+                            <td class="meses">
+                                <%= @meses %>
                             </td>
                             <td class="juros">
                             </td>
@@ -248,7 +249,7 @@
                                 <%= @tabela.where(mes: "\t"+ p.strftime("%m") + "\t").where(ano: "\t"+ p.strftime("%Y") + "\t")[0].valor %>
                             </td>
                             <td class="indice-atualizacao">
-                                58.570367
+                                <%= @indice_atualizacao %>
                             </td>
                             <td class="bruto-atualizacao">
                             </td>
@@ -256,7 +257,8 @@
                             </td>
                             <td class="liquido-atualizado">
                             </td>
-                            <td class="meses"> <%= @meses %>
+                            <td class="meses">
+                                <%= @meses %>
                             </td>
                             <td class="juros">
                             </td>
@@ -282,7 +284,6 @@
                     TOTAL:
                 </th>
                 <th class="total-bruto-atualizacao">
-
                 </th>
                 <th class="total-previdencia">
                 </th>
