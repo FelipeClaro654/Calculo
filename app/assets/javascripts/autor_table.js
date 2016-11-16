@@ -11,7 +11,10 @@ $(function () {
             $.each(totals, function (i, e) {
                 var t = 0;
                 $.each(this, function (i, e) {
-                    t += parseFloat($(e).html());
+                    var value = $(e).html();
+                    if(value != "-"){
+                        t += parseFloat(value);
+                    }
                 })
                 totals[i] = t;
             });
@@ -25,8 +28,18 @@ $(function () {
     }
 
     $(document).on("change",".periodo-value", function() {
-        var parent = $(this).parents("tr"),
-            a = parseFloat($(this).val().replace(",", ".")),
+        var parent = $(this).parents("tr");
+
+        if($(this).val() === ""){
+            parent.find(".bruto-atualizacao").html("-");
+            parent.find(".previdencia").html("-");
+            parent.find(".liquido-atualizado").html("-");
+            parent.find(".juros").html("-");
+            parent.find(".honorario").html("-");
+            return false;
+        }
+
+        var a = parseFloat($(this).val().replace(",", ".")),
             b = parseFloat(parent.find(".indice-tabela").html()),
             c = parseFloat(parent.find(".indice-atualizacao").html()),
             d = parseFloat(((a / b)*c)),
