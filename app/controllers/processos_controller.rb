@@ -106,31 +106,33 @@ class ProcessosController < ApplicationController
             @periodos.each_with_index do |per, index|
 
                 if per.kind_of?(Array)
-                    periodo_inicial = per[0]
-                    periodo_final = per[1]
-
+                    @periodo_inicial = per[0]
+                    @periodo_final = per[1]
                     indice_periodo = retorna_indice(("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime, a.processo.tabela_atualizacao.nome)
                 else
-                    periodo_inicial = per.month
-                    periodo_final = per.month + 1
-                    byebug
+                    @periodo_inicial = per
+                    @periodo_final = per + 1
                     indice_periodo = retorna_indice(per, a.processo.tabela_atualizacao.nome)
                 end
-                periodo_value = index == 0 ? 0 : 100
 
+                if index == 0
+                    periodo_value = 0
+                else
+                    periodo_value = 100
+                end
+                meses = month_difference(a.periodo_inicial, a.periodo_final)
                 results = calcula_pagamentos(
                                             periodo_value,
                                             indice_periodo,
                                             a.processo.indice_tabela,
-                                            month_difference(a.periodo_inicial, a.periodo_final)
+                                            meses
                                             )
-
-
+                                            byebug
                 pagamento = Pagamento.new do |p|
                   p.autor_id = a.id
                   p.table_index = index
-                  p.periodo_inicial = a.periodo_inicial
-                  p.periodo_final = a.periodo_final
+                  p.periodo_inicial = @periodo_inicial
+                  p.periodo_final = @periodo_final
                   p.periodo_value = periodo_value
                   p.indice_tabela = indice_periodo
                   p.indice_atualizacao = a.processo.indice_tabela
@@ -139,6 +141,7 @@ class ProcessosController < ApplicationController
                   p.liquido_atualizado = results[:liquido_atualizado].round(2)
                   p.juros = results[:juros].round(2)
                   p.honorario = results[:honorario].round(2)
+                  p.meses = meses
                 end
                 pagamento.save!
             end
@@ -153,9 +156,8 @@ class ProcessosController < ApplicationController
         bruto_atualizacao = bruto/indice_periodo*indice_atualizacao
         previdencia = bruto_atualizacao*(0.01)
         liquido_atualizado = bruto_atualizacao - previdencia
-        juros = bruto_atualizacao*meses*(5/100)
-        honorario = (bruto_atualizacao + juros)*(10/100)
-
+        juros = bruto_atualizacao*meses*5/100
+        honorario = (bruto_atualizacao + juros)*10/100
         results = {
             "bruto_atualizacao": bruto_atualizacao,
             "previdencia": previdencia,
