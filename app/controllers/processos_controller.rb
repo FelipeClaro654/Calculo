@@ -28,7 +28,6 @@ class ProcessosController < ApplicationController
         @processo = Processo.new(processo_params)
         respond_to do |format|
             if @processo.save
-                byebug
                 create_pagamentos(@processo.autors)
                 format.html { render :edit, notice: 'Processo was successfully created.' }
                 format.json { render :show, status: :created, location: @processo }
@@ -127,7 +126,6 @@ class ProcessosController < ApplicationController
                                             a.processo.indice_tabela,
                                             meses
                                             )
-                                            byebug
                 pagamento = Pagamento.new do |p|
                   p.autor_id = a.id
                   p.table_index = index
