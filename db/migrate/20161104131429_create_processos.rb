@@ -9,6 +9,7 @@ class CreateProcessos < ActiveRecord::Migration[5.0]
       t.string :vara
       t.string :tipo_processo
       t.date :data_base
+      t.decimal :indice_tabela
       t.string :sentenca
       t.string :re
       t.string :acordao

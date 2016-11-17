@@ -92,8 +92,8 @@
                 } %>
             </div>
             <div class="col-xs-2">
-                <label>Índice da Data Base</label>
-                <h6>58,570367</h6>
+                <%= f.input :indice_tabela,
+                    :input_html => {:disabled => true} %>
             </div>
             <div class="col-xs-2">
                 <%= f.input :juros,
@@ -162,7 +162,7 @@
             <div class="row width-percent-85">
                 <br>
                 <div class="actions pull-right">
-                    <%= f.submit 'Gerar Pagamentos', :class => "btn bg-custom-primary" %>
+                    <%= button_tag 'Gerar Pagamentos', :class => "btn bg-custom-primary gerar-pagamentos" %>
                 </div>
             </div>
         </div>
@@ -191,7 +191,25 @@
 
                             <% unless @processo.autors.empty?
                                 @processo.autors.each do |a| %>
-                                    <%=link_to a.nome, :controller => :autors, :action => :show_autor_table, :autor => a.id%>
+                                    <ul class="list-inline list-autor">
+                                        <li>
+                                            <%=
+                                                link_to a.nome,
+                                                :controller => :autors,
+                                                :action => :show_autor_table,
+                                                :autor => a.id
+                                            %>
+                                        </li>
+                                        <li>
+                                            | <%= a.periodo_inicial.strftime("%d/%m/%Y") %>
+                                        </li>
+                                        <li>
+                                            <%= a.periodo_final.strftime("%d/%m/%Y") %>
+                                        </li>
+                                        <li>
+                                            <span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span>
+                                        </li>
+                                    </ul>
                                 <% end %>
                             <% end %>
 

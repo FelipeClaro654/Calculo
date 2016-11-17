@@ -2,18 +2,19 @@ $(document).on('turbolinks:load', function() {
     $(".calendario").datepicker({
         changeMonth: true,
         changeYear: true,
-        format: "DD/MM/YYYY",
-        onClose: function(dateText, inst) {
-            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
-        }
+        dateFormat: "dd/mm/yy",
+        yearRange: "1950:2016"
     });
 
     $('#autors').on('cocoon:before-insert', function(e, insertedItem) {
         if(!$(".btn-add-autor").hasClass('btn-add-autor-position')){
             $(".btn-add-autor").addClass('btn-add-autor-position');
         }
-        insertedItem.find(".calendario").datetimepicker({
-            format: "DD/MM/YYYY"
+        insertedItem.find(".calendario").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            yearRange: "1950:2016"
         });
     });
 
@@ -22,4 +23,9 @@ $(document).on('turbolinks:load', function() {
         parent.removeClass('has-error');
         parent.find(".help-block").remove();
     });
+
+    $(".gerar-pagamentos").click(function () {
+        $("#processo_indice_tabela").removeAttr('disabled');
+        $(".process-form").submit();
+    })
 });

@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20161114164727) do
     t.string   "vara"
     t.string   "tipo_processo"
     t.date     "data_base"
+    t.decimal  "indice_tabela"
     t.string   "sentenca"
     t.string   "re"
     t.string   "acordao"

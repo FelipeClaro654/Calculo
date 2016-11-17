@@ -30,12 +30,12 @@ class AutorsController < ApplicationController
                 @tabela = TabelaOpv.where("ano IN (?)", anos)
                 @indice_atualizacao =
                     TabelaOpv.where(ano: "\t"+(@autor.processo.data_base.year).to_s + "\t").
-                    where(mes: "\t"+(@autor.processo.data_base.month).to_s + "\t")[0].valor
+                    where(mes: "\t"+(@autor.processo.data_base.strftime("%m")) + "\t")[0].valor
             else
                 @tabela = TabelaJudicial.where("ano IN (?)", anos)
                 @indice_atualizacao =
                     TabelaJudicial.where(ano: "\t"+(@autor.processo.data_base.year).to_s + "\t").
-                    where(mes: "\t"+(@autor.processo.data_base.month).to_s + "\t")[0].valor
+                    where(mes: "\t"+(@autor.processo.strftime("%m")) + "\t")[0].valor
             end
 
             @pagamentos = Pagamento.where(autor_id: @autor.id)

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :processos
+  resources :processos do
+      get "retorna_indice", on: :collection
+  end
   resources :autors do
     get "show_autor_table", on: :collection
     post "salva_pagamentos", on: :collection

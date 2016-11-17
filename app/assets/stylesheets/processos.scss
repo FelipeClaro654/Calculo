@@ -60,3 +60,9 @@ label:not(.checkbox, .radio):after {
         overflow-x: visible;
     }
 }
+
+.list-autor{
+    :first-child{
+        width: 50%;
+    }
+}

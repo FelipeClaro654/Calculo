@@ -1,6 +1,22 @@
 $(function () {
 
     Autor_Table ={
+        retorna_indice: function () {
+            $.ajax({
+                url: "/processos/retorna_indice",
+                dataType: "json",
+                data: {
+                    data_base: $("#processo_data_base").val(),
+                    tabela: $("#processo_tabela_atualizacao_id option:selected").text()
+                }
+            })
+            .done(function(result) {
+                $("#processo_indice_tabela").val(result);
+                var parent = $("#processo_indice_tabela").parents(".form-group");
+                parent.removeClass('has-error');
+                parent.find(".help-block").remove();
+            });
+        },
         update_totals: function () {
             var totals = [  $(".bruto-atualizacao"),
                             $(".previdencia"),
@@ -26,6 +42,16 @@ $(function () {
             $(".total-honorario").html(totals[4].toFixed(2));
         }
     }
+
+    $(document).on("change","#processo_tabela_atualizacao_id", function() {
+        if($("#processo_data_base").val() != ""){
+            Autor_Table.retorna_indice();
+        }
+    });
+
+    $(document).on("change","#processo_data_base", function() {
+        Autor_Table.retorna_indice();
+    });
 
     $(document).on("change",".periodo-value", function() {
         var parent = $(this).parents("tr");
@@ -87,6 +113,7 @@ $(function () {
                     periodo_final: parent.find(".periodo-final").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
                     periodo_value: parent.find(".periodo-value").val(),
                     indice_tabela: parent.find(".indice-tabela").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
+                    indice_atualizacao: parent.find(".indice-atualizacao").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
                     bruto_atualizacao: parent.find(".bruto-atualizacao").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
                     previdencia: parent.find(".previdencia").html(),
                     liquido_atualizado: parent.find(".liquido-atualizado").html(),

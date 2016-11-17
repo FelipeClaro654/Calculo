@@ -11,6 +11,7 @@ class Processo < ApplicationRecord
   validates :acordao, presence: true
   validates :base_calculo_autor, presence: true
   validates :data_base, presence: true
+  validates :indice_tabela, presence: true
   validates :cbpm_ipesp_valor, presence: true
   validates :juros, presence: true
   validates :cruz_iamspe_valor, presence: true

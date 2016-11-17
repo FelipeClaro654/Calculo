@@ -22,6 +22,7 @@ pt-BR:
         re: "Ré(u)"
         numero: "Número"
         data_base: "Data Base"
+        indice_tabela: "Índice Tabela"
         tipo_processo: "Tipo de Ação"
         base_calculo_autor: "Base de Cálculo do Autor(a) Fls."
         tabela_atualizacao_id: "Tabela Atualização"
