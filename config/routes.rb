@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :processos do
       get "retorna_indice", on: :collection
+      get "retorna_indice_front", on: :collection
   end
   resources :autors do
     get "show_autor_table", on: :collection

@@ -201,7 +201,7 @@
 
                 <% else %>
                     <%  @value = ""
-                        if p_index == 1
+                        if p_index == 0
                             @value = "-"
                         end
                     %>
@@ -215,7 +215,7 @@
                                 <%= p[1]%>
                             </td>
                             <td>
-                                <input class="periodo-value" type="text" name="name" value="<%=@value%>">
+                                <input class="periodo-value" type="text" name="name" value="">
                             </td>
                             <td class="indice-tabela">
                                 <%= @tabela.where(mes: "\t"+ p[2].to_s + "\t").where(ano: "\t"+ p[3].to_s + "\t")[0].valor %>
@@ -233,7 +233,7 @@
                                 <%=@value%>
                             </td>
                             <td class="meses">
-                                <%= @meses %>
+                                <%=@meses %>
                             </td>
                             <td class="juros">
                                 <%=@value%>
@@ -254,7 +254,7 @@
                                 <%= (p + 1.month).strftime("/%y") %>
                             </td>
                             <td>
-                                <input class="periodo-value" type="text" name="name" value="<%=@value%>">
+                                <input class="periodo-value" type="text" name="name" value="">
                             </td>
                             <td class="indice-tabela">
                                 <%= @tabela.where(mes: "\t"+ p.strftime("%m") + "\t").where(ano: "\t"+ p.strftime("%Y") + "\t")[0].valor %>
@@ -314,8 +314,5 @@
             </tr>
         </tfoot>
     </table>
-    <% if @pagamentos.count == 0 %>
-        <%= javascript_tag "$('.periodo-value').not(':eq(0)').val('100')" %>
-        <%= javascript_tag "$('.periodo-value').trigger('change')" %>
-    <% end %>
+    <%= javascript_tag "Autor_Table.update_totals()" %>
 </div>

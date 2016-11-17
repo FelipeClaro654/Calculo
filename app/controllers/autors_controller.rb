@@ -1,22 +1,15 @@
 class AutorsController < ApplicationController
+    include ApplicationHelper
     def index
     end
 
     def show_autor_table
         if params[:autor]
             @autor = Autor.find(params[:autor])
-            @periodos = []
             @inicio = @autor.periodo_inicial
 
-            while @inicio < @autor.periodo_final do
-                if @inicio.month == 11
-                    @periodos.push(["13ºSal " + @inicio.strftime("/%y"),
-                                    "Dez " + @inicio.strftime("/%y"),
-                                    12, @inicio.year])
-                end
-                @periodos.push(@inicio)
-                @inicio = @inicio.beginning_of_month + 1.month
-            end
+            @periodos = retorna_periodos(@autor)
+
             @tabela = @autor.processo.tabela_atualizacao.nome
             range_anos = (@autor.periodo_final.year) - (@autor.periodo_inicial.year)
             anos = []
@@ -35,7 +28,7 @@ class AutorsController < ApplicationController
                 @tabela = TabelaJudicial.where("ano IN (?)", anos)
                 @indice_atualizacao =
                     TabelaJudicial.where(ano: "\t"+(@autor.processo.data_base.year).to_s + "\t").
-                    where(mes: "\t"+(@autor.processo.strftime("%m")) + "\t")[0].valor
+                    where(mes: "\t"+(@autor.processo.data_base.strftime("%m")) + "\t")[0].valor
             end
 
             @pagamentos = Pagamento.where(autor_id: @autor.id)
@@ -44,14 +37,6 @@ class AutorsController < ApplicationController
         else
             format.html { redirect_to @autor.processo, notice: "Informe o ID do Autor" }
         end
-    end
-
-    def month_difference(data_a, data_b)
-        difference = 0.0
-        if data_a.year != data_b.year
-            difference += (data_b - data_a).to_f / 30.4375
-        end
-        difference.round(2)
     end
 
     def salva_pagamentos

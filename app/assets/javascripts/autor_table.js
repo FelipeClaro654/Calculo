@@ -3,11 +3,12 @@ $(function () {
     Autor_Table ={
         retorna_indice: function () {
             $.ajax({
-                url: "/processos/retorna_indice",
+                url: "/processos/retorna_indice_front",
                 dataType: "json",
                 data: {
                     data_base: $("#processo_data_base").val(),
-                    tabela: $("#processo_tabela_atualizacao_id option:selected").text()
+                    tabela: $("#processo_tabela_atualizacao_id option:selected").text(),
+                    type: "JSON"
                 }
             })
             .done(function(result) {
@@ -85,6 +86,9 @@ $(function () {
             $.ajax({
                 url: '/autors/salva_pagamentos/',
                 type: 'post',
+                beforeSend: function () {
+
+                },
                 data: {
                     autor_id: $("#autor_id").val(),
                     table_index: parent.data("table-index"),
@@ -92,6 +96,7 @@ $(function () {
                     periodo_final: parent.find(".periodo-final").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
                     periodo_value: parent.find(".periodo-value").val(),
                     indice_tabela: parent.find(".indice-tabela").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
+                    indice_atualizacao: parent.find(".indice-atualizacao").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
                     bruto_atualizacao: parent.find(".bruto-atualizacao").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
                     previdencia: parent.find(".previdencia").html(),
                     liquido_atualizado: parent.find(".liquido-atualizado").html(),

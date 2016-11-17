@@ -1,4 +1,5 @@
 class ProcessosController < ApplicationController
+    include ApplicationHelper
     before_action :set_processo, only: [:show, :edit, :update, :destroy]
     # GET /processos
     # GET /processos.json
@@ -27,6 +28,8 @@ class ProcessosController < ApplicationController
         @processo = Processo.new(processo_params)
         respond_to do |format|
             if @processo.save
+                byebug
+                create_pagamentos(@processo.autors)
                 format.html { render :edit, notice: 'Processo was successfully created.' }
                 format.json { render :show, status: :created, location: @processo }
             else
@@ -61,7 +64,7 @@ class ProcessosController < ApplicationController
         end
     end
 
-    def retorna_indice
+    def retorna_indice_front
         if params[:tabela] == "PCA-E"
             @indice_tabela =
                 TabelaOpv.where(ano: "\t" + params[:data_base][6..9] + "\t").
@@ -71,17 +74,111 @@ class ProcessosController < ApplicationController
                 TabelaJudicial.where(ano: "\t" + params[:data_base][6..9] + "\t").
                 where(mes: "\t" + params[:data_base][3..4] + "\t")[0].valor
         end
-         render json: @indice_tabela
+            render json: @indice_tabela
+    end
+
+    def retorna_indice(data_base, tabela)
+        if data_base == "PCA-E"
+            @indice_tabela =
+                TabelaOpv.where(ano: "\t" + data_base.year.to_s + "\t").
+                where(mes: "\t" + data_base.strftime("%m") + "\t")[0].valor
+        else
+            @indice_tabela =
+                TabelaJudicial.where(ano: "\t" + data_base.year.to_s + "\t").
+                where(mes: "\t" + data_base.strftime("%m") + "\t")[0].valor
+        end
+        @indice_tabela
     end
 
     def update_autores(processo)
-
         processo.autors.each do |a|
-            byebug
-
-            @pagamento = Pagamento.where(autor_id: a.id)
+            @pagamentos = Pagamento.where(autor_id: a.id)
+            @pagamentos.update_all(
+                :indice_atualizacao => processo.indice_tabela
+            )
+            update_pagamentos(@pagamentos)
         end
     end
+
+    def create_pagamentos(autores)
+        autores.each do |a|
+            @periodos = retorna_periodos(a)
+            @periodos.each_with_index do |per, index|
+
+                if per.kind_of?(Array)
+                    periodo_inicial = per[0]
+                    periodo_final = per[1]
+
+                    indice_periodo = retorna_indice(("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime, a.processo.tabela_atualizacao.nome)
+                else
+                    periodo_inicial = per.month
+                    periodo_final = per.month + 1
+                    byebug
+                    indice_periodo = retorna_indice(per, a.processo.tabela_atualizacao.nome)
+                end
+                periodo_value = index == 0 ? 0 : 100
+
+                results = calcula_pagamentos(
+                                            periodo_value,
+                                            indice_periodo,
+                                            a.processo.indice_tabela,
+                                            month_difference(a.periodo_inicial, a.periodo_final)
+                                            )
+
+
+                pagamento = Pagamento.new do |p|
+                  p.autor_id = a.id
+                  p.table_index = index
+                  p.periodo_inicial = a.periodo_inicial
+                  p.periodo_final = a.periodo_final
+                  p.periodo_value = periodo_value
+                  p.indice_tabela = indice_periodo
+                  p.indice_atualizacao = a.processo.indice_tabela
+                  p.bruto_atualizacao = results[:bruto_atualizacao].round(2)
+                  p.previdencia = results[:previdencia].round(2)
+                  p.liquido_atualizado = results[:liquido_atualizado].round(2)
+                  p.juros = results[:juros].round(2)
+                  p.honorario = results[:honorario].round(2)
+                end
+                pagamento.save!
+            end
+        end
+    end
+
+    def calcula_pagamentos(periodo_v, i_tabela, i_atualizacao, meses)
+        bruto = periodo_v
+        indice_periodo = i_tabela
+        indice_atualizacao = i_atualizacao
+
+        bruto_atualizacao = bruto/indice_periodo*indice_atualizacao
+        previdencia = bruto_atualizacao*(0.01)
+        liquido_atualizado = bruto_atualizacao - previdencia
+        juros = bruto_atualizacao*meses*(5/100)
+        honorario = (bruto_atualizacao + juros)*(10/100)
+
+        results = {
+            "bruto_atualizacao": bruto_atualizacao,
+            "previdencia": previdencia,
+            "liquido_atualizado": liquido_atualizado,
+            "juros": juros,
+            "honorario": honorario
+        }
+        return results
+    end
+
+    def update_pagamentos(pagamentos)
+        pagamentos.each do |p|
+            results = calcula_pagamentos(p.periodo_value, p.indice_tabela, p.indice_atualizacao, p.meses)
+            p.update_attributes(
+                :bruto_atualizacao => results[:bruto_atualizacao].round(2),
+                :previdencia => results[:previdencia].round(2),
+                :liquido_atualizado => results[:liquido_atualizado].round(2),
+                :juros => results[:juros].round(2),
+                :honorario => results[:honorario].round(2)
+            )
+        end
+    end
+
 
     private
 
