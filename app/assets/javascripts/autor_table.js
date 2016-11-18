@@ -12,11 +12,21 @@ $(function () {
                 }
             })
             .done(function(result) {
+                if(!result.success){
+                    $("#processo_indice_tabela").val("");
+                    $("#no_indice").removeClass("hidden");
+                    $("#no_indice").alert();
+                    setTimeout(function () {
+                        $("#no_indice").alert('close');
+                    }, 6000);
+                    return false;
+                }
                 $("#processo_indice_tabela").val(result);
                 var parent = $("#processo_indice_tabela").parents(".form-group");
                 parent.removeClass('has-error');
                 parent.find(".help-block").remove();
-            });
+            })
+
         },
         update_totals: function () {
             var totals = [  $(".bruto-atualizacao"),

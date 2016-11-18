@@ -27,13 +27,18 @@ module ApplicationHelper
         if params[:tabela] == "PCA-E"
             @indice_tabela =
                 TabelaOpv.where(ano:  params[:data_base][6..9] ).
-                where(mes:  params[:data_base][3..4] )[0].valor
+                where(mes:  params[:data_base][3..4] )
         else
             @indice_tabela =
                 TabelaJudicial.where(ano:  params[:data_base][6..9] ).
-                where(mes:  params[:data_base][3..4] )[0].valor
+                where(mes:  params[:data_base][3..4] )
         end
-            render json: @indice_tabela
+
+        if @indice_tabela.empty?
+            render :json => { :success => false }
+        else
+            render :json => { :success => true, :indice_tabela => @indice_tabela }
+        end
     end
 
     def retorna_indice(data_base, tabela)
