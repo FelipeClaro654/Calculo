@@ -15,9 +15,8 @@ $(function () {
                 if(!result.success){
                     $("#processo_indice_tabela").val("");
                     $("#no_indice").removeClass("hidden");
-                    $("#no_indice").alert();
                     setTimeout(function () {
-                        $("#no_indice").alert('close');
+                        $("#no_indice").addClass('hidden');
                     }, 6000);
                     return false;
                 }
