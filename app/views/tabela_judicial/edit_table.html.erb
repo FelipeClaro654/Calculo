@@ -1,0 +1,114 @@
+<div class="month-container">
+    <%  @meses =  @tabela.count
+        (1..@meses).each do |m| %>
+            <% if m%96 == 0 %>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span class="not-visible">_</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                JAN
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                FEV
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                MAR
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                ABR
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                MAI
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                JUN
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                JUL
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                AGO
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                SET
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                OUT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                NOV
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                DEZ
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            <% end %>
+        <% end
+    %>
+</div>
+<div class="valores">
+    <%  @ano = ""
+        @tabela.each_with_index do |t, index| %>
+            <% if t.mes == "01" %>
+
+                <table class="table pull-right bordered striped">
+                    <thead>
+                        <tr>
+                            <th colspan="2"><%= t.ano %></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+            <% end %>
+                <tr class="">
+                    <td>
+                        <input type="text"
+                            data-ano="<%= t.ano %>"
+                            data-mes="<%= t.mes %>"
+                            data-tabela="judicial"
+                            value="<%= t.valor %>"
+                            class="valor-tabela">
+                    </td>
+                </tr>
+
+            <% if t.mes == "12" %>
+                        </tbody>
+                    </table>
+
+            <% end %>
+
+            <% @ano = t.ano %>
+    <%  end %>
+</div>

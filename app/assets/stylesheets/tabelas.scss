@@ -1,0 +1,40 @@
+.common-tabelas{
+    table{
+
+        tbody > tr > td{
+            padding: 3px !important;
+        }
+    }
+}
+
+.valores{
+    @extend .common-tabelas;
+    table{
+        text-align: center;
+        th{
+            text-align: center;
+        }
+        width: 122px;
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+.month-container{
+    width: 71px;
+    float: left;
+    text-align: center;
+
+    table{
+
+        tbody{
+            border: 1px solid #ddd;
+        }
+    }
+    @extend .common-tabelas;
+}
+
+input[type=text].valor-tabela{
+    width: 116px !important;
+    height: 14px !important;
+    text-align: right;
+}

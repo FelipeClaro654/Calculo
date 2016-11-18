@@ -26,12 +26,12 @@ module ApplicationHelper
     def retorna_indice_front
         if params[:tabela] == "PCA-E"
             @indice_tabela =
-                TabelaOpv.where(ano: "\t" + params[:data_base][6..9] + "\t").
-                where(mes: "\t" + params[:data_base][3..4] + "\t")[0].valor
+                TabelaOpv.where(ano:  params[:data_base][6..9] ).
+                where(mes:  params[:data_base][3..4] )[0].valor
         else
             @indice_tabela =
-                TabelaJudicial.where(ano: "\t" + params[:data_base][6..9] + "\t").
-                where(mes: "\t" + params[:data_base][3..4] + "\t")[0].valor
+                TabelaJudicial.where(ano:  params[:data_base][6..9] ).
+                where(mes:  params[:data_base][3..4] )[0].valor
         end
             render json: @indice_tabela
     end
@@ -39,12 +39,12 @@ module ApplicationHelper
     def retorna_indice(data_base, tabela)
         if data_base == "PCA-E"
             @indice_tabela =
-                TabelaOpv.where(ano: "\t" + data_base.year.to_s + "\t").
-                where(mes: "\t" + data_base.strftime("%m") + "\t")[0].valor
+                TabelaOpv.where(ano:  data_base.year.to_s ).
+                where(mes:  data_base.strftime("%m") )[0].valor
         else
             @indice_tabela =
-                TabelaJudicial.where(ano: "\t" + data_base.year.to_s + "\t").
-                where(mes: "\t" + data_base.strftime("%m") + "\t")[0].valor
+                TabelaJudicial.where(ano:  data_base.year.to_s ).
+                where(mes:  data_base.strftime("%m") )[0].valor
         end
         @indice_tabela
     end
