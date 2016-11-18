@@ -1,6 +1,9 @@
 <%= simple_form_for @processo, :html => {:class => ' process-form'} do |f| %>
 
-<div id="no_indice" class="alert alert-danger pull-right hidden" role="alert">
+<div id="no_indice" class="alert alert-danger pull-right" style="display: none;" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
     <h6>
         Nenhum índice para esta data. Cadastre e tente novamente.
     </h6>

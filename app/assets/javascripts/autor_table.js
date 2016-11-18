@@ -14,10 +14,10 @@ $(function () {
             .done(function(result) {
                 if(!result.success){
                     $("#processo_indice_tabela").val("");
-                    $("#no_indice").removeClass("hidden");
+                    $("#no_indice").show();
                     setTimeout(function () {
-                        $("#no_indice").addClass('hidden');
-                    }, 6000);
+                        $("#no_indice").hide();
+                    }, 3000);
                     return false;
                 }
                 $("#processo_indice_tabela").val(result.indice_tabela);
@@ -25,7 +25,6 @@ $(function () {
                 parent.removeClass('has-error');
                 parent.find(".help-block").remove();
             });
-
         },
         update_totals: function () {
             var totals = [  $(".bruto-atualizacao"),
