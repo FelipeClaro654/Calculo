@@ -21,11 +21,11 @@ $(function () {
                     }, 6000);
                     return false;
                 }
-                $("#processo_indice_tabela").val(result);
+                $("#processo_indice_tabela").val(result.indice_tabela);
                 var parent = $("#processo_indice_tabela").parents(".form-group");
                 parent.removeClass('has-error');
                 parent.find(".help-block").remove();
-            })
+            });
 
         },
         update_totals: function () {

@@ -37,7 +37,7 @@ module ApplicationHelper
         if @indice_tabela.empty?
             render :json => { :success => false }
         else
-            render :json => { :success => true, :indice_tabela => @indice_tabela }
+            render :json => { :success => true, :indice_tabela => @indice_tabela[0].valor }
         end
     end
 
