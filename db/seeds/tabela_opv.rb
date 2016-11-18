@@ -1,5 +1,4 @@
 TabelaOpv.create!([
-    {mes:'01', ano:'1964',valor: 0.000000,       status:'Ativo'},
     {mes:'01', ano:'1992',valor: 1000.00 ,       status:'Ativo' },
     {mes:'02', ano:'1992',valor: 1256.00 ,       status:'Ativo' },
     {mes:'03', ano:'1992',valor: 1583.82 ,       status:'Ativo' },
