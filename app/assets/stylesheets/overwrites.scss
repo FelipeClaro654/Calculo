@@ -120,3 +120,23 @@ select {
     margin-top: -2px;
     position: absolute;
 }
+
+ul.dropdown-menu {
+    padding: 0;
+    li {
+        height: 22px !important;
+    }
+    a, a:hover{
+        padding: 1px 20px;
+        height: 22px !important;
+    }
+
+    .active{
+        a{
+            background: $primary;
+        }
+        a:hover{
+            background: $secondary;
+        }
+    }
+}
