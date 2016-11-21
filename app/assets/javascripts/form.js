@@ -66,5 +66,11 @@ $(document).on('turbolinks:load', function() {
 
     });
 
+    $("#processo_juros").mask('000,00', {reverse: true});
+    $("#processo_cbpm_ipesp_valor").mask('000,00', {reverse: true});
+    $("#processo_cruz_iamspe_valor").mask('000,00', {reverse: true});
+    $("#processo_base_calculo_autor").mask('000,00', {reverse: true});
+
+
     Forms.esconde_autores_ja_salvos();
 });

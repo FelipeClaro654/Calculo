@@ -111,7 +111,8 @@ class ProcessosController < ApplicationController
                                             periodo_value,
                                             indice_periodo,
                                             a.processo.indice_tabela,
-                                            meses
+                                            meses,
+                                            a.processo.juros
                                             )
                 pagamento = Pagamento.new do |p|
                   p.autor_id = a.id
@@ -133,7 +134,7 @@ class ProcessosController < ApplicationController
         end
     end
 
-    def calcula_pagamentos(periodo_v, i_tabela, i_atualizacao, meses)
+    def calcula_pagamentos(periodo_v, i_tabela, i_atualizacao, meses, juros_porc)
         bruto = periodo_v
         indice_periodo = i_tabela
         indice_atualizacao = i_atualizacao
@@ -141,7 +142,7 @@ class ProcessosController < ApplicationController
         bruto_atualizacao = bruto/indice_periodo*indice_atualizacao
         previdencia = bruto_atualizacao*(0.01)
         liquido_atualizado = bruto_atualizacao - previdencia
-        juros = bruto_atualizacao*meses*5/100
+        juros = bruto_atualizacao*meses*juros_porc
         honorario = (bruto_atualizacao + juros)*10/100
         results = {
             "bruto_atualizacao": bruto_atualizacao,
@@ -155,7 +156,7 @@ class ProcessosController < ApplicationController
 
     def update_pagamentos(pagamentos)
         pagamentos.each do |p|
-            results = calcula_pagamentos(p.periodo_value, p.indice_tabela, p.indice_atualizacao, p.meses)
+            results = calcula_pagamentos(p.periodo_value, p.indice_tabela, p.indice_atualizacao, p.meses, p.juros)
             p.update_attributes(
                 :bruto_atualizacao => results[:bruto_atualizacao].round(2),
                 :previdencia => results[:previdencia].round(2),
