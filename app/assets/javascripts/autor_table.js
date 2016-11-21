@@ -19,6 +19,7 @@ $(function () {
                     setTimeout(function () {
                         $("#no_indice").hide();
                     }, 3000);
+                    $("#processo_tabela_atualizacao_id").effect("pulsate", {}, 500);
                     return false;
                 }
             });
