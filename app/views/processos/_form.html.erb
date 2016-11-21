@@ -239,12 +239,8 @@
                         <hr>
                         <div id="autors">
                             <div class="hidden-form-autors hidden">
-                                <% @processo.autors.each do |a| %>
-                                    <% if a.new_record? && a.id == nil %>
-                                        <%= f.fields_for :autors do |autor| %>
-                                          <%= render "autor_fields", :f => autor %>
-                                        <% end %>
-                                    <% end %>
+                                <%= f.fields_for :autors do |autor| %>
+                                  <%= render "autor_fields", :f => autor %>
                                 <% end %>
                             </div>
 
