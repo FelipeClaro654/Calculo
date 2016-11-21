@@ -49,17 +49,17 @@ module ApplicationHelper
             if data_base == "PCA-E"
                 @indice_tabela =
                 TabelaOpv.where(ano:  data_base.year.to_s ).
-                where(mes:  data_base.strftime("%m") )[0].valor
+                where(mes:  data_base.strftime("%m") )
             elsif params[:tabela] == "TPDJSP"
                 @indice_tabela =
                 TabelaJudicial.where(ano:  data_base.year.to_s ).
-                where(mes:  data_base.strftime("%m") )[0].valor
+                where(mes:  data_base.strftime("%m") )
             else
                 @indice_tabela =
                 TabelaFazenda.where(ano:  data_base.year.to_s ).
-                where(mes: data_base.strftime("%m") )[0].valor
+                where(mes: data_base.strftime("%m") )
             end
-            @indice_tabela
+            @indice_tabela[0].valor
         end
 
         def bootstrap_class_for flash_type

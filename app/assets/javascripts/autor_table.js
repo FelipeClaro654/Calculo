@@ -1,6 +1,29 @@
 $(function () {
 
     Autor_Table ={
+        retorna_indice_autor: function (input) {
+
+            $.ajax({
+                url: "/processos/retorna_indice_front",
+                dataType: "json",
+                data: {
+                    data_base: input.val(),
+                    tabela: $("#processo_tabela_atualizacao_id option:selected").text(),
+                    type: "JSON"
+                }
+            })
+            .done(function(result, x, y) {
+                if(!result.success){
+                    input.val("");
+                    $("#no_indice").show();
+                    setTimeout(function () {
+                        $("#no_indice").hide();
+                    }, 3000);
+                    return false;
+                }
+            });
+        },
+
         retorna_indice: function () {
             $.ajax({
                 url: "/processos/retorna_indice_front",
@@ -51,6 +74,12 @@ $(function () {
             $(".total-honorario").html(totals[4].toFixed(2));
         }
     }
+    $(document).on("change",".panel-autor .calendario", function() {
+        if($(this).val() != ""){
+            Autor_Table.retorna_indice_autor($(this));
+        }
+    });
+
 
     $(document).on("change","#processo_tabela_atualizacao_id", function() {
         if($("#processo_data_base").val() != ""){
