@@ -63,3 +63,22 @@
 .not-visible{
     visibility: hidden;
 }
+
+.upper-msg{
+    height: 57px;
+    margin-top: -15px;
+    h5{
+        text-align: right;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+}
+
+.quick-alert{
+    top: 11px;
+    right: 10px;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}

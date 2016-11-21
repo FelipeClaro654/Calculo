@@ -42,10 +42,23 @@ class ProcessosController < ApplicationController
     # PATCH/PUT /processos/1.json
     def update
         respond_to do |format|
+            old_autores = @processo.autors
+            @old_ids = []
+            old_autores.each do |o|
+                @old_ids.push(o.id)
+            end
+
             if @processo.update(processo_params)
-                update_autores(@processo)
-                format.html { redirect_to @processo, notice: 'Processo was successfully updated.' }
-                format.json { render :show, status: :ok, location: @processo }
+                if @old_ids.empty?
+                    create_pagamentos(@processo.autors)
+                else
+                    @new_autores = @processo.autors.where('id NOT IN (?)', @old_ids)
+                    create_pagamentos(@new_autores)
+                    update_autores(@processo)
+                end
+
+                format.html { render :edit, notice: 'Processo was successfully updated.' }
+                format.json { render json: @processo, status: :ok, location: @processo }
             else
                 format.html { render :edit }
                 format.json { render json: @processo.errors, status: :unprocessable_entity }

@@ -56,13 +56,24 @@ label:not(.checkbox, .radio):after {
     .panel-body{
         min-height: 150px;
         max-height: 428px;
-        overflow-x: scroll;
-        overflow-x: visible;
+        overflow-x: hidden;
     }
 }
 
 .list-autor{
     :first-child{
-        width: 50%;
+        width: 58%;
     }
+    :nth-child(2), :nth-child(3){
+        width: 18%;
+    }
+    :nth-child(4){
+        width: 2%;
+    }
+}
+
+.btn-add-autor{
+    position: absolute;
+    top: 78px;
+    right: 8px;
 }

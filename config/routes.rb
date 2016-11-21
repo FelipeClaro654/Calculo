@@ -6,12 +6,17 @@ Rails.application.routes.draw do
   resources :autors do
     get "show_autor_table", on: :collection
     post "salva_pagamentos", on: :collection
+    post "destroy", on: :collection
   end
   resources :tabela_opv do
       get "edit_table", on: :collection
       post "update_valor", on: :collection
   end
   resources :tabela_judicial do
+      get "edit_table", on: :collection
+      post "update_valor", on: :collection
+  end
+  resources :tabela_fazenda do
       get "edit_table", on: :collection
       post "update_valor", on: :collection
   end

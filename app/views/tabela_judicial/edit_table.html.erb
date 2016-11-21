@@ -1,7 +1,12 @@
+<div class="row upper-msg">
+    <h5 class="clearfix"><small>* Utilize a barra de espaço para alternar entre 2 e 6 casas decimais.</small></h5>
+    <h5 class="clearfix"><small>* Pressione TAB ou ENTER para atualizar os valores.</small></h5>
+</div>
+
 <div class="month-container">
     <%  @meses =  @tabela.count
-        (1..@meses).each do |m| %>
-            <% if m%96 == 0 %>
+        (0..@meses).each do |m| %>
+            <% if m%144 == 0 %>
                 <table class="table">
                     <thead>
                         <tr>
@@ -92,10 +97,16 @@
                 <tr class="">
                     <td>
                         <input type="text"
+                            id="xuribiba_<%= index%>"
+                            <% if t.valor.to_s.split(".")[1].length > 2 %>
+                                data-decimal="5"
+                            <% else %>
+                                data-decimal="2"
+                            <% end %>
                             data-ano="<%= t.ano %>"
                             data-mes="<%= t.mes %>"
                             data-tabela="judicial"
-                            value="<%= t.valor %>"
+                            value="<%= number_with_delimiter(t.valor, separator: ",", delimiter: ".") %>"
                             class="valor-tabela">
                     </td>
                 </tr>

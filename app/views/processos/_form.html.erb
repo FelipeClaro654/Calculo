@@ -197,32 +197,46 @@
                         </h6>
                     </div>
                     <div class="panel-body">
-                        <div id="autors">
-
-                            <% unless @processo.autors.empty?
-                                @processo.autors.each do |a| %>
-                                    <ul class="list-inline list-autor">
-                                        <li>
-                                            <%=
-                                                link_to a.nome,
-                                                :controller => :autors,
-                                                :action => :show_autor_table,
-                                                :autor => a.id
-                                            %>
-                                        </li>
-                                        <li>
-                                            | <%= a.periodo_inicial.strftime("%d/%m/%Y") %>
-                                        </li>
-                                        <li>
-                                            <%= a.periodo_final.strftime("%d/%m/%Y") %>
-                                        </li>
-                                        <li>
-                                            <span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span>
-                                        </li>
-                                    </ul>
-                                <% end %>
+                        <ul class="list-inline list-autor">
+                            <li>
+                                <strong>Nome</strong>
+                            </li>
+                            <li>
+                                <strong>Período Inicial</strong>
+                            </li>
+                            <li>
+                                <strong>Período Inicial</strong>
+                            </li>
+                            <li>
+                            </li>
+                        </ul>
+                        <% unless @processo.autors.empty?
+                            @processo.autors.each do |a| %>
+                                <ul class="list-inline list-autor">
+                                    <li>
+                                        <%=
+                                            link_to a.nome,
+                                            :controller => :autors,
+                                            :action => :show_autor_table,
+                                            :autor => a.id
+                                        %>
+                                    </li>
+                                    <li>
+                                        <%= a.periodo_inicial.strftime("%d/%m/%Y") %>
+                                    </li>
+                                    <li>
+                                        <%= a.periodo_final.strftime("%d/%m/%Y") %>
+                                    </li>
+                                    <li>
+                                        <span class="glyphicon glyphicon-trash text-danger cursor-pointer delete-autor"
+                                            aria-hidden="true" data-autor-id="<%= a.id %>"></span>
+                                    </li>
+                                </ul>
                             <% end %>
+                        <% end %>
+                        <hr>
 
+                        <div id="autors">
                             <%= link_to_add_association "Adicionar", f, :autors,
                             :class => "btn btn-success pull-right btn-xs btn-add-autor" %>
                         </div>

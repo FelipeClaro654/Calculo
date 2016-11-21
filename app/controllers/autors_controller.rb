@@ -23,4 +23,10 @@ class AutorsController < ApplicationController
         end
         head :ok
     end
+
+    def destroy
+        @autor = Autor.find(params[:autor_id])
+        @autor.destroy
+        render :json => { :success => true, autor_id: params[:autor_id] }
+    end
 end

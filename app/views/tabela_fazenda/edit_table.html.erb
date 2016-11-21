@@ -86,7 +86,6 @@
     <%  @ano = ""
         @tabela.each_with_index do |t, index| %>
             <% if t.mes == "01" %>
-
                 <table class="table pull-right bordered striped">
                     <thead>
                         <tr>
@@ -94,15 +93,15 @@
                         </tr>
                     </thead>
                     <tbody>
-
-
             <% end %>
                 <tr class="">
                     <td>
                         <input type="text"
+                            id="xuribiba_<%= index%>"
+                            data-decimal="2"
                             data-ano="<%= t.ano %>"
                             data-mes="<%= t.mes %>"
-                            data-tabela="opv"
+                            data-tabela="judicial"
                             value="<%= t.valor.to_s.gsub('.', ',') %>"
                             class="valor-tabela">
                     </td>

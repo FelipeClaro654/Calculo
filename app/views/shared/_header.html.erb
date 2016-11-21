@@ -11,7 +11,7 @@
    </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="custom-nav" id="bs-example-navbar-collapse-1">
+    <div class="custom-nav">
       <ul class="nav navbar-nav">
         <li class="<%= 'active' if params[:controller] == 'processos' %>">
             <%= link_to "Processo", controller: "processos", action: "new" %>
@@ -27,6 +27,9 @@
               </li>
               <li class="<%= 'active' if params[:controller] == 'tabela_judicial' %>">
                   <%= link_to "Tabela TPDJSP", controller: "tabela_judicial", action: "edit_table" %>
+              </li>
+              <li class="<%= 'active' if params[:controller] == 'tabela_fazenda' %>">
+                  <%= link_to "Tabela Modulada", controller: "tabela_fazenda", action: "edit_table" %>
               </li>
           </ul>
         </li>
