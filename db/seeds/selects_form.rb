@@ -1,5 +1,6 @@
 TabelaAtualizacao.create!(nome: 'PCA-E')
 TabelaAtualizacao.create!(nome: 'TPDJSP')
+TabelaAtualizacao.create!(nome: 'Modulada')
 
 CbpmIpesp.create!(nome: 'CBPM')
 CbpmIpesp.create!(nome: 'IPESP')

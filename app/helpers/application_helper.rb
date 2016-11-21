@@ -28,9 +28,13 @@ module ApplicationHelper
                 @indice_tabela =
                 TabelaOpv.where(ano:  params[:data_base][6..9] ).
                 where(mes:  params[:data_base][3..4] )
-            else
+            elsif params[:tabela] == "TPDJSP"
                 @indice_tabela =
                 TabelaJudicial.where(ano:  params[:data_base][6..9] ).
+                where(mes:  params[:data_base][3..4] )
+            else
+                @indice_tabela =
+                TabelaFazenda.where(ano:  params[:data_base][6..9] ).
                 where(mes:  params[:data_base][3..4] )
             end
 
@@ -46,10 +50,14 @@ module ApplicationHelper
                 @indice_tabela =
                 TabelaOpv.where(ano:  data_base.year.to_s ).
                 where(mes:  data_base.strftime("%m") )[0].valor
-            else
+            elsif params[:tabela] == "TPDJSP"
                 @indice_tabela =
                 TabelaJudicial.where(ano:  data_base.year.to_s ).
                 where(mes:  data_base.strftime("%m") )[0].valor
+            else
+                @indice_tabela =
+                TabelaFazenda.where(ano:  data_base.year.to_s ).
+                where(mes: data_base.strftime("%m") )[0].valor
             end
             @indice_tabela
         end
