@@ -1,6 +1,15 @@
 $(document).on('turbolinks:load', function() {
 
     Forms ={
+        esconde_autores_ja_salvos: function () {
+            var inputs = $("#autors input[name*='[id]']");
+
+            $.each(inputs, function () {
+                $(this).prev().hide();
+            });
+
+            $(".hidden-form-autors").removeClass('hidden');
+        },
         show_message: function (msg, type) {
             var div = '<div class="alert quick-alert '+type+'" role="alert">'+msg+'</div>';
             $("#show_message").html(div);
@@ -56,4 +65,6 @@ $(document).on('turbolinks:load', function() {
         });
 
     });
+
+    Forms.esconde_autores_ja_salvos();
 });
