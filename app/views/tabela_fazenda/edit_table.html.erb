@@ -98,11 +98,15 @@
                     <td>
                         <input type="text"
                             id="xuribiba_<%= index%>"
-                            data-decimal="2"
+                            <% if t.valor.to_s.split(".")[1].length > 2 %>
+                                data-decimal="5"
+                            <% else %>
+                                data-decimal="2"
+                            <% end %>
                             data-ano="<%= t.ano %>"
                             data-mes="<%= t.mes %>"
                             data-tabela="judicial"
-                            value="<%= t.valor.to_s.gsub('.', ',') %>"
+                            value="<%= number_with_delimiter(t.valor, separator: ",", delimiter: ".") %>"
                             class="valor-tabela">
                     </td>
                 </tr>
