@@ -98,6 +98,12 @@ select {
 
 .ui-datepicker{
     z-index: 5 !important;
+    font-size: 11px !important;
+    .ui-datepicker-month,
+    .ui-datepicker-year{
+        height: 16px !important;
+        font-size: 10px !important;
+    }
 }
 
 .panel{
