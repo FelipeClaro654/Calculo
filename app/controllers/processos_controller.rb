@@ -32,7 +32,7 @@ class ProcessosController < ApplicationController
                 format.html { render :edit, notice: 'Processo was successfully created.' }
                 format.json { render :show, status: :created, location: @processo }
             else
-                format.html { render :new, collection:@tabela_atualizacao }
+                format.html { render :new, collection: @tabela_atualizacao }
                 format.json { render json: @processo.errors, status: :unprocessable_entity }
             end
         end

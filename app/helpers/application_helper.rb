@@ -46,11 +46,11 @@ module ApplicationHelper
         end
 
         def retorna_indice(data_base, tabela)
-            if data_base == "PCA-E"
+            if tabela == "PCA-E"
                 @indice_tabela =
                 TabelaOpv.where(ano:  data_base.year.to_s ).
                 where(mes:  data_base.strftime("%m") )
-            elsif params[:tabela] == "TPDJSP"
+            elsif tabela == "TPDJSP"
                 @indice_tabela =
                 TabelaJudicial.where(ano:  data_base.year.to_s ).
                 where(mes:  data_base.strftime("%m") )
