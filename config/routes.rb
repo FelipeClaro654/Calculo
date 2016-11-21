@@ -11,14 +11,17 @@ Rails.application.routes.draw do
   resources :tabela_opv do
       get "edit_table", on: :collection
       post "update_valor", on: :collection
+      post "add_ano", on: :collection
   end
   resources :tabela_judicial do
       get "edit_table", on: :collection
       post "update_valor", on: :collection
+      post "add_ano", on: :collection
   end
   resources :tabela_fazenda do
       get "edit_table", on: :collection
       post "update_valor", on: :collection
+      post "add_ano", on: :collection
   end
   root "processos#new"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

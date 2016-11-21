@@ -34,10 +34,15 @@
   }
 }
 
-
 @for $i from 1 through 50 {
   .margin-top-#{$i}{
       margin-top: #{$i}px !important;
+  }
+}
+
+@for $i from 1 through 50 {
+  .neg-margin-top-#{$i}{
+      margin-top: -#{$i}px !important;
   }
 }
 

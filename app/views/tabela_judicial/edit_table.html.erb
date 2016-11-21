@@ -2,7 +2,15 @@
     <h5 class="clearfix"><small>* Utilize a barra de espaço para alternar entre 2 e 6 casas decimais.</small></h5>
     <h5 class="clearfix"><small>* Pressione TAB ou ENTER para atualizar os valores.</small></h5>
 </div>
-
+<div class="row">
+    <button data-tabela="judicial"
+            class="add-ano btn bg-custom-primary btn-xs pull-left margin-left-15 neg-margin-top-46"
+            type="button"
+            name="button"
+            title="Adicionar ano">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar ano
+    </button>
+</div>
 <div class="month-container">
     <%  @meses =  @tabela.count
         (0..@meses).each do |m| %>

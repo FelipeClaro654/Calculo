@@ -1,4 +1,15 @@
 $(function () {
+    $(".add-ano").click(function() {
+        $.ajax({
+            url: '/tabela_'+$(this).data("tabela")+'/add_ano',
+            type: 'post'
+        })
+        .done(function(result) {
+            window.location.reload();
+        });
+
+    });
+
     $(".valor-tabela").keyup(function(e) {
         if(e.keyCode === 9 || e.keyCode === 13){
             $.ajax({

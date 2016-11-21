@@ -2,6 +2,12 @@ table{
     font-size: 10px;
 }
 
+.btn:hover,
+.btn:focus,
+.btn.focus{
+    color: white;
+}
+
 abbr[title]{
   display: none;
 }
@@ -12,7 +18,8 @@ select{
     height: 22px !important;
     border-radius: 0 !important;
     font-size: 9px !important;
-    padding: 5px !important;
+    border: 1px solid #ccc;
+    padding: 0 3px !important;
 }
 
 label{
