@@ -75,4 +75,9 @@ module ApplicationHelper
             end
             nil
         end
+
+        def atualiza_decimal(param)
+            param = param.gsub(",", ".")
+            param
+        end
     end

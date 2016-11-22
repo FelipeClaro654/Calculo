@@ -1,6 +1,12 @@
 $(document).on('turbolinks:load', function() {
 
     Forms ={
+        corrige_decimais: function () {
+            $("#processo_juros").val($("#processo_juros").val().replace(",", "."));
+            $("#processo_cbpm_ipesp_valor").val($("#processo_cbpm_ipesp_valor").val().replace(",", "."));
+            $("#processo_cruz_iamspe_valor").val($("#processo_cruz_iamspe_valor").val().replace(",", "."));
+        },
+
         esconde_autores_ja_salvos: function () {
             var inputs = $("#autors input[name*='[id]']");
 
@@ -42,6 +48,7 @@ $(document).on('turbolinks:load', function() {
     });
 
     $(".gerar-pagamentos").click(function () {
+        Forms.corrige_decimais();
         $("#processo_indice_tabela").removeAttr("disabled");
         $(".process-form").submit();
     })
@@ -69,8 +76,6 @@ $(document).on('turbolinks:load', function() {
     $("#processo_juros").mask('000,00', {reverse: true});
     $("#processo_cbpm_ipesp_valor").mask('000,00', {reverse: true});
     $("#processo_cruz_iamspe_valor").mask('000,00', {reverse: true});
-    $("#processo_base_calculo_autor").mask('000,00', {reverse: true});
-
 
     Forms.esconde_autores_ja_salvos();
 });

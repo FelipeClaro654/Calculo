@@ -75,12 +75,14 @@ $(function () {
             $(".total-honorario").html(totals[4].toFixed(2));
         }
     }
+
+    $(".periodo-value").mask('000,00', {reverse: true});
+
     $(document).on("change",".panel-autor .calendario", function() {
         if($(this).val() != ""){
             Autor_Table.retorna_indice_autor($(this));
         }
     });
-
 
     $(document).on("change","#processo_tabela_atualizacao_id", function() {
         if($("#processo_data_base").val() != ""){
@@ -119,34 +121,7 @@ $(function () {
         parent.find(".liquido-atualizado").html(f.toFixed(2));
         parent.find(".juros").html(h.toFixed(2));
         parent.find(".honorario").html(i.toFixed(2));
-
-        if(parent.data("pagamento-id") === ""){
-            $.ajax({
-                url: '/autors/salva_pagamentos/',
-                type: 'post',
-                beforeSend: function () {
-
-                },
-                data: {
-                    autor_id: $("#autor_id").val(),
-                    table_index: parent.data("table-index"),
-                    periodo_inicial: parent.find(".periodo-inicial").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                    periodo_final: parent.find(".periodo-final").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                    periodo_value: parent.find(".periodo-value").val(),
-                    indice_tabela: parent.find(".indice-tabela").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                    indice_atualizacao: parent.find(".indice-atualizacao").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                    bruto_atualizacao: parent.find(".bruto-atualizacao").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                    previdencia: parent.find(".previdencia").html(),
-                    liquido_atualizado: parent.find(".liquido-atualizado").html(),
-                    meses: parent.find(".meses").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                    juros: parent.find(".juros").html(),
-                    honorario: parent.find(".honorario").html()
-                }
-            })
-            .done(function() {
-                console.log("success");
-            });
-        }else{
+        debugger;
             $.ajax({
                 url: '/autors/salva_pagamentos/',
                 type: 'post',
@@ -154,7 +129,7 @@ $(function () {
                     pagamento_id: parent.data("pagamento-id"),
                     periodo_inicial: parent.find(".periodo-inicial").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
                     periodo_final: parent.find(".periodo-final").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                    periodo_value: parent.find(".periodo-value").val(),
+                    periodo_value: parent.find(".periodo-value").val().replace(",", "."),
                     indice_tabela: parent.find(".indice-tabela").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
                     indice_atualizacao: parent.find(".indice-atualizacao").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
                     bruto_atualizacao: parent.find(".bruto-atualizacao").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
@@ -165,9 +140,8 @@ $(function () {
                     honorario: parent.find(".honorario").html()
                 }
             }).done(function () {
-                console.log("success");
+                Forms.show_message("Informações Atualizadas", "alert-success");
             });
-        }
         Autor_Table.update_totals();
     });
 

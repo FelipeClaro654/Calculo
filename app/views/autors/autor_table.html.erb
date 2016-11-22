@@ -58,12 +58,12 @@
 
       <li>
         <strong>Tabela Atualização:</strong>
-        <%= @autor.processo.tabela_atualizacao_id %>
+        <%= @autor.processo.tabela_atualizacao.nome %>
       </li>
 
       <li>
         <strong>Previdência:</strong>
-        <%= @autor.processo.cbpm_ipesp_id %>
+        <%= @autor.processo.cbpm_ipesp.nome %>
       </li>
 
       <li>
@@ -94,7 +94,7 @@
 
       <li>
         <strong>Data Cálculo:</strong>
-        <%= @autor.processo.data_calculo_id %>
+        <%= @autor.processo.data_calculo.nome %>
       </li>
       </ul>
   </div>
@@ -159,9 +159,7 @@
         </thead>
         <tbody>
             <% @pagamentos.order("created_at asc").each_with_index do |p , p_index| %>
-
                     <tr data-pagamento-id="<%= p.id %>" data-table-index="<%= p_index %>">
-
                         <% if p.periodo_final.length == 7 %>
                             <td class="periodo-inicial">
                                 <%= p.periodo_inicial %>
@@ -180,7 +178,7 @@
                             </td>
                         <% end %>
                         <td>
-                            <input class="periodo-value" type="text" name="name" value="<%= p.periodo_value %>">
+                            <input class="periodo-value" type="text" name="name" value="<%= number_with_precision(p.periodo_value, :precision => 2) %>">
                         </td>
                         <td class="indice-tabela">
                             <%= p.indice_tabela %>
@@ -238,5 +236,4 @@
             </tr>
         </tfoot>
     </table>
-    <%= javascript_tag "Autor_Table.update_totals()" %>
 </div>

@@ -1,0 +1,2 @@
+class TabelaJuro < ApplicationRecord
+end
