@@ -11,12 +11,12 @@
 
           <li>
             <strong>Data Distribuição:</strong>
-            <%= @autor.processo.data_distribuicao %>
+            <%= @autor.processo.data_distribuicao.strftime("%d/%m/%Y") %>
           </li>
 
           <li>
             <strong>Data Citação:</strong>
-            <%= @autor.processo.data_citacao %>
+            <%= @autor.processo.data_citacao.strftime("%d/%m/%Y") %>
           </li>
 
           <li>
@@ -32,7 +32,7 @@
 
       <li>
         <strong>Data Base:</strong>
-        <%= @autor.processo.data_base %>
+        <%= @autor.processo.data_base.strftime("%d/%m/%Y") %>
       </li>
 
       <li>
@@ -108,7 +108,7 @@
 </div>
 <hr>
 <h5> <strong>Autor(a):</strong> <%= @autor.nome %></h5>
-<h5> <strong>Período:</strong> <%= @autor.periodo_inicial %> até <%= @autor.periodo_final %> </h5>
+<h5> <strong>Período:</strong> <%= @autor.periodo_inicial.strftime("%d/%m/%Y") %> até <%= @autor.periodo_final.strftime("%d/%m/%Y") %> </h5>
 
 <%= hidden_field_tag :autor_id, @autor.id %>
 
