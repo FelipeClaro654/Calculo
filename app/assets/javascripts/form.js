@@ -22,6 +22,35 @@ $(document).on('turbolinks:load', function() {
             setTimeout(function () {
                 $("#show_message").html("");
             }, 4000);
+        },
+        atualiza_juros: function () {
+
+            if($("#processo_data_base").val() == "" || $("#processo_data_citacao").val() == ""){
+                return false;
+            }
+
+            if($("#processo_tipo_juro_id option:selected").text() == "tabela"){
+                var data = "";
+
+                if($("#processo_data_calculo_id option:selected").text() == "Data"){
+                    data = moment($("#processo_data_base").datepicker("getDate"));
+                }else{
+                    data = moment($("#processo_data_citacao").datepicker("getDate"));
+                }
+
+                $.ajax({
+                    url: '/processos/atualiza_juros',
+                    data: {
+                        ano: data.format("YYYY"),
+                        mes: data.format("MM")
+                    }
+                })
+                .done(function(result) {
+                    $("#processo_juros").val(result.juros_atualizado);
+                    $(".process-form").submit();
+                });
+
+            }
         }
     }
 
@@ -50,7 +79,7 @@ $(document).on('turbolinks:load', function() {
     $(".gerar-pagamentos").click(function () {
         Forms.corrige_decimais();
         $("#processo_indice_tabela").removeAttr("disabled");
-        $(".process-form").submit();
+        Forms.atualiza_juros();
     })
 
     $(".delete-autor").click(function() {
@@ -66,9 +95,8 @@ $(document).on('turbolinks:load', function() {
                 autor_id: $(this).data("autor-id")
             }
         })
-        .done(function(result) {
-            $("[data-autor-id='"+result.autor_id+"'].delete-autor").parents(".list-autor").remove();
-            Forms.show_message("Autor excluído com sucesso.", "alert-success");
+        .done(function() {
+            window.location.reload();
         });
 
     });

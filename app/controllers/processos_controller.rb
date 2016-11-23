@@ -90,7 +90,6 @@ class ProcessosController < ApplicationController
         autores.each do |a|
             @periodos = retorna_periodos(a)
             @periodos.each_with_index do |per, index|
-
                 if per.kind_of?(Array)
                     @periodo_inicial = per[0]
                     @periodo_final = per[1]
@@ -145,12 +144,8 @@ class ProcessosController < ApplicationController
         indice_periodo = i_tabela
         indice_atualizacao = i_atualizacao
 
-        if juros_porc.to_s == "0.5"
-            data = data_calculo == "Data" ? processo.data_base : processo.data_citacao
-            juros_porc = atualiza_juros(data) == [] ? 0.5 : atualiza_juros(data).to_d
-        end
-
-        bruto_atualizacao = bruto/indice_periodo*indice_atualizacao
+###
+        bruto_atualizacao = (bruto.to_d)/indice_periodo*indice_atualizacao
         previdencia = bruto_atualizacao*(prev_porc/100 + assist_porc/100)
         liquido_atualizado = bruto_atualizacao - previdencia
         juros = bruto_atualizacao*meses*(juros_porc/100)
@@ -165,13 +160,15 @@ class ProcessosController < ApplicationController
         return results
     end
 
-    def atualiza_juros(data)
-        juros_atualizado = TabelaJuro.where(ano: data.year.to_s).where(mes: data.month.to_s)
+    def atualiza_juros
+        juros_atualizado = TabelaJuro.where(ano: params[:ano]).where(mes: params[:mes])
 
         if juros_atualizado.nil?
-            juros_atualizado = 0,005
+            juros_atualizado = 0.5
+        else
+            juros_atualizado = juros_atualizado[0].valor
         end
-        juros_atualizado
+        render :json => {:success => true, :juros_atualizado =>  juros_atualizado}
     end
 
     def update_pagamentos(pagamentos)

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :processos do
       get "retorna_indice", on: :collection
       get "retorna_indice_front", on: :collection
+      get "atualiza_juros", on: :collection
   end
   resources :autors do
     get "show_autor_table", on: :collection
@@ -19,6 +20,11 @@ Rails.application.routes.draw do
       post "add_ano", on: :collection
   end
   resources :tabela_fazenda do
+      get "edit_table", on: :collection
+      post "update_valor", on: :collection
+      post "add_ano", on: :collection
+  end
+  resources :tabela_juro do
       get "edit_table", on: :collection
       post "update_valor", on: :collection
       post "add_ano", on: :collection

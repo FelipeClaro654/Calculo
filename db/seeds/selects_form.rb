@@ -6,8 +6,8 @@ CbpmIpesp.create!(nome: 'CBPM')
 CbpmIpesp.create!(nome: 'IPESP')
 CbpmIpesp.create!(nome: 'MISTO')
 
-TipoJuro.create!(nome: 'am')
-TipoJuro.create!(nome: 'aa')
+TipoJuro.create!(nome: 'tabela')
+TipoJuro.create!(nome: 'valor')
 
 CruzIamspe.create!(nome: 'Cruz Azul')
 CruzIamspe.create!(nome: 'IAMSPE')

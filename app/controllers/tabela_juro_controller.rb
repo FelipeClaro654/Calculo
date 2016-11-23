@@ -1,18 +1,16 @@
-class TabelaFazendaController < ApplicationController
+class TabelaJuroController < ApplicationController
     def edit_table
-        @tabela = TabelaFazenda.order("ano desc").order("mes")
+        @tabela = TabelaJuro.order("ano desc").order("mes")
     end
 
     def update_valor
         params[:valor] = 0 if params[:valor] == ""
-        @row = TabelaFazenda.where("ano = :ano and mes = :mes", {ano: params[:ano], mes:  params[:mes] })
+        @row = TabelaJuro.where("ano = :ano and mes = :mes", {ano: params[:ano], mes:  params[:mes] })
         @row[0].update_attribute(:valor, params[:valor])
-
-        head :ok
     end
 
     def add_ano
-        @max_ano = TabelaFazenda.maximum("ano").to_i + 1
+        @max_ano = TabelaJuro.maximum("ano").to_i + 1
 
         (1..12).each do |nv|
             mes = ""
@@ -21,7 +19,7 @@ class TabelaFazendaController < ApplicationController
             else
                 mes = "0" + (nv.to_s)
             end
-            novo_registro = TabelaFazenda.new(
+            novo_registro = TabelaJuro.new(
                                                 mes: mes,
                                                 ano: @max_ano,
                                                 valor: 0.000000,
@@ -29,6 +27,5 @@ class TabelaFazendaController < ApplicationController
                                              )
             novo_registro.save!
         end
-        head :ok
     end
 end

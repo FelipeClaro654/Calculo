@@ -13,7 +13,7 @@ $(function () {
     $(".valor-tabela").keyup(function(e) {
         if(e.keyCode === 9 || e.keyCode === 13){
             $.ajax({
-                url: '/tabela_'+$(this).data("tabela")+'/update_valor',
+                url: '/tabela_'+$(".add-ano").data("tabela")+'/update_valor',
                 type: 'post',
                 data: {
                     ano: $(this).data("ano"),
@@ -28,9 +28,9 @@ $(function () {
 
     $('.valor-tabela').focus(function () {
         if($(this).data("decimal") === 2){
-            $(this).unmask().mask('000.000.000,00', {reverse: true});
+            $(this).unmask().mask('###.###.##0,00', {reverse: true});
         }else{
-            $(this).unmask().mask('000.000.000,000000', {reverse: true});
+            $(this).unmask().mask('###.###.##0,000000', {reverse: true});
 
         }
     });

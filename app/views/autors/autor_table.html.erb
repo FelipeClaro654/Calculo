@@ -68,13 +68,17 @@
 
       <li>
         <strong>Previdência %:</strong>
-        <%= @autor.processo.cbpm_ipesp_valor %>
+        <div class="previdencia-processo pull-right margin-left-2">
+            <%= @autor.processo.cbpm_ipesp_valor %>
+        </div>
       </li>
       </ul>
       <ul class="list-inline">
       <li>
         <strong>Juros:</strong>
-        <%= @autor.processo.juros %>
+        <div class="juros-processo pull-right margin-left-2">
+            <%= @autor.processo.juros %>
+        </div>
       </li>
 
       <li>
@@ -85,11 +89,14 @@
       <li>
         <strong>Assist. Médica:</strong>
         <%= @autor.processo.cruz_iamspe_id %>
+
       </li>
 
       <li>
         <strong>Assist. Médica Valor:</strong>
-        <%= @autor.processo.cruz_iamspe_valor %>
+        <div class="assistencia-processo pull-right margin-left-2">
+            <%= @autor.processo.cruz_iamspe_valor %>
+        </div>
       </li>
 
       <li>
@@ -159,53 +166,52 @@
         </thead>
         <tbody>
             <% @pagamentos.order("created_at asc").each_with_index do |p , p_index| %>
-                    <tr data-pagamento-id="<%= p.id %>" data-table-index="<%= p_index %>">
-                        <% if p.periodo_final.length == 7 %>
-                            <td class="periodo-inicial">
-                                <%= p.periodo_inicial %>
-                            </td>
-                            <td class="periodo-final">
-                                <%= p.periodo_final %>
-                            </td>
-                        <%else %>
-                            <td class="periodo-inicial">
-                                <%= I18n.t("date.abbr_month_names")[p.periodo_inicial[5..6].to_i] %>
-                                /<%=p.periodo_inicial[2..3] %>
-                            </td>
-                            <td class="periodo-final">
-                                <%= I18n.t("date.abbr_month_names")[p.periodo_final[5..6].to_i] %>
-                                /<%=p.periodo_final[2..3] %>
-                            </td>
-                        <% end %>
-                        <td>
-                            <input class="periodo-value" type="text" name="name" value="<%= number_with_precision(p.periodo_value, :precision => 2) %>">
+                <tr data-pagamento-id="<%= p.id %>" data-table-index="<%= p_index %>">
+                    <% if p.periodo_final.length == 7 %>
+                        <td class="periodo-inicial">
+                            <%= p.periodo_inicial %>
                         </td>
-                        <td class="indice-tabela">
-                            <%= p.indice_tabela %>
+                        <td class="periodo-final">
+                            <%= p.periodo_final %>
                         </td>
-                        <td class="indice-atualizacao">
-                            <%= @indice_atualizacao %>
+                    <%else %>
+                        <td class="periodo-inicial">
+                            <%= I18n.t("date.abbr_month_names")[p.periodo_inicial[5..6].to_i] %>
+                            /<%=p.periodo_inicial[2..3] %>
                         </td>
-                        <td class="bruto-atualizacao">
-                            <%= p.bruto_atualizacao %>
+                        <td class="periodo-final">
+                            <%= I18n.t("date.abbr_month_names")[p.periodo_final[5..6].to_i] %>
+                            /<%=p.periodo_final[2..3] %>
                         </td>
-                        <td class="previdencia">
-                            <%= p.previdencia %>
-                        </td>
-                        <td class="liquido-atualizado">
-                            <%= p.liquido_atualizado %>
-                        </td>
-                        <td class="meses">
-                            <%= p.meses %>
-                        </td>
-                        <td class="juros">
-                            <%= p.juros %>
-                        </td>
-                        <td class="honorario">
-                            <%= p.honorario %>
-                        </td>
-                    </tr>
-
+                    <% end %>
+                    <td>
+                        <input class="periodo-value" type="text" name="name" value="<%= number_with_precision(p.periodo_value, :precision => 2) %>">
+                    </td>
+                    <td class="indice-tabela">
+                        <%= p.indice_tabela %>
+                    </td>
+                    <td class="indice-atualizacao">
+                        <%= @indice_atualizacao %>
+                    </td>
+                    <td class="bruto-atualizacao">
+                        <%= p.bruto_atualizacao %>
+                    </td>
+                    <td class="previdencia">
+                        <%= p.previdencia %>
+                    </td>
+                    <td class="liquido-atualizado">
+                        <%= p.liquido_atualizado %>
+                    </td>
+                    <td class="meses">
+                        <%= p.meses %>
+                    </td>
+                    <td class="juros">
+                        <%= p.juros %>
+                    </td>
+                    <td class="honorario">
+                        <%= p.honorario %>
+                    </td>
+                </tr>
             <% end %>
         </tbody>
         <tfoot>

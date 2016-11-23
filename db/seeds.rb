@@ -9,7 +9,7 @@
 # coding: utf-8
 
 %w{
-  selects_form tabela_fazenda tabela_judicial tabela_opv
+  selects_form tabela_fazenda tabela_judicial tabela_opv tabela_juros
 }.each do |part|
   require File.expand_path(File.dirname(__FILE__))+"/seeds/#{part}.rb"
 end

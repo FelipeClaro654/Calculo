@@ -31,6 +31,9 @@
               <li class="<%= 'active' if params[:controller] == 'tabela_fazenda' %>">
                   <%= link_to "Tabela Modulada", controller: "tabela_fazenda", action: "edit_table" %>
               </li>
+              <li class="<%= 'active' if params[:controller] == 'tabela_juro' %>">
+                  <%= link_to "Tabela Juros", controller: "tabela_juro", action: "edit_table" %>
+              </li>
           </ul>
         </li>
       </ul>

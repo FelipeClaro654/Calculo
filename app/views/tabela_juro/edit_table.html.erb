@@ -3,7 +3,7 @@
     <h5 class="clearfix"><small>* Pressione TAB ou ENTER para atualizar os valores.</small></h5>
 </div>
 <div class="row">
-    <button data-tabela="fazenda"
+    <button data-tabela="juro"
             class="add-ano btn bg-custom-primary btn-xs pull-left margin-left-15 neg-margin-top-46"
             type="button"
             name="button"
@@ -90,7 +90,7 @@
         <% end
     %>
 </div>
-<div class="valores">
+<div class="valores valores-juros">
     <%  @ano = ""
         @tabela.each_with_index do |t, index| %>
             <% if t.mes == "01" %>
@@ -113,7 +113,7 @@
                             <% end %>
                             data-ano="<%= t.ano %>"
                             data-mes="<%= t.mes %>"
-                            value="<%= number_with_delimiter(t.valor, separator: ",", delimiter: ".") %>"
+                            value="<%= number_with_delimiter(('%.02f' % t.valor), separator: ",", delimiter: ".") %>"
                             class="valor-tabela">
                     </td>
                 </tr>

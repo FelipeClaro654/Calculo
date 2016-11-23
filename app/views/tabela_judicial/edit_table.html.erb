@@ -105,7 +105,7 @@
                 <tr class="">
                     <td>
                         <input type="text"
-                            id="xuribiba_<%= index%>"
+                            id="table_<%= index%>"
                             <% if t.valor.to_s.split(".")[1].length > 2 %>
                                 data-decimal="5"
                             <% else %>
@@ -113,7 +113,6 @@
                             <% end %>
                             data-ano="<%= t.ano %>"
                             data-mes="<%= t.mes %>"
-                            data-tabela="judicial"
                             value="<%= number_with_delimiter(t.valor, separator: ",", delimiter: ".") %>"
                             class="valor-tabela">
                     </td>

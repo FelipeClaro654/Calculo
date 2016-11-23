@@ -110,7 +110,7 @@
                 as: :string,
                 :input_html => {
                     :placeholder => "Valor %",
-                    :value => number_with_precision(@processo.juros, :precision => 2)
+                    :value => @processo.juros.nil? ? "" : '%.02f' % @processo.juros,
                 }
                 %>
                 <div class="percent-symbol margin-top-28">
@@ -137,7 +137,7 @@
                 as: :string,
                 :input_html => {
                     :placeholder => "Valor %",
-                    :value => number_with_precision(@processo.cbpm_ipesp_valor, :precision => 2)
+                    :value => @processo.cbpm_ipesp_valor.nil? ? "" : '%.02f' % @processo.cbpm_ipesp_valor,
                 }%>
                 <div class="percent-symbol margin-top-28">
                     %
@@ -155,7 +155,7 @@
                 <%= f.text_field :cruz_iamspe_valor,
                     class: "form-control",
                     as: :string,
-                    :value => '%.02f' % @processo.cruz_iamspe_valor,
+                    :value => @processo.cruz_iamspe_valor.nil? ? "" : '%.02f' % @processo.cruz_iamspe_valor,
                     :placeholder => "Valor %"
                 %>
                     <div class="percent-symbol margin-top-28">
@@ -182,7 +182,7 @@
             <div class="row width-percent-85">
                 <br>
                 <div class="actions pull-right">
-                    <%= button_tag 'Gerar Pagamentos', :class => "btn bg-custom-primary gerar-pagamentos" %>
+                    <%= button_tag 'Gerar Pagamentos', :class => "btn bg-custom-primary gerar-pagamentos", :type => "button" %>
                 </div>
             </div>
         </div>
