@@ -45,19 +45,19 @@ module ApplicationHelper
             end
         end
 
-        def retorna_indice(data_base, tabela)
+        def retorna_indice(data, tabela)
             if tabela == "PCA-E"
                 @indice_tabela =
-                TabelaOpv.where(ano:  data_base.year.to_s ).
-                where(mes:  data_base.strftime("%m") )
+                TabelaOpv.where(ano:  data.year.to_s ).
+                where(mes:  data.strftime("%m") )
             elsif tabela == "TPDJSP"
                 @indice_tabela =
-                TabelaJudicial.where(ano:  data_base.year.to_s ).
-                where(mes:  data_base.strftime("%m") )
+                TabelaJudicial.where(ano:  data.year.to_s ).
+                where(mes:  data.strftime("%m") )
             else
                 @indice_tabela =
-                TabelaFazenda.where(ano:  data_base.year.to_s ).
-                where(mes: data_base.strftime("%m") )
+                TabelaFazenda.where(ano:  data.year.to_s ).
+                where(mes: data.strftime("%m") )
             end
             @indice_tabela[0].valor
         end

@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20161122144007) do
     t.decimal  "meses"
     t.decimal  "juros"
     t.decimal  "honorario"
+    t.date     "periodo"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.index ["autor_id"], name: "index_pagamentos_on_autor_id", using: :btree

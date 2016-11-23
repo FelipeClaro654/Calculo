@@ -87,16 +87,19 @@ class ProcessosController < ApplicationController
     end
 
     def create_pagamentos(autores)
+
         autores.each do |a|
             @periodos = retorna_periodos(a)
             @periodos.each_with_index do |per, index|
+
                 if per.kind_of?(Array)
                     @periodo_inicial = per[0]
                     @periodo_final = per[1]
                     indice_periodo = retorna_indice(("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime, a.processo.tabela_atualizacao.nome)
                 else
                     @periodo_inicial = per
-                    @periodo_final = per + 1
+                    @periodo_final = per + 1.month
+
                     indice_periodo = retorna_indice(per, a.processo.tabela_atualizacao.nome)
                 end
 
@@ -127,24 +130,20 @@ class ProcessosController < ApplicationController
                   p.juros = results[:juros].round(2)
                   p.honorario = results[:honorario].round(2)
                   p.meses = meses
+                  p.periodo = per.kind_of?(Array) ? ("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime : @periodo_inicial
                 end
                 pagamento.save!
             end
         end
     end
 
-    def calcula_pagamentos(periodo_v, i_tabela, meses, processo)
-        i_atualizacao = processo.indice_tabela
+    def calcula_pagamentos(bruto, indice_periodo, meses, processo)
+        indice_atualizacao = processo.indice_tabela
         prev_porc = processo.cbpm_ipesp_valor
         assist_porc = processo.cruz_iamspe_valor
         data_calculo = processo.data_calculo.nome
         juros_porc = processo.juros
 
-        bruto = periodo_v
-        indice_periodo = i_tabela
-        indice_atualizacao = i_atualizacao
-
-###
         bruto_atualizacao = (bruto.to_d)/indice_periodo*indice_atualizacao
         previdencia = bruto_atualizacao*(prev_porc/100 + assist_porc/100)
         liquido_atualizado = bruto_atualizacao - previdencia
@@ -163,7 +162,7 @@ class ProcessosController < ApplicationController
     def atualiza_juros
         juros_atualizado = TabelaJuro.where(ano: params[:ano]).where(mes: params[:mes])
 
-        if juros_atualizado.nil?
+        if juros_atualizado.empty?
             juros_atualizado = 0.5
         else
             juros_atualizado = juros_atualizado[0].valor
@@ -173,13 +172,16 @@ class ProcessosController < ApplicationController
 
     def update_pagamentos(pagamentos)
         pagamentos.each do |p|
+            indice_periodo = retorna_indice(p.periodo, p.autor.processo.tabela_atualizacao.nome)
+
             results = calcula_pagamentos(
                                         p.periodo_value,
-                                        p.indice_tabela,
+                                        indice_periodo,
                                         p.meses,
                                         p.autor.processo
                                         )
             p.update_attributes(
+                :indice_tabela => indice_periodo,
                 :bruto_atualizacao => results[:bruto_atualizacao].round(2),
                 :previdencia => results[:previdencia].round(2),
                 :liquido_atualizado => results[:liquido_atualizado].round(2),

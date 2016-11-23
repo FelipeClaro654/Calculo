@@ -14,7 +14,7 @@ class CreatePagamentos < ActiveRecord::Migration[5.0]
       t.decimal :meses
       t.decimal :juros
       t.decimal :honorario
-
+      t.date :periodo
       t.timestamps
     end
   end
