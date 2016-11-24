@@ -54,6 +54,13 @@ $(document).on('turbolinks:load', function() {
         }
     }
 
+
+    $(document).on("change",".panel-autor .calendario", function() {
+        if($(this).val() != ""){
+            Autor_Table.retorna_indice_autor($(this));
+        }
+    });
+
     $(".calendario").datepicker({
         changeMonth: true,
         changeYear: true,

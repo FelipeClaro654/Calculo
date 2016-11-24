@@ -76,13 +76,22 @@ $(function () {
         }
     }
 
-    $(".periodo-value").mask('000.000.000,00', {reverse: true});
+    var down = false;
 
-    $(document).on("change",".panel-autor .calendario", function() {
-        if($(this).val() != ""){
-            Autor_Table.retorna_indice_autor($(this));
-        }
-    });
+    $(document).on("keydown",".periodo-value", function(e) {
+         var keycode = (e.keyCode ? e.keyCode : e.which);
+         if(keycode == '109'){
+              if (down == false) { // first press
+                  $(this).parents("tr").next("tr").find(".periodo-value").val($(this).val()).focus();
+                  down = true; // record that the key's down
+              }
+              setTimeout(function () {
+                  down = false;
+              }, 200);
+         }
+     });
+
+    $(".periodo-value").mask('000.000.000,00', {reverse: true});
 
     $(document).on("change","#processo_tabela_atualizacao_id", function() {
         if($("#processo_data_base").val() != ""){
