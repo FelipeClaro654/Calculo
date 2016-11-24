@@ -1,245 +1,246 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-      <strong>Dados Processo</strong>
-  </div>
-  <div class="panel-body">
-      <ul class="list-inline">
-          <li>
-            <strong>Número:</strong>
-            <%= @autor.processo.numero %>
-          </li>
+<div class=" width-percent-70">
+    <div class="panel panel-default autor-details-panel">
+      <div class="panel-heading">
+              Dados Processo
+      </div>
+      <div class="panel-body">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <td>
+                          Conta de Liquidação
+                      </td>
+                      <td>
+                          Distribuição:
+                          <div class="pull-right"><%= @autor.processo.data_distribuicao.strftime("%d/%m/%Y") %></div>
+                      </td>
+                      <td>
+                          Fórum:
+                          <div class="pull-right"><%= @autor.processo.forum %></div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          Tipo de Ação:
+                          <div class="pull-right"><%= @autor.processo.tipo_processo %></div>
+                      </td>
+                      <td>
+                          Data Citação:
+                          <div class="pull-right"><%= @autor.processo.data_citacao.strftime("%d/%m/%Y") %></div>
+                      </td>
+                      <td>
+                          Cartório:
+                          <div class="pull-right"><%= @autor.processo.vara %></div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          Data Base:
+                          <div class="pull-right"><%= @autor.processo.data_base.strftime("%d/%m/%Y") %></div>
+                      </td>
+                      <td>
+                          Sentença Fls.:
+                          <div class="pull-right"><%= @autor.processo.sentenca %></div>
+                      </td>
+                      <td>
+                          Número:
+                          <div class="pull-right"><%= @autor.processo.numero %></div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          Índice da Data Base:
+                          <div class="pull-right"><%= @autor.processo.indice_tabela %></div>
+                      </td>
+                      <td>
+                          Acordão Fls.:
+                          <div class="pull-right"><%= @autor.processo.acordao %></div>
+                      </td>
+                      <td>
+                          Ré(u):
+                          <div class="pull-right"><%= @autor.processo.re %></div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          Tabela Atualização:
+                          <div class="pull-right"><%= @autor.processo.tabela_atualizacao.nome %></div>
+                      </td>
+                      <td>
+                          Previdência (<%= @autor.processo.cbpm_ipesp.nome %>) %:
+                          <div class="previdencia-processo pull-right margin-left-2">
+                              <%= @autor.processo.cbpm_ipesp_valor %>
+                          </div>
+                      </td>
+                      <td>
+                          Assist. Médica (<%= @autor.processo.cruz_iamspe.nome %>) %:
+                          <div class="assistencia-processo pull-right margin-left-2">
+                              <%= @autor.processo.cruz_iamspe_valor %>
+                          </div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          Juros:
+                          <div class="juros-processo pull-right margin-left-2">
+                              <%= @autor.processo.juros %>
+                          </div>
+                      </td>
+                      <td>
+                           A partir de:
+                          <div class="pull-right">
+                              <%= @autor.processo.data_calculo.nome %>
+                          </div>
+                      </td>
+                      <td>
+                          Base de Calculo do Autor:
+                          <div class="pull-right"><%= @autor.processo.base_calculo_autor %></div>
+                      </td>
+                  </tr>
+              </thead>
+          </table>
+      </div>
+    </div>
+    <hr>
+    <p> Autor(a): <%= @autor.nome %></p>
+    <p> Período:
+        <%= @autor.periodo_inicial.strftime("%d/%m/%Y") %> até <%= @autor.periodo_final.strftime("%d/%m/%Y") %>
+    </p>
 
-          <li>
-            <strong>Data Distribuição:</strong>
-            <%= @autor.processo.data_distribuicao.strftime("%d/%m/%Y") %>
-          </li>
+    <%= hidden_field_tag :autor_id, @autor.id %>
 
-          <li>
-            <strong>Data Citação:</strong>
-            <%= @autor.processo.data_citacao.strftime("%d/%m/%Y") %>
-          </li>
-
-          <li>
-            <strong>Cartório:</strong>
-            <%= @autor.processo.vara %>
-          </li>
-      </ul>
-      <ul class="list-inline">
-      <li>
-        <strong>Tipo de Ação:</strong>
-        <%= @autor.processo.tipo_processo %>
-      </li>
-
-      <li>
-        <strong>Data Base:</strong>
-        <%= @autor.processo.data_base.strftime("%d/%m/%Y") %>
-      </li>
-
-      <li>
-        <strong>Sentença Fls.:</strong>
-        <%= @autor.processo.sentenca %>
-      </li>
-
-      <li>
-        <strong>Ré(u):</strong>
-        <%= @autor.processo.re %>
-      </li>
-      </ul>
-      <ul class="list-inline">
-      <li>
-        <strong>Acordão Fls.:</strong>
-        <%= @autor.processo.acordao %>
-      </li>
-
-      <li>
-        <strong>Base de Calculo do Autor:</strong>
-        <%= @autor.processo.base_calculo_autor %>
-      </li>
-
-      <li>
-        <strong>Tabela Atualização:</strong>
-        <%= @autor.processo.tabela_atualizacao.nome %>
-      </li>
-
-      <li>
-        <strong>Previdência:</strong>
-        <%= @autor.processo.cbpm_ipesp.nome %>
-      </li>
-
-      <li>
-        <strong>Previdência %:</strong>
-        <div class="previdencia-processo pull-right margin-left-2">
-            <%= @autor.processo.cbpm_ipesp_valor %>
-        </div>
-      </li>
-      </ul>
-      <ul class="list-inline">
-      <li>
-        <strong>Juros:</strong>
-        <div class="juros-processo pull-right margin-left-2">
-            <%= @autor.processo.juros %>
-        </div>
-      </li>
-
-      <li>
-        <strong>Tipo Juros:</strong>
-        <%= @autor.processo.tipo_juro_id %>
-      </li>
-
-      <li>
-        <strong>Assist. Médica:</strong>
-        <%= @autor.processo.cruz_iamspe_id %>
-
-      </li>
-
-      <li>
-        <strong>Assist. Médica Valor:</strong>
-        <div class="assistencia-processo pull-right margin-left-2">
-            <%= @autor.processo.cruz_iamspe_valor %>
-        </div>
-      </li>
-
-      <li>
-        <strong>Data Cálculo:</strong>
-        <%= @autor.processo.data_calculo.nome %>
-      </li>
-      </ul>
-  </div>
-</div>
-<hr>
-<h5> <strong>Autor(a):</strong> <%= @autor.nome %></h5>
-<h5> <strong>Período:</strong> <%= @autor.periodo_inicial.strftime("%d/%m/%Y") %> até <%= @autor.periodo_final.strftime("%d/%m/%Y") %> </h5>
-
-<%= hidden_field_tag :autor_id, @autor.id %>
-
-<div class="row">
-    <table class="table autor-table">
-        <thead>
-            <th>
-                Período
-            </th>
-            <th>
-                Data <br>da Obrigação
-            </th>
-            <th>
-                Principal <br> Bruto  <br>Mensal
-            </th>
-            <th>
-                Índice da <br> Data da <br> Obrigação
-            </th>
-            <th>
-                Índice da <br>Data da <br>Atualização <br>
-                <%= @autor.processo.data_base %>
-            </th>
-            <th>
-                Principal <br> Bruto <br> Atualizado
-            </th>
-            <th>
-                Desconto <br> da <br> Previdência
-                <%= @autor.processo.cbpm_ipesp.nome %> -
-                <%= @autor.processo.cbpm_ipesp_valor %>
-                <br>
-                <%= @autor.processo.cruz_iamspe.nome %> -
-                <%= @autor.processo.cruz_iamspe_valor %>
-            </th>
-            <th>
-                Principal <br>Líquido<br> Atualizado
-            </th>
-            <th>
-                Nº de Meses
-            </th>
-            <th>
-                Juros - <%= @autor.processo.juros %> - <%= @autor.processo.tipo_juro.nome %>
-                <br>
-                a partir da <%= @autor.processo.data_calculo.nome %>
-                <br>
-                <% if @autor.processo.data_calculo.nome == "Data" %>
-                    <%= @autor.processo.data_base %>
-                <% else %>
-                    <%= @autor.processo.data_citacao %>
-                <% end %>
-            </th>
-            <th>
-                Hon. Adv. 10% <br> do Valor Total:
-                ---
-            </th>
-        </thead>
-        <tbody>
-            <% @pagamentos.order("created_at asc").each_with_index do |p , p_index| %>
-                <tr data-pagamento-id="<%= p.id %>" data-table-index="<%= p_index %>">
-                    <% if p.periodo_final.length == 7 %>
-                        <td class="periodo-inicial">
-                            <%= p.periodo_inicial %>
-                        </td>
-                        <td class="periodo-final">
-                            <%= p.periodo_final %>
-                        </td>
-                    <%else %>
-                        <td class="periodo-inicial">
-                            <%= I18n.t("date.abbr_month_names")[p.periodo_inicial[5..6].to_i] %>
-                            /<%=p.periodo_inicial[2..3] %>
-                        </td>
-                        <td class="periodo-final">
-                            <%= I18n.t("date.abbr_month_names")[p.periodo_final[5..6].to_i] %>
-                            /<%=p.periodo_final[2..3] %>
-                        </td>
-                    <% end %>
-                    <td>
-                        <input class="periodo-value" type="text" name="name" value="<%= number_with_precision(p.periodo_value, :precision => 2) %>">
-                    </td>
-                    <td class="indice-tabela">
-                        <%= p.indice_tabela %>
-                    </td>
-                    <td class="indice-atualizacao">
-                        <%= @indice_atualizacao %>
-                    </td>
-                    <td class="bruto-atualizacao">
-                        <%= p.bruto_atualizacao %>
-                    </td>
-                    <td class="previdencia">
-                        <%= p.previdencia %>
-                    </td>
-                    <td class="liquido-atualizado">
-                        <%= p.liquido_atualizado %>
-                    </td>
-                    <td class="meses">
-                        <%= p.meses %>
-                    </td>
-                    <td class="juros">
-                        <%= p.juros %>
-                    </td>
-                    <td class="honorario">
-                        <%= p.honorario %>
-                    </td>
-                </tr>
-            <% end %>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th class="">
-                </th>
-                <th class="">
+    <div class="row">
+        <table class="table autor-table">
+            <thead>
+                <th>
+                    Período
                 </th>
                 <th>
+                    Data <br>da Obrigação
                 </th>
-                <th class="">
+                <th>
+                    Principal <br> Bruto  <br>Mensal
                 </th>
-                <th class="">
-                    TOTAL:
+                <th>
+                    Índice <br> da Data da <br> Obrigação
                 </th>
-                <th class="total-bruto-atualizacao">
+                <th>
+                    Índice <br> da Data da <br>Atualização <br>
+                    <%= @autor.processo.data_base %>
                 </th>
-                <th class="total-previdencia">
+                <th>
+                    Principal <br> Bruto <br> Atualizado
                 </th>
-                <th class="total-liquido-atualizado">
+                <th>
+                    Desconto da <br> Previdência <br>
+                    <%= @autor.processo.cbpm_ipesp.nome %> -
+                    <%= @autor.processo.cbpm_ipesp_valor %>
+                    <br>
+                    <%= @autor.processo.cruz_iamspe.nome %> -
+                    <%= @autor.processo.cruz_iamspe_valor %>
                 </th>
-                <th class="">
+                <th>
+                    Principal <br>Líquido<br> Atualizado
                 </th>
-                <th class="total-juros">
+                <th>
+                    Nº de Meses
                 </th>
-                <th class="total-honorario">
+                <th>
+                    Juros <br>
+                    <%= @autor.processo.juros %> <br>
+                    <%= @autor.processo.tipo_juro.nome %> <br>
+                    a partir da <br>
+                    <%= @autor.processo.data_calculo.nome %> <br>
+                    <% if @autor.processo.data_calculo.nome == "Data" %>
+                        <%= @autor.processo.data_base.strftime("%d/%m/%Y") %>
+                    <% else %>
+                        <%= @autor.processo.data_citacao.strftime("%d/%m/%Y") %>
+                    <% end %>
                 </th>
-            </tr>
-        </tfoot>
-    </table>
+                <th>
+                    Hon. Adv. <br> 10% <br> do Valor Total: <br>
+                    Principal Bruto <br>
+                    e Juros
+                </th>
+            </thead>
+            <tbody>
+                <% @pagamentos.order("created_at asc").each_with_index do |p , p_index| %>
+                    <tr data-pagamento-id="<%= p.id %>" data-table-index="<%= p_index %>">
+                        <% if p.periodo_final.length == 7 %>
+                            <td class="periodo-inicial">
+                                <%= p.periodo_inicial %>
+                            </td>
+                            <td class="periodo-final">
+                                <%= p.periodo_final %>
+                            </td>
+                        <%else %>
+                            <td class="periodo-inicial">
+                                <%= I18n.t("date.abbr_month_names")[p.periodo_inicial[5..6].to_i] %>
+                                /<%=p.periodo_inicial[2..3] %>
+                            </td>
+                            <td class="periodo-final">
+                                <%= I18n.t("date.abbr_month_names")[p.periodo_final[5..6].to_i] %>
+                                /<%=p.periodo_final[2..3] %>
+                            </td>
+                        <% end %>
+                        <td>
+                            <input class="periodo-value" type="text" name="name"
+                                    value="<%= number_with_delimiter(('%.02f' % p.periodo_value), separator: ",", delimiter: ".") %>">
+                        </td>
+                        <td class="indice-tabela">
+                            <%= p.indice_tabela %>
+                        </td>
+                        <td class="indice-atualizacao">
+                            <%= @indice_atualizacao %>
+                        </td>
+                        <td class="bruto-atualizacao">
+                            <%= p.bruto_atualizacao %>
+                        </td>
+                        <td class="previdencia">
+                            <%= p.previdencia %>
+                        </td>
+                        <td class="liquido-atualizado">
+                            <%= p.liquido_atualizado %>
+                        </td>
+                        <td class="meses">
+                            <%= p.meses %>
+                        </td>
+                        <td class="juros">
+                            <%= p.juros %>
+                        </td>
+                        <td class="honorario">
+                            <%= p.honorario %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th class="">
+                    </th>
+                    <th class="">
+                    </th>
+                    <th>
+                    </th>
+                    <th class="">
+                    </th>
+                    <th class="">
+                        TOTAL:
+                    </th>
+                    <th class="total-bruto-atualizacao">
+                    </th>
+                    <th class="total-previdencia">
+                    </th>
+                    <th class="total-liquido-atualizado">
+                    </th>
+                    <th class="">
+                    </th>
+                    <th class="total-juros">
+                    </th>
+                    <th class="total-honorario">
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>

@@ -66,6 +66,8 @@ GEM
     eventmachine (1.2.0.1)
     execjs (2.7.0)
     ffi (1.9.14)
+    font-kit-rails (1.2.0)
+      rails
     formatador (0.2.5)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -217,6 +219,7 @@ DEPENDENCIES
   byebug
   cocoon
   coffee-rails (~> 4.2)
+  font-kit-rails (~> 1.2.0)
   guard (>= 2.2.2)
   guard-livereload
   jbuilder (~> 2.5)

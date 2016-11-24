@@ -76,7 +76,7 @@ $(function () {
         }
     }
 
-    $(".periodo-value").mask('000,00', {reverse: true});
+    $(".periodo-value").mask('000.000.000,00', {reverse: true});
 
     $(document).on("change",".panel-autor .calendario", function() {
         if($(this).val() != ""){
@@ -95,31 +95,29 @@ $(function () {
     });
 
     $(document).on("change",".periodo-value", function() {
-        var parent = $(this).parents("tr");
-
-        if($(this).val() === ""){
-            parent.find(".bruto-atualizacao").html("-");
-            parent.find(".previdencia").html("-");
-            parent.find(".liquido-atualizado").html("-");
-            parent.find(".juros").html("-");
-            parent.find(".honorario").html("-");
-            return false;
-        }
-        var a = parseFloat($(this).val().replace(",", ".")),
+        var parent = $(this).parents("tr"),
+            a = parseFloat($(this).val().split(".").join("").replace(",", ".")),
             b = parseFloat(parent.find(".indice-tabela").html()),
             c = parseFloat(parent.find(".indice-atualizacao").html()),
             d = parseFloat(((a / b)*c)),
-            e = parseFloat((d*( (parseFloat($(".previdencia-processo").html())/100) + (parseFloat($(".assistencia-processo").html())/100) ))),
+            e = parseFloat((d*( (parseFloat($(".previdencia-processo").html())/100) +
+                                (parseFloat($(".assistencia-processo").html())/100) ))),
             f = parseFloat((d - e)),
             g = parseFloat(parent.find(".meses").html()),
             h = parseFloat(d*g*(parseFloat($(".juros-processo").html())/100)),
             i = (d+h)*(10/100);
 
-        parent.find(".bruto-atualizacao").html(d.toFixed(2));
-        parent.find(".previdencia").html(e.toFixed(2));
-        parent.find(".liquido-atualizado").html(f.toFixed(2));
-        parent.find(".juros").html(h.toFixed(2));
-        parent.find(".honorario").html(i.toFixed(2));
+        d = d.toFixed(2);
+        e = e.toFixed(2);
+        f = f.toFixed(2);
+        h = h.toFixed(2);
+        i = i.toFixed(2);
+
+        parent.find(".bruto-atualizacao").html(d);
+        parent.find(".previdencia").html(e);
+        parent.find(".liquido-atualizado").html(f);
+        parent.find(".juros").html(h);
+        parent.find(".honorario").html(i);
 
         $.ajax({
             url: '/autors/salva_pagamentos/',
@@ -128,15 +126,15 @@ $(function () {
                 pagamento_id: parent.data("pagamento-id"),
                 periodo_inicial: parent.find(".periodo-inicial").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
                 periodo_final: parent.find(".periodo-final").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                periodo_value: parent.find(".periodo-value").val().replace(",", "."),
-                indice_tabela: parent.find(".indice-tabela").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                indice_atualizacao: parent.find(".indice-atualizacao").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                bruto_atualizacao: parent.find(".bruto-atualizacao").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                previdencia: parent.find(".previdencia").html(),
-                liquido_atualizado: parent.find(".liquido-atualizado").html(),
-                meses: parent.find(".meses").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                juros: parent.find(".juros").html(),
-                honorario: parent.find(".honorario").html()
+                periodo_value: a,
+                indice_tabela: b,
+                indice_atualizacao: c,
+                bruto_atualizacao: d,
+                previdencia: e,
+                liquido_atualizado: f,
+                meses: g,
+                juros: h,
+                honorario: i
             }
         }).done(function () {
             Forms.show_message("Informações Atualizadas", "alert-success");

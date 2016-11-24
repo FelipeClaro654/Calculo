@@ -12,3 +12,20 @@
         }
     }
 }
+
+.autor-details-panel{
+    table{
+        font-size: 9px;
+        margin-bottom: 0;
+        td{
+            padding: 5px !important;
+            border-top: 0 !important;
+            div{
+                max-width: 125px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+        }
+    }
+}
