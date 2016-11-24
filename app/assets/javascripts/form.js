@@ -24,8 +24,8 @@ $(document).on('turbolinks:load', function() {
             }, 4000);
         },
         atualiza_juros: function () {
-
             if($("#processo_data_base").val() == "" || $("#processo_data_citacao").val() == ""){
+                Forms.show_message("Preencha os campos Data Base e Data Citação!", "alert-warning");
                 return false;
             }
 
@@ -50,6 +50,8 @@ $(document).on('turbolinks:load', function() {
                     $(".process-form").submit();
                 });
 
+            }else{
+                $(".process-form").submit();
             }
         }
     }
