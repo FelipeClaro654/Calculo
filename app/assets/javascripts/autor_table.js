@@ -109,11 +109,11 @@ $(function () {
             b = parseFloat(parent.find(".indice-tabela").html()),
             c = parseFloat(parent.find(".indice-atualizacao").html()),
             d = parseFloat(((a / b)*c)),
-            e = parseFloat((d*( (parseFloat($(".previdencia-processo").html())/100) +
-                                (parseFloat($(".assistencia-processo").html())/100) ))),
+            e = parseFloat((d*( (parseFloat($(".previdencia-processo").data("previdencia"))/100) +
+                                (parseFloat($(".assistencia-processo").data("assistencia"))/100) ))),
             f = parseFloat((d - e)),
             g = parseFloat(parent.find(".meses").html()),
-            h = parseFloat(d*g*(parseFloat($(".juros-processo").html())/100)),
+            h = parseFloat(d*g*(parseFloat($(".juros-processo").data("juros"))/100)),
             i = (d+h)*(10/100);
 
         d = d.toFixed(2);
