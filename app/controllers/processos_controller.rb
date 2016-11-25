@@ -53,8 +53,18 @@ class ProcessosController < ApplicationController
                     create_pagamentos(@processo.autors)
                 else
                     @new_autores = @processo.autors.where('id NOT IN (?)', @old_ids)
-                    create_pagamentos(@new_autores)
-                    update_autores(@processo)
+
+                    if @new_autores.empty?
+                        @old_autores =  @processo.autors
+                    else
+                        create_pagamentos(@new_autores)
+                        @new_ids = []
+                        @new_autores.each do |n|
+                            @new_ids.push(n.id)
+                        end
+                        @old_autores =  @processo.autors.where('id NOT IN (?)', @new_ids)
+                    end
+                    update_autores(@old_autores)
                 end
 
                 format.html { render :edit, notice: 'Processo was successfully updated.' }
@@ -76,18 +86,17 @@ class ProcessosController < ApplicationController
         end
     end
 
-    def update_autores(processo)
-        processo.autors.each do |a|
+    def update_autores(old_autores)
+        old_autores.each do |a|
             @pagamentos = Pagamento.where(autor_id: a.id)
             @pagamentos.update_all(
-                :indice_atualizacao => processo.indice_tabela
+                :indice_atualizacao => a.processo.indice_tabela
             )
             update_pagamentos(@pagamentos)
         end
     end
 
     def create_pagamentos(autores)
-
         autores.each do |a|
             @periodos = retorna_periodos(a)
             @periodos.each_with_index do |per, index|
@@ -113,9 +122,9 @@ class ProcessosController < ApplicationController
                                             periodo_value,
                                             indice_periodo,
                                             meses,
-                                            a.processo
+                                            a.processo,
+                                            per.kind_of?(Array) ? ("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime : @periodo_inicial
                                             )
-
                 pagamento = Pagamento.new do |p|
                   p.autor_id = a.id
                   p.table_index = index
@@ -129,7 +138,7 @@ class ProcessosController < ApplicationController
                   p.liquido_atualizado = results[:liquido_atualizado].round(2)
                   p.juros = results[:juros].round(2)
                   p.honorario = results[:honorario].round(2)
-                  p.meses = meses
+                  p.meses = results[:meses]
                   p.periodo = per.kind_of?(Array) ? ("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime : @periodo_inicial
                 end
                 pagamento.save!
@@ -137,7 +146,9 @@ class ProcessosController < ApplicationController
         end
     end
 
-    def calcula_pagamentos(bruto, indice_periodo, meses, processo)
+    def calcula_pagamentos(bruto, indice_periodo, meses, processo, periodo)
+        meses = atualiza_meses(processo.data_distribuicao, periodo, meses)
+
         indice_atualizacao = processo.indice_tabela
         prev_porc = processo.cbpm_ipesp_valor
         assist_porc = processo.cruz_iamspe_valor
@@ -154,7 +165,8 @@ class ProcessosController < ApplicationController
             "previdencia": previdencia,
             "liquido_atualizado": liquido_atualizado,
             "juros": juros,
-            "honorario": honorario
+            "honorario": honorario,
+            "meses": meses
         }
         return results
     end
@@ -171,14 +183,15 @@ class ProcessosController < ApplicationController
     end
 
     def update_pagamentos(pagamentos)
+        meses = month_difference(pagamentos[0].autor.periodo_inicial, pagamentos[0].autor.periodo_final)
         pagamentos.each do |p|
             indice_periodo = retorna_indice(p.periodo, p.autor.processo.tabela_atualizacao.nome)
-
             results = calcula_pagamentos(
                                         p.periodo_value,
                                         indice_periodo,
-                                        p.meses,
-                                        p.autor.processo
+                                        meses,
+                                        p.autor.processo,
+                                        p.periodo
                                         )
             p.update_attributes(
                 :indice_tabela => indice_periodo,
@@ -186,7 +199,8 @@ class ProcessosController < ApplicationController
                 :previdencia => results[:previdencia].round(2),
                 :liquido_atualizado => results[:liquido_atualizado].round(2),
                 :juros => results[:juros].round(2),
-                :honorario => results[:honorario].round(2)
+                :honorario => results[:honorario].round(2),
+                :meses => results[:meses]
             )
         end
     end
