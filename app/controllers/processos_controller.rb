@@ -147,7 +147,7 @@ class ProcessosController < ApplicationController
     end
 
     def calcula_pagamentos(bruto, indice_periodo, meses, processo, periodo)
-        meses = atualiza_meses(processo.data_distribuicao, periodo, meses)
+        meses = atualiza_meses(processo.data_citacao, periodo, meses)
 
         indice_atualizacao = processo.indice_tabela
         prev_porc = processo.cbpm_ipesp_valor
