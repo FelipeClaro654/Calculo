@@ -197,28 +197,28 @@
                                     value="<%= number_with_delimiter(('%.02f' % p.periodo_value), separator: ",", delimiter: ".") %>">
                         </td>
                         <td data-valor="<%= p.indice_tabela %>" class="indice-tabela">
-                            <%= number_with_delimiter(('%.02f' % p.indice_tabela), separator: ",", delimiter: ".") %>
+                            <%= p.indice_tabela.to_s.gsub(".", ",") %>
                         </td>
                         <td data-valor="<%= @indice_atualizacao %>" class="indice-atualizacao">
-                            <%= number_with_delimiter(('%.02f' % @indice_atualizacao), separator: ",", delimiter: ".") %>
+                            <%= @indice_atualizacao.to_s.gsub(".", ",") %>
                         </td>
                         <td data-valor="<%= p.bruto_atualizacao %>" class="bruto-atualizacao">
-                            <%= number_with_delimiter(('%.02f' % p.bruto_atualizacao), separator: ",", delimiter: ".") %>
+                            <%= p.bruto_atualizacao.to_s.gsub(".", ",") %>
                         </td>
                         <td data-valor="<%= p.previdencia %>" class="previdencia">
-                            <%= number_with_delimiter(('%.02f' % p.previdencia), separator: ",", delimiter: ".") %>
+                            <%= p.previdencia.to_s.gsub(".", ",") %>
                         </td>
                         <td data-valor="<%= p.liquido_atualizado %>" class="liquido-atualizado">
-                            <%= number_with_delimiter(('%.02f' % p.liquido_atualizado), separator: ",", delimiter: ".") %>
+                            <%= p.liquido_atualizado.to_s.gsub(".", ",") %>
                         </td>
                         <td data-valor="<%= p.meses %>" class="meses">
                             <%= number_with_delimiter(('%.02f' % p.meses), separator: ",", delimiter: ".") %>
                         </td>
                         <td data-valor="<%= p.juros %>" class="juros">
-                            <%= number_with_delimiter(('%.02f' % p.juros), separator: ",", delimiter: ".") %>
+                            <%= p.juros.to_s.gsub(".", ",") %>
                         </td>
                         <td data-valor=" <%= p.honorario %>" class="honorario">
-                            <%= number_with_delimiter(('%.02f' % p.honorario), separator: ",", delimiter: ".") %>
+                            <%= p.honorario.to_s.gsub(".", ",") %>
                         </td>
                     </tr>
                 <% end %>
