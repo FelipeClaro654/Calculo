@@ -100,11 +100,12 @@ class ProcessosController < ApplicationController
         autores.each do |a|
             @periodos = retorna_periodos(a)
             @periodos.each_with_index do |per, index|
-
+                is_decimo = false
                 if per.kind_of?(Array)
                     @periodo_inicial = per[0]
                     @periodo_final = per[1]
                     indice_periodo = retorna_indice(("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime, a.processo.tabela_atualizacao.nome)
+                    is_decimo = true
                 else
                     @periodo_inicial = per
                     @periodo_final = per + 1.month
@@ -123,7 +124,8 @@ class ProcessosController < ApplicationController
                                             indice_periodo,
                                             meses,
                                             a.processo,
-                                            per.kind_of?(Array) ? ("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime : @periodo_inicial
+                                            per.kind_of?(Array) ? ("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime : @periodo_inicial,
+                                            is_decimo
                                             )
                 pagamento = Pagamento.new do |p|
                   p.autor_id = a.id
@@ -146,12 +148,19 @@ class ProcessosController < ApplicationController
         end
     end
 
-    def calcula_pagamentos(bruto, indice_periodo, meses, processo, periodo)
+    def calcula_pagamentos(bruto, indice_periodo, meses, processo, periodo, is_decimo)
         meses = atualiza_meses(processo.data_citacao, periodo, meses)
 
         indice_atualizacao = processo.indice_tabela
-        prev_porc = processo.cbpm_ipesp_valor
-        assist_porc = processo.cruz_iamspe_valor
+
+        if is_decimo
+            prev_porc = 0
+            assist_porc = 0
+        else
+            prev_porc = processo.cbpm_ipesp_valor
+            assist_porc = processo.cruz_iamspe_valor
+        end
+        
         data_calculo = processo.data_calculo.nome
         juros_porc = processo.juros
 
@@ -185,13 +194,19 @@ class ProcessosController < ApplicationController
     def update_pagamentos(pagamentos)
         meses = month_difference(pagamentos[0].autor.periodo_inicial, pagamentos[0].autor.periodo_final)
         pagamentos.each do |p|
+            is_decimo = false
+            if p.periodo_final.length == 7
+                is_decimo = true
+            end
+
             indice_periodo = retorna_indice(p.periodo, p.autor.processo.tabela_atualizacao.nome)
             results = calcula_pagamentos(
                                         p.periodo_value,
                                         indice_periodo,
                                         meses,
                                         p.autor.processo,
-                                        p.periodo
+                                        p.periodo,
+                                        is_decimo
                                         )
             p.update_attributes(
                 :indice_tabela => indice_periodo,

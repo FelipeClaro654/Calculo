@@ -53,26 +53,22 @@ $(function () {
         update_totals: function () {
             var totals = [  $(".bruto-atualizacao"),
                             $(".previdencia"),
-                            $(".liquido"),
+                            $(".liquido-atualizado"),
                             $(".juros"),
                             $(".honorario") ];
 
             $.each(totals, function (i, e) {
                 var t = 0;
                 $.each(this, function (i, e) {
-                    var value = $(e).html();
-                    if(value != "-"){
-                        t += parseFloat(value);
-                    }
+                    t += parseFloat($(e).data("valor"));
                 })
                 totals[i] = t;
             });
-
-            $(".total-bruto-atualizacao").html(totals[0].toFixed(2));
-            $(".total-previdencia").html(totals[1].toFixed(2));
-            $(".total-liquido").html(totals[2].toFixed(2));
-            $(".total-juros").html(totals[3].toFixed(2));
-            $(".total-honorario").html(totals[4].toFixed(2));
+            $(".total-bruto-atualizacao").html(totals[0].toFixed(2).replace(".",","));
+            $(".total-previdencia").html(totals[1].toFixed(2).replace(".",","));
+            $(".total-liquido-atualizado").html(totals[2].toFixed(2).replace(".",","));
+            $(".total-juros").html(totals[3].toFixed(2).replace(".",","));
+            $(".total-honorario").html(totals[4].toFixed(2).replace(".",","));
         }
     }
 
@@ -106,13 +102,13 @@ $(function () {
     $(document).on("change",".periodo-value", function() {
         var parent = $(this).parents("tr"),
             a = parseFloat($(this).val().split(".").join("").replace(",", ".")),
-            b = parseFloat(parent.find(".indice-tabela").html()),
-            c = parseFloat(parent.find(".indice-atualizacao").html()),
+            b = parseFloat(parent.find(".indice-tabela").data("valor")),
+            c = parseFloat(parent.find(".indice-atualizacao").data("valor")),
             d = parseFloat(((a / b)*c)),
             e = parseFloat((d*( (parseFloat($(".previdencia-processo").data("previdencia"))/100) +
                                 (parseFloat($(".assistencia-processo").data("assistencia"))/100) ))),
             f = parseFloat((d - e)),
-            g = parseFloat(parent.find(".meses").html()),
+            g = parseFloat(parent.find(".meses").data("valor")),
             h = parseFloat(d*g*(parseFloat($(".juros-processo").data("juros"))/100)),
             i = (d+h)*(10/100);
 
@@ -122,11 +118,11 @@ $(function () {
         h = h.toFixed(2);
         i = i.toFixed(2);
 
-        parent.find(".bruto-atualizacao").html(d);
-        parent.find(".previdencia").html(e);
-        parent.find(".liquido-atualizado").html(f);
-        parent.find(".juros").html(h);
-        parent.find(".honorario").html(i);
+        parent.find(".bruto-atualizacao").html(d).data("valor", d);
+        parent.find(".previdencia").html(e).data("valor", e);
+        parent.find(".liquido-atualizado").html(f).data("valor", f);
+        parent.find(".juros").html(h).data("valor", h);
+        parent.find(".honorario").html(i).data("valor", i);
 
         $.ajax({
             url: '/autors/salva_pagamentos/',
