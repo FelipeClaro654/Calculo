@@ -23,7 +23,7 @@ module ApplicationHelper
     def retorna_periodos(autor)
         inicio = autor.periodo_inicial
         periodos = []
-        while inicio < autor.periodo_final do
+        while inicio <= autor.periodo_final do
             if inicio.month == 12
                 periodos.push(["13ºSal " + inicio.strftime("/%y"),
                 "Dez " + inicio.strftime("/%y"),
