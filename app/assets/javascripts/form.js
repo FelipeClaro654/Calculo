@@ -70,6 +70,8 @@ $(document).on('turbolinks:load', function() {
         yearRange: "1950:2016"
     });
 
+    $(".calendario").mask('00/00/0000');
+
     $('#autors').on('cocoon:before-insert', function(e, insertedItem) {
         insertedItem.find(".calendario").datepicker({
             changeMonth: true,
