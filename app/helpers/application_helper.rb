@@ -17,7 +17,7 @@ module ApplicationHelper
     def month_difference(data_a, data_b)
         difference = 0.0
         difference += (data_b - data_a).to_f / 30.4375
-        difference.round(2)
+        difference
     end
 
     def retorna_periodos(autor)

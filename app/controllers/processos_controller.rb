@@ -114,7 +114,7 @@ class ProcessosController < ApplicationController
                 end
 
                 if index == 0
-                    periodo_value = 0
+                    periodo_value = 604.35
                 else
                     periodo_value = 100
                 end
@@ -148,10 +148,10 @@ class ProcessosController < ApplicationController
         end
     end
 
-    def calcula_pagamentos(bruto, indice_periodo, meses, processo, periodo, is_decimo)
-        meses = atualiza_meses(processo.data_citacao, periodo, meses)
+    def calcula_pagamentos(a, b, g, processo, periodo, is_decimo)
+        g = atualiza_meses(processo.data_citacao, periodo, g)
 
-        indice_atualizacao = processo.indice_tabela
+        c = processo.indice_tabela
 
         if is_decimo
             prev_porc = 0
@@ -164,18 +164,23 @@ class ProcessosController < ApplicationController
         data_calculo = processo.data_calculo.nome
         juros_porc = processo.juros
 
-        bruto_atualizacao = (bruto.to_d)/indice_periodo*indice_atualizacao
-        previdencia = bruto_atualizacao*(prev_porc/100 + assist_porc/100)
-        liquido_atualizado = bruto_atualizacao - previdencia
-        juros = bruto_atualizacao*meses*(juros_porc/100)
-        honorario = (bruto_atualizacao + juros)*10/100
+        d = (a.to_d)/b*c
+        d = d.round(2)
+        e = d*((prev_porc/100).round(2) + (assist_porc/100).round(2))
+        e = e.round(2)
+        f = d - e
+        f = f.round(2)
+        h = f*g*juros_porc/100
+        h = h.round(2)
+        honorario = (d + h)*10/100
+        honorario = honorario.round(2)
         results = {
-            "bruto_atualizacao": bruto_atualizacao,
-            "previdencia": previdencia,
-            "liquido_atualizado": liquido_atualizado,
-            "juros": juros,
+            "bruto_atualizacao": d,
+            "previdencia": e,
+            "liquido_atualizado": f,
+            "juros": h,
             "honorario": honorario,
-            "meses": meses
+            "meses": g
         }
         return results
     end
