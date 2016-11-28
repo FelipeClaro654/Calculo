@@ -114,7 +114,7 @@ class ProcessosController < ApplicationController
                 end
 
                 if index == 0
-                    periodo_value = 604.35
+                    periodo_value = 0
                 else
                     periodo_value = 100
                 end
