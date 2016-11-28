@@ -1,8 +1,8 @@
 module ApplicationHelper
 
-    def atualiza_meses(data_distribuicao, periodo, meses)
+    def atualiza_meses(data_citacao, periodo, meses)
         @meses = meses
-        month_dif = month_difference(data_distribuicao, periodo)
+        month_dif = month_difference(data_citacao, periodo)
         if month_dif > 0
             if month_dif < 1
                 @meses = @meses.to_s.split(".")[0].to_f

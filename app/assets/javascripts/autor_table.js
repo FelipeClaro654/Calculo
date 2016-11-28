@@ -98,19 +98,19 @@ $(function () {
     $(document).on("change","#processo_data_base", function() {
         Autor_Table.retorna_indice();
     });
-
     $(document).on("change",".periodo-value", function() {
         var parent = $(this).parents("tr"),
             a = parseFloat($(this).val().split(".").join("").replace(",", ".")),
             b = parseFloat(parent.find(".indice-tabela").data("valor")),
             c = parseFloat(parent.find(".indice-atualizacao").data("valor")),
-            d = parseFloat(((a / b)*c)),
-            e = parseFloat((d*( (parseFloat($(".previdencia-processo").data("previdencia"))/100) +
-                                (parseFloat($(".assistencia-processo").data("assistencia"))/100) ))),
-            f = parseFloat((d - e)),
+            d = +(parseFloat(((a / b)*c)).toFixed(2)),
+            e = +(parseFloat((d*( (parseFloat($(".previdencia-processo").data("previdencia"))/100) +
+                                (parseFloat($(".assistencia-processo").data("assistencia"))/100) ))
+                          ).toFixed(2)),
+            f = +(parseFloat((d - e)).toFixed(2)),
             g = parseFloat(parent.find(".meses").data("valor")),
-            h = parseFloat(d*g*(parseFloat($(".juros-processo").data("juros"))/100)),
-            i = (d+h)*(10/100);
+            h = +(parseFloat(f*g*(parseFloat($(".juros-processo").data("juros"))/100)).toFixed(2)),
+            i = +(((d+h)*(10/100)).toFixed(2));
 
         d = d.toFixed(2);
         e = e.toFixed(2);
@@ -118,19 +118,17 @@ $(function () {
         h = h.toFixed(2);
         i = i.toFixed(2);
 
-        parent.find(".bruto-atualizacao").html(d).data("valor", d);
-        parent.find(".previdencia").html(e).data("valor", e);
-        parent.find(".liquido-atualizado").html(f).data("valor", f);
-        parent.find(".juros").html(h).data("valor", h);
-        parent.find(".honorario").html(i).data("valor", i);
+        parent.find(".bruto-atualizacao").html(d.replace(".",",")).data("valor", d);
+        parent.find(".previdencia").html(e.replace(".",",")).data("valor", e);
+        parent.find(".liquido-atualizado").html(f.replace(".",",")).data("valor", f);
+        parent.find(".juros").html(h.replace(".",",")).data("valor", h);
+        parent.find(".honorario").html(i.replace(".",",")).data("valor", i);
 
         $.ajax({
             url: '/autors/salva_pagamentos/',
             type: 'post',
             data: {
                 pagamento_id: parent.data("pagamento-id"),
-                periodo_inicial: parent.find(".periodo-inicial").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
-                periodo_final: parent.find(".periodo-final").html().replace(/^\s+|\s+$/gm,'').replace(/\r?\n|\r/g, " "),
                 periodo_value: a,
                 indice_tabela: b,
                 indice_atualizacao: c,

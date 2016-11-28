@@ -23,8 +23,6 @@ class Pagamento < ApplicationRecord
     def self.editar_pagamento(params)
         @pagamento = Pagamento.find(params[:pagamento_id])
         @pagamento.update_attributes(
-                                    periodo_inicial: params[:periodo_inicial],
-                                    periodo_final: params[:periodo_final],
                                     periodo_value: params[:periodo_value],
                                     indice_tabela: params[:indice_tabela],
                                     indice_atualizacao: params[:indice_atualizacao],
