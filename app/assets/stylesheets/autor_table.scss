@@ -11,6 +11,11 @@
             width: 70px !important;
         }
     }
+    tfoot{
+        th{
+            padding-right: 2px !important;
+        }
+    }
 }
 
 .autor-details-panel{
@@ -27,5 +32,12 @@
                 overflow: hidden;
             }
         }
+    }
+}
+
+.autor-totals-container{
+    margin: 0 auto;
+    th{
+        padding: 2px !important;
     }
 }

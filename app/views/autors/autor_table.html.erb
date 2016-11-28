@@ -142,10 +142,10 @@
                     Desconto da<br>Previdência<br>
                     <% if @autor.processo.cbpm_ipesp_valor > 0 %>
                         <%= @autor.processo.cbpm_ipesp.nome %><br>
-                        <%= @autor.processo.cbpm_ipesp_valor %>
+                        <%= ('%.02f' % @autor.processo.cbpm_ipesp_valor).gsub(".", ",") %>%
                     <% else %>
                         <%= @autor.processo.cruz_iamspe.nome %><br>
-                        <%= @autor.processo.cruz_iamspe_valor %>
+                        <%= ('%.02f' % @autor.processo.cruz_iamspe_valor).gsub(".", ",") %>%
                     <% end %>
                 </th>
                 <th>
@@ -156,7 +156,7 @@
                 </th>
                 <th>
                     Juros<br>
-                    <%= @autor.processo.juros.to_s.gsub(".", ",") %> am<br>
+                    <%= ('%.01f' % @autor.processo.juros).gsub(".", ",") %>% am<br>
                     a partir da<br>
                     <%= @autor.processo.data_calculo.nome %><br>
                     <% if @autor.processo.data_calculo.nome == "Data" %>
@@ -174,7 +174,10 @@
             </thead>
             <tbody>
                 <% @pagamentos.order("created_at asc").each_with_index do |p , p_index| %>
-                    <tr data-pagamento-id="<%= p.id %>" data-table-index="<%= p_index %>">
+                    <tr data-pagamento-id="<%= p.id %>" data-table-index="<%= p_index %>"
+                        data-decimo="<%= p.periodo_final.length == 7 ? true : false %>"
+                        data-totals-part="<%= p.periodo - 1.month >= p.autor.processo.data_distribuicao ? true : false %>"
+                        >
                         <% if p.periodo_final.length == 7 %>
                             <td class="periodo-inicial">
                                 <%= p.periodo_inicial %>
@@ -197,28 +200,28 @@
                                     value="<%= number_with_delimiter(('%.02f' % p.periodo_value), separator: ",", delimiter: ".") %>">
                         </td>
                         <td data-valor="<%= p.indice_tabela %>" class="indice-tabela">
-                            <%= p.indice_tabela.to_s.gsub(".", ",") %>
+                            <%= ('%.06f' % p.indice_tabela).gsub(".", ",") %>
                         </td>
                         <td data-valor="<%= @indice_atualizacao %>" class="indice-atualizacao">
-                            <%= @indice_atualizacao.to_s.gsub(".", ",") %>
+                            <%= ('%.06f' % @indice_atualizacao).gsub(".", ",") %>
                         </td>
                         <td data-valor="<%= p.bruto_atualizacao %>" class="bruto-atualizacao">
-                            <%= p.bruto_atualizacao.to_s.gsub(".", ",") %>
+                            <%= number_with_delimiter(('%.02f' % p.bruto_atualizacao), separator: ",", delimiter: ".") %>
                         </td>
                         <td data-valor="<%= p.previdencia %>" class="previdencia">
-                            <%= p.previdencia.to_s.gsub(".", ",") %>
+                            <%= number_with_delimiter(('%.02f' % p.previdencia), separator: ",", delimiter: ".") %>
                         </td>
                         <td data-valor="<%= p.liquido_atualizado %>" class="liquido-atualizado">
-                            <%= p.liquido_atualizado.to_s.gsub(".", ",") %>
+                            <%= number_with_delimiter(('%.02f' % p.liquido_atualizado), separator: ",", delimiter: ".") %>
                         </td>
                         <td data-valor="<%= p.meses %>" class="meses">
                             <%= number_with_delimiter(('%.02f' % p.meses), separator: ",", delimiter: ".") %>
                         </td>
                         <td data-valor="<%= p.juros %>" class="juros">
-                            <%= p.juros.to_s.gsub(".", ",") %>
+                            <%= number_with_delimiter(('%.02f' %  p.juros), separator: ",", delimiter: ".") %>
                         </td>
-                        <td data-valor=" <%= p.honorario %>" class="honorario">
-                            <%= p.honorario.to_s.gsub(".", ",") %>
+                        <td data-valor="<%= p.honorario %>" class="honorario">
+                            <%= number_with_delimiter(('%.02f' %  p.honorario), separator: ",", delimiter: ".") %>
                         </td>
                     </tr>
                 <% end %>
@@ -250,6 +253,83 @@
                     </th>
                 </tr>
             </tfoot>
+        </table>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <table class="table text-center width-percent-50 autor-totals-container no-division-table">
+            <tr>
+                <th>
+                    <strong>Principal Atualizado</strong>
+                </th>
+
+                <th>
+                    <strong class="total-bruto-atualizacao text-right">
+                    </strong>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <strong>Desc. <%= @autor.processo.cruz_iamspe.nome %>
+                    (<%= ('%.02f' % @autor.processo.cruz_iamspe_valor).gsub(".", ",") %>%)</strong>
+                </th>
+                <th>
+                    <strong class="total-previdencia text-right"></strong>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <strong>Principal Líquido</strong>
+                </th>
+                <th>
+                    <strong class="total-liquido-atualizado text-right"></strong>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <strong>Juros</strong>
+                </th>
+                <th>
+                    <strong class="total-juros text-right"></strong>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <strong>honorarios de 10% s/(Principal Atualizado + Juros)</strong>
+                </th>
+                <th>
+                    <strong class="total-honorario text-right"></strong>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <strong>Custas</strong>
+                </th>
+                <th>
+                    <strong class="text-right text-danger"></strong>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <strong>Total da Conta de Liquidação</strong>
+                </th>
+                <th>
+                    <strong class="total-conta-liquidacao"></strong>
+                </th>
+            </tr>
+        </table>
+
+        <br>
+
+        <table class="width-percent-30 autor-totals-container no-division-table">
+            <tr>
+                <td>
+                    <span class="pull-left margin-left-30">Autores:</span>
+
+                    <strong class="pull-left margin-left-15"><%= @autor.nome %></strong>
+                </td>
+            </tr>
         </table>
     </div>
 </div>

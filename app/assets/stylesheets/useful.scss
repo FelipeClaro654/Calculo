@@ -88,3 +88,9 @@
 .cursor-pointer{
     cursor: pointer;
 }
+
+.no-division-table{
+    th, td{
+        border: 0 !important;
+    }
+}

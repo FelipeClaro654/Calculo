@@ -2,7 +2,6 @@ $(function () {
 
     Autor_Table ={
         retorna_indice_autor: function (input) {
-
             $.ajax({
                 url: "/processos/retorna_indice_front",
                 dataType: "json",
@@ -61,14 +60,19 @@ $(function () {
                 var t = 0;
                 $.each(this, function (i, e) {
                     t += parseFloat($(e).data("valor"));
-                })
+                });
+                t = t.toFixed(2);
+                t = t.split(".");
+                t[0] = Useful.formata_numero(t[0]);
+                t = t.join(",");
                 totals[i] = t;
             });
-            $(".total-bruto-atualizacao").html(totals[0].toFixed(2).replace(".",","));
-            $(".total-previdencia").html(totals[1].toFixed(2).replace(".",","));
-            $(".total-liquido-atualizado").html(totals[2].toFixed(2).replace(".",","));
-            $(".total-juros").html(totals[3].toFixed(2).replace(".",","));
-            $(".total-honorario").html(totals[4].toFixed(2).replace(".",","));
+
+            $(".total-bruto-atualizacao").html(totals[0]);
+            $(".total-previdencia").html(totals[1]);
+            $(".total-liquido-atualizado").html(totals[2]);
+            $(".total-juros").html(totals[3]);
+            $(".total-honorario").html(totals[4]);
         }
     }
 
@@ -100,29 +104,17 @@ $(function () {
     });
     $(document).on("change",".periodo-value", function() {
         var parent = $(this).parents("tr"),
+            prev = parent.data("decimo") ? 0 : (parseFloat($(".previdencia-processo").data("previdencia"))/100),
+            assist = parent.data("decimo") ? 0 : (parseFloat($(".assistencia-processo").data("assistencia"))/100),
             a = parseFloat($(this).val().split(".").join("").replace(",", ".")),
             b = parseFloat(parent.find(".indice-tabela").data("valor")),
             c = parseFloat(parent.find(".indice-atualizacao").data("valor")),
             d = +(parseFloat(((a / b)*c)).toFixed(2)),
-            e = +(parseFloat((d*( (parseFloat($(".previdencia-processo").data("previdencia"))/100) +
-                                (parseFloat($(".assistencia-processo").data("assistencia"))/100) ))
-                          ).toFixed(2)),
+            e = +(parseFloat((d*(prev + assist)).toFixed(2))),
             f = +(parseFloat((d - e)).toFixed(2)),
             g = parseFloat(parent.find(".meses").data("valor")),
             h = +(parseFloat(f*g*(parseFloat($(".juros-processo").data("juros"))/100)).toFixed(2)),
             i = +(((d+h)*(10/100)).toFixed(2));
-
-        d = d.toFixed(2);
-        e = e.toFixed(2);
-        f = f.toFixed(2);
-        h = h.toFixed(2);
-        i = i.toFixed(2);
-
-        parent.find(".bruto-atualizacao").html(d.replace(".",",")).data("valor", d);
-        parent.find(".previdencia").html(e.replace(".",",")).data("valor", e);
-        parent.find(".liquido-atualizado").html(f.replace(".",",")).data("valor", f);
-        parent.find(".juros").html(h.replace(".",",")).data("valor", h);
-        parent.find(".honorario").html(i.replace(".",",")).data("valor", i);
 
         $.ajax({
             url: '/autors/salva_pagamentos/',
@@ -138,12 +130,43 @@ $(function () {
                 meses: g,
                 juros: h,
                 honorario: i
-            }
-        }).done(function () {
-            Forms.show_message("Informações Atualizadas", "alert-success");
-        });
-        Autor_Table.update_totals();
-    });
+            },
+            success: function () {
+                d = d.toFixed(2);
+                e = e.toFixed(2);
+                f = f.toFixed(2);
+                h = h.toFixed(2);
+                i = i.toFixed(2);
 
+                d = d.split(".");
+                d[0] = Useful.formata_numero(d[0]);
+                d = d.join(",");
+
+                e = e.split(".");
+                e[0] = Useful.formata_numero(e[0]);
+                e = e.join(",");
+
+                f = f.split(".");
+                f[0] = Useful.formata_numero(f[0]);
+                f = f.join(",");
+
+                h = h.split(".");
+                h[0] = Useful.formata_numero(h[0]);
+                h = h.join(",");
+
+                i = i.split(".");
+                i[0] = Useful.formata_numero(i[0]);
+                i = i.join(",");
+
+                parent.find(".bruto-atualizacao").html(d).data("valor", d);
+                parent.find(".previdencia").html(e).data("valor", e);
+                parent.find(".liquido-atualizado").html(f).data("valor", f);
+                parent.find(".juros").html(h).data("valor", h);
+                parent.find(".honorario").html(i).data("valor", i);
+                Forms.show_message("Informações Atualizadas", "alert-success");
+                Autor_Table.update_totals();
+            }
+        });
+    });
     Autor_Table.update_totals();
 });
