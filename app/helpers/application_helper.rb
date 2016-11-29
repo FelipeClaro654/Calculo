@@ -1,9 +1,6 @@
 module ApplicationHelper
 
     def atualiza_meses(data_citacao, periodo, meses)
-        if @periodo_inicial == "01-11-2007".to_date
-            byebug
-        end
         @meses = meses
         month_dif = (periodo.year * 12 + periodo.month) - (data_citacao.year * 12 + data_citacao.month)
 
