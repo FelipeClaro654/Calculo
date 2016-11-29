@@ -5,6 +5,7 @@ $(document).on('turbolinks:load', function() {
             $("#processo_juros").val($("#processo_juros").val().replace(",", "."));
             $("#processo_cbpm_ipesp_valor").val($("#processo_cbpm_ipesp_valor").val().replace(",", "."));
             $("#processo_cruz_iamspe_valor").val($("#processo_cruz_iamspe_valor").val().replace(",", "."));
+            $("#processo_custas_valor").val($("#processo_custas_valor").val().replace(",", "."));
         },
 
         esconde_autores_ja_salvos: function () {
@@ -112,9 +113,8 @@ $(document).on('turbolinks:load', function() {
 
     });
 
-    $("#processo_juros").mask('000,00', {reverse: true});
-    $("#processo_cbpm_ipesp_valor").mask('000,00', {reverse: true});
-    $("#processo_cruz_iamspe_valor").mask('000,00', {reverse: true});
+    $("#processo_juros, #processo_cbpm_ipesp_valor, #processo_cruz_iamspe_valor, #processo_custas_valor, #processo_custas_resultado").
+        mask('000,00', {reverse: true});
 
     Forms.esconde_autores_ja_salvos();
 });
