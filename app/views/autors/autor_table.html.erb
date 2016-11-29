@@ -175,9 +175,7 @@
             <tbody>
                 <% @pagamentos.order("created_at asc").each_with_index do |p , p_index| %>
                     <tr data-pagamento-id="<%= p.id %>" data-table-index="<%= p_index %>"
-                        data-decimo="<%= p.periodo_final.length == 7 ? true : false %>"
-                        data-totals-part="<%= p.periodo - 1.month >= p.autor.processo.data_distribuicao ? true : false %>"
-                        >
+                        data-decimo="<%= p.periodo_final.length == 7 ? true : false %>">
                         <% if p.periodo_final.length == 7 %>
                             <td class="periodo-inicial">
                                 <%= p.periodo_inicial %>

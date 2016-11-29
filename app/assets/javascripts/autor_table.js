@@ -138,6 +138,12 @@ $(function () {
                 h = h.toFixed(2);
                 i = i.toFixed(2);
 
+                parent.find(".bruto-atualizacao").data("valor", d);
+                parent.find(".previdencia").data("valor", e);
+                parent.find(".liquido-atualizado").data("valor", f);
+                parent.find(".juros").data("valor", h);
+                parent.find(".honorario").data("valor", i);
+
                 d = d.split(".");
                 d[0] = Useful.formata_numero(d[0]);
                 d = d.join(",");
@@ -158,11 +164,11 @@ $(function () {
                 i[0] = Useful.formata_numero(i[0]);
                 i = i.join(",");
 
-                parent.find(".bruto-atualizacao").html(d).data("valor", d);
-                parent.find(".previdencia").html(e).data("valor", e);
-                parent.find(".liquido-atualizado").html(f).data("valor", f);
-                parent.find(".juros").html(h).data("valor", h);
-                parent.find(".honorario").html(i).data("valor", i);
+                parent.find(".bruto-atualizacao").html(d);
+                parent.find(".previdencia").html(e);
+                parent.find(".liquido-atualizado").html(f);
+                parent.find(".juros").html(h);
+                parent.find(".honorario").html(i);
                 Forms.show_message("Informações Atualizadas", "alert-success");
                 Autor_Table.update_totals();
             }
