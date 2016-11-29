@@ -1,12 +1,18 @@
 module ApplicationHelper
 
     def atualiza_meses(data_citacao, periodo, meses)
+        if @periodo_inicial == "01-11-2007".to_date
+            byebug
+        end
         @meses = meses
-        month_dif = ((periodo - data_citacao).to_f / 30.4375).round(1)
-        if month_dif > 0
-            if month_dif < 1
-                @meses = @meses.to_s.split(".")[0].to_f
-            else
+        month_dif = (periodo.year * 12 + periodo.month) - (data_citacao.year * 12 + data_citacao.month)
+
+        if periodo.year == data_citacao.year &&
+            periodo.month == data_citacao.month
+            @meses = @meses.to_s.split(".")[0].to_i
+        else
+            if month_dif >= 1
+
                 @meses = @meses.to_s.split(".")[0].to_i
                 @meses = @meses - month_dif.to_s.split(".")[0].to_i
             end

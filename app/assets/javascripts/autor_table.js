@@ -63,13 +63,19 @@ $(function () {
                 $.each(this, function (i, e) {
                     t += parseFloat($(e).data("valor"));
                 });
-                total += t;
+                if($(e).hasClass('liquido-atualizado')
+                || $(e).hasClass('juros')
+                || $(e).hasClass('honorario')
+                ){
+                    total += t;
+                }
                 t = t.toFixed(2);
                 t = t.split(".");
                 t[0] = Useful.formata_numero(t[0]);
                 t = t.join(",");
                 totals[i] = t;
             });
+            total += parseFloat($(".custas-resultado").html());
             total = total.toFixed(2);
             total = total.split(".");
             total[0] = Useful.formata_numero(total[0]);
