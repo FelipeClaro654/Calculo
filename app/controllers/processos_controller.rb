@@ -28,6 +28,7 @@ class ProcessosController < ApplicationController
         @processo = Processo.new(processo_params)
         respond_to do |format|
             if @processo.save
+                calcula_custas(@processo)
                 create_pagamentos(@processo.autors)
                 format.html { render :edit, notice: 'Processo was successfully created.' }
                 format.json { render :show, status: :created, location: @processo }
@@ -49,22 +50,28 @@ class ProcessosController < ApplicationController
             end
 
             if @processo.update(processo_params)
-                if @old_ids.empty?
-                    create_pagamentos(@processo.autors)
-                else
-                    @new_autores = @processo.autors.where('id NOT IN (?)', @old_ids)
+                calcula_custas(@processo)
+                @new_autores = @processo.autors.where('id NOT IN (?)', @old_ids)
 
-                    if @new_autores.empty?
-                        @old_autores =  @processo.autors
+                unless @old_ids.length > 0 || @new_autores.length > 0
+
+                    if @old_ids.empty?
+                        create_pagamentos(@processo.autors)
                     else
-                        create_pagamentos(@new_autores)
-                        @new_ids = []
-                        @new_autores.each do |n|
-                            @new_ids.push(n.id)
+
+                        if @new_autores.empty?
+                            @old_autores =  @processo.autors
+                        else
+                            create_pagamentos(@new_autores)
+                            @new_ids = []
+                            @new_autores.each do |n|
+                                @new_ids.push(n.id)
+                            end
+                            @old_autores =  @processo.autors.where('id NOT IN (?)', @new_ids)
                         end
-                        @old_autores =  @processo.autors.where('id NOT IN (?)', @new_ids)
+
+                        update_autores(@old_autores)
                     end
-                    update_autores(@old_autores)
                 end
 
                 format.html { render :edit, notice: 'Processo was successfully updated.' }
@@ -84,6 +91,16 @@ class ProcessosController < ApplicationController
             format.html { redirect_to processos_url, notice: 'Processo was successfully destroyed.' }
             format.json { head :no_content }
         end
+    end
+
+    def calcula_custas(processo)
+        autores = processo.autors.count
+        indice = retorna_indice(processo.custas_data, processo.tabela_atualizacao.nome)
+        custas = processo.custas_valor / indice * processo.indice_tabela
+        if autores > 0
+            custas = custas / autores
+        end
+        processo.update_attribute(:custas_resultado, custas)
     end
 
     def update_autores(old_autores)
@@ -255,6 +272,8 @@ class ProcessosController < ApplicationController
         :cruz_iamspe_id,
         :cruz_iamspe_valor,
         :data_calculo_id,
+        :custas_data,
+        :custas_valor,
         autors_attributes: [:id, :nome, :periodo_inicial, :periodo_final, :_destroy])
     end
 end

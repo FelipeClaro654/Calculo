@@ -56,23 +56,31 @@ $(function () {
                             $(".juros"),
                             $(".honorario") ];
 
+            var total = 0;
+
             $.each(totals, function (i, e) {
                 var t = 0;
                 $.each(this, function (i, e) {
                     t += parseFloat($(e).data("valor"));
                 });
+                total += t;
                 t = t.toFixed(2);
                 t = t.split(".");
                 t[0] = Useful.formata_numero(t[0]);
                 t = t.join(",");
                 totals[i] = t;
             });
+            total = total.toFixed(2);
+            total = total.split(".");
+            total[0] = Useful.formata_numero(total[0]);
+            total = total.join(",");
 
             $(".total-bruto-atualizacao").html(totals[0]);
             $(".total-previdencia").html(totals[1]);
             $(".total-liquido-atualizado").html(totals[2]);
             $(".total-juros").html(totals[3]);
             $(".total-honorario").html(totals[4]);
+            $(".total-conta-liquidacao").html(total);
         }
     }
 

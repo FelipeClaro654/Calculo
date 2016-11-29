@@ -181,6 +181,34 @@
                     </div>
                 </div>
             </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-2">
+                    <%= f.input :custas_data, label: "Data",
+                        as: :string,
+                        :input_html => {
+                            :placeholder => "__/__/__",
+                            :value =>  @processo.custas_data.blank? ? '' : @processo.custas_data.strftime('%d/%m/%Y'),
+                            :class => "calendario"
+                    } %>
+                </div>
+                <div class="col-xs-2">
+                    <%= f.input :custas_valor, label: "Valor",
+                        as: :string,
+                        :input_html => {
+                        :placeholder => "Valor %",
+                        :value => @processo.custas_valor.nil? ? "" : '%.02f' % @processo.custas_valor,
+                    }%>
+                </div>
+                <div class="col-xs-2">
+                    <%= f.input :custas_resultado, label: "Custas",
+                        as: :string,
+                        disabled: true,
+                        :input_html => {
+                        :value => @processo.custas_resultado.nil? ? "" : '%.02f' % @processo.custas_resultado,
+                    }%>
+                </div>
+            </div>
             <div class="row width-percent-85">
                 <br>
                 <div class="actions pull-right">

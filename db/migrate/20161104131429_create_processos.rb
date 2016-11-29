@@ -10,6 +10,9 @@ class CreateProcessos < ActiveRecord::Migration[5.0]
       t.string :tipo_processo
       t.date :data_base
       t.decimal :indice_tabela
+      t.date :custas_data
+      t.decimal :custas_valor
+      t.decimal :custas_resultado
       t.string :sentenca
       t.string :re
       t.string :acordao
@@ -22,6 +25,7 @@ class CreateProcessos < ActiveRecord::Migration[5.0]
       t.integer :cruz_iamspe_id
       t.decimal :cruz_iamspe_valor
       t.integer :data_calculo_id
+
 
       t.timestamps
     end

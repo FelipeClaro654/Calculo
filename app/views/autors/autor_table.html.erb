@@ -305,7 +305,9 @@
                     <strong>Custas</strong>
                 </th>
                 <th>
-                    <strong class="text-right text-danger"></strong>
+                    <strong class="text-right text-danger">
+                        <%= ('%.02f' % @autor.processo.custas_resultado).gsub(".", ",") %>
+                    </strong>
                 </th>
             </tr>
             <tr>
