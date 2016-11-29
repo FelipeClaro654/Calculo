@@ -2,7 +2,7 @@ module ApplicationHelper
 
     def atualiza_meses(data_citacao, periodo, meses)
         @meses = meses
-        month_dif = month_difference(data_citacao, periodo)
+        month_dif = ((periodo - data_citacao).to_f / 30.4375).round(1)
         if month_dif > 0
             if month_dif < 1
                 @meses = @meses.to_s.split(".")[0].to_f

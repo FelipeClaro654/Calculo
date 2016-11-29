@@ -51,14 +51,12 @@ class ProcessosController < ApplicationController
 
             if @processo.update(processo_params)
                 calcula_custas(@processo)
-                @new_autores = @processo.autors.where('id NOT IN (?)', @old_ids)
 
-                unless @old_ids.length > 0 || @new_autores.length > 0
-
+                if @processo.autors.count > 0
                     if @old_ids.empty?
                         create_pagamentos(@processo.autors)
                     else
-
+                        @new_autores = @processo.autors.where('id NOT IN (?)', @old_ids)
                         if @new_autores.empty?
                             @old_autores =  @processo.autors
                         else
@@ -182,13 +180,14 @@ class ProcessosController < ApplicationController
                 else
                     periodo_value = 100
                 end
+
                 meses = month_difference(a.processo.data_citacao, a.processo.data_base)
                 results = calcula_pagamentos(
                                             periodo_value,
                                             indice_periodo,
                                             meses,
                                             a.processo,
-                                            per.kind_of?(Array) ? ("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime - 1.month: @periodo_inicial,
+                                            per.kind_of?(Array) ? ("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime - 1.month : @periodo_inicial,
                                             is_decimo
                                             )
                 pagamento = Pagamento.new do |p|
