@@ -116,6 +116,11 @@ $(function () {
     $(document).on("change","#processo_data_base", function() {
         Autor_Table.retorna_indice();
     });
+
+    $(document).on("click","#print_autor_table", function() {
+        window.print();
+    });
+
     $(document).on("change",".periodo-value", function() {
         var parent = $(this).parents("tr"),
             prev = parent.data("decimo") ? 0 : (parseFloat($(".previdencia-processo").data("previdencia"))/100),

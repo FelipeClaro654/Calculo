@@ -10,25 +10,25 @@
   }
 }
 
-@for $i from 1 through 50 {
+@for $i from 1 through 100 {
   .margin-left-#{$i}{
       margin-left: #{$i}px !important;
   }
 }
 
-@for $i from 1 through 50 {
+@for $i from 1 through 100 {
   .neg-margin-left-#{$i}{
       margin-left: -#{$i}px !important;
   }
 }
 
-@for $i from 1 through 50 {
+@for $i from 1 through 100 {
   .margin-right-#{$i}{
       margin-right: #{$i}px !important;
   }
 }
 
-@for $i from 1 through 50 {
+@for $i from 1 through 100 {
   .neg-margin-right-#{$i}{
       margin-right: -#{$i}px !important;
   }
