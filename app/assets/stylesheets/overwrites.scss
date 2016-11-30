@@ -13,12 +13,6 @@ body{
     font-family: sans-serif;
 }
 
-@-moz-document url-prefix() {
-  body {
-     letter-spacing: -1px;
-  }
-}
-
 .container{
     width: 1200px !important;
 }
