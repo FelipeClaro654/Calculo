@@ -41,3 +41,47 @@
         padding: 2px !important;
     }
 }
+
+.print-container{
+    font-size: 10px;
+    margin-left: 27mm;
+    width: 85%;
+
+    .panel-body{
+        padding: 10px;
+    }
+
+    .container,
+    .autor-table,
+    .autor-details-panel table {
+        font-size: 10px;
+    }
+
+    .autor-details-panel{
+        table{
+            td{
+                padding: 0px !important;
+            }
+        }
+    }
+
+    .autor-table{
+        th{
+            padding-bottom: 0px !important;
+            padding-top: 0px !important;
+        }
+        td{
+            padding: 0px 8px !important;
+        }
+    }
+
+    .periodo-value{
+        border: 0px;
+        font-size: 10px;
+        box-shadow: none;
+    }
+
+    .form-control{
+        height: 15px;
+    }
+}

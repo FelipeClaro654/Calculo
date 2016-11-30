@@ -1,6 +1,11 @@
 $(function () {
 
     Autor_Table ={
+        print_autor: function () {
+            $(".container").switchClass("container", "print-container");
+            $(".container-autor-table").toggleClass("width-percent-70");
+        },
+
         retorna_indice_autor: function (input) {
             $.ajax({
                 url: "/processos/retorna_indice_front",
@@ -118,7 +123,19 @@ $(function () {
     });
 
     $(document).on("click","#print_autor_table", function() {
-        window.print();
+        $(".container").css("visibility", "hidden");
+        Autor_Table.print_autor();
+
+        setTimeout(function () {
+            $(".print-container").css("visibility", "visible");
+            window.print();
+            $(".print-container").css("visibility", "hidden");
+            $(".print-container").switchClass("print-container", "container");
+            $(".container-autor-table").toggleClass("width-percent-70");
+            setTimeout(function () {
+                $(".container").css("visibility", "visible");
+            },500)
+        }, 500)
     });
 
     $(document).on("change",".periodo-value", function() {
@@ -195,3 +212,8 @@ $(function () {
     });
     Autor_Table.update_totals();
 });
+
+
+window.onafterprint = function(){
+      window.location.reload(true);
+ }
