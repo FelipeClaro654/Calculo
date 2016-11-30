@@ -13,6 +13,12 @@ body{
     font-family: sans-serif;
 }
 
+@-moz-document url-prefix() {
+  body {
+     letter-spacing: -1px;
+  }
+}
+
 .container{
     width: 1200px !important;
 }
@@ -20,7 +26,7 @@ body{
 .form-control{
     height: 21px;
     color: black !important;
-    padding: 6px 1px;
+    padding: 4px 1px;
 }
 
 .navbar-collapse.collapse {
