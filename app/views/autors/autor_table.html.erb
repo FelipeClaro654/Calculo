@@ -29,7 +29,7 @@
                             <div class="pull-right margin-right-10"><%= @autor.processo.tipo_processo %></div>
                         </td>
                         <td>
-                            <label class="pull-left">Data Citação:</label>
+                            <label class="pull-left">Citação:</label>
                             <div class="pull-right margin-right-10"><%= @autor.processo.data_citacao.strftime("%d/%m/%Y") %></div>
                         </td>
                         <td>
@@ -70,7 +70,7 @@
                             <label class="pull-left">Juros:</label>
                             <div data-juros="<%= @autor.processo.juros %>"
                                 class="juros-processo pull-right margin-right-10">
-                                <%= (@autor.processo.juros * 12 ).to_s.gsub(".",",") %> %
+                                <%= (@autor.processo.juros * 12 ).to_s.gsub(".",",") %> % aa
                             </div>
                         </td>
                         <td>
@@ -87,7 +87,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label class="pull-left">A partir de:</label>
+                            <label class="pull-left">A partir da:</label>
                             <div class="pull-right margin-right-10">
                                 <%= @autor.processo.data_calculo.nome %>
                             </div>
