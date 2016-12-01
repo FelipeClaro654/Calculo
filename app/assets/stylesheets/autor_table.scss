@@ -71,7 +71,7 @@
     }
 
     .autor-details-panel{
-        width: 105%;
+        width: 104.7%;
         margin-left: -16px;
         table{
             td{
@@ -129,5 +129,20 @@
 @media print{
     .autor-totals-container{
         page-break-inside: avoid;
+    }
+    @page
+    {
+        size:  auto;   /* auto is the initial value */
+        margin: 0mm 12mm;  /* this affects the margin in the printer settings */
+    }
+
+    html
+    {
+        margin: 0px;  /* this affects the margin on the html before sending to printer */
+    }
+
+    body
+    {
+        margin: 0mm; /* margin you want for the content */
     }
 }
