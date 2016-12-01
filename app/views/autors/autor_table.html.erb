@@ -1,4 +1,4 @@
-<div class="container-autor-table margin-left-90 width-percent-70">
+<div class="container-autor-table margin-left-90 width-percent-70 margin-top-10">
     <div class="panel panel-default autor-details-panel">
         <div class="panel-heading">
             CONTA DE LIQUIDAÇÃO
@@ -7,12 +7,12 @@
             </button>
         </div>
         <div class="panel-body">
-            <table class="table">
+            <table class="table table-liquidacao">
                 <thead>
                     <tr>
                         <td>
-                            <label class="pull-left">Autor:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.processo_autor %></div>
+                            <label class="pull-left">Ré(u):</label>
+                            <div class="pull-right margin-right-10"><%= @autor.processo.re %></div>
                         </td>
                         <td>
                             <label class="pull-left">Distribuição:</label>
@@ -47,7 +47,7 @@
                             <div class="pull-right margin-right-10"><%= @autor.processo.sentenca %></div>
                         </td>
                         <td>
-                            <label class="pull-left">Número:</label>
+                            <label class="pull-left">Processo:</label>
                             <div class="pull-right margin-right-10"><%= @autor.processo.numero %></div>
                         </td>
                     </tr>
@@ -61,8 +61,8 @@
                             <div class="pull-right margin-right-10"><%= @autor.processo.acordao %></div>
                         </td>
                         <td>
-                            <label class="pull-left">Ré(u):</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.re %></div>
+                            <label class="pull-left">Autor(a):</label>
+                            <div class="pull-right margin-right-10"><%= @autor.processo.processo_autor %></div>
                         </td>
                     </tr>
                     <tr>
@@ -100,20 +100,19 @@
                             </div>
                         </td>
                         <td>
-
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td>
                             <label class="pull-left">Período:</label>
                             <div class="pull-right margin-right-10">
                                 <%= @autor.periodo_inicial.strftime("%d/%m/%Y") %> até <%= @autor.periodo_final.strftime("%d/%m/%Y") %>
                             </div>
                         </td>
+
+                    </tr>
+                    <tr>
                         <td>
                             <label class="pull-left">Tabela Atualização:</label>
                             <div class="pull-right margin-right-10"><%= @autor.processo.tabela_atualizacao.nome %></div>
+                        </td>
+                        <td>
                         </td>
                         <td>
                         </td>
@@ -279,7 +278,7 @@
                 </th>
 
                 <th>
-                    <strong class="total-bruto-atualizacao text-right">
+                    <strong class="total-bruto-atualizacao text-right pull-right">
                     </strong>
                 </th>
             </tr>
@@ -289,7 +288,7 @@
                         (<%= ('%.02f' % @autor.processo.cruz_iamspe_valor).gsub(".", ",") %>%)</strong>
                     </th>
                     <th>
-                        <strong class="total-previdencia text-right"></strong>
+                        <strong class="total-previdencia text-right pull-right"></strong>
                     </th>
                 </tr>
                 <tr>
@@ -297,7 +296,7 @@
                         <strong>Principal Líquido</strong>
                     </th>
                     <th>
-                        <strong class="total-liquido-atualizado text-right"></strong>
+                        <strong class="total-liquido-atualizado text-right pull-right"></strong>
                     </th>
                 </tr>
                 <tr>
@@ -305,15 +304,15 @@
                         <strong>Juros</strong>
                     </th>
                     <th>
-                        <strong class="total-juros text-right"></strong>
+                        <strong class="total-juros text-right pull-right"></strong>
                     </th>
                 </tr>
                 <tr>
                     <th>
-                        <strong>honorarios de 10% s/(Principal Atualizado + Juros)</strong>
+                        <strong>Honorarios de 10% s/(Principal Atualizado + Juros)</strong>
                     </th>
                     <th>
-                        <strong class="total-honorario text-right"></strong>
+                        <strong class="total-honorario text-right pull-right"></strong>
                     </th>
                 </tr>
                 <tr>
@@ -321,7 +320,7 @@
                         <strong>Custas</strong>
                     </th>
                     <th>
-                        <strong class="custas-resultado text-right text-danger">
+                        <strong class="custas-resultado text-right text-danger pull-right">
                             <%= ('%.02f' % @autor.processo.custas_resultado).gsub(".", ",") %>
                         </strong>
                     </th>
@@ -331,7 +330,7 @@
                         <strong>Total da Conta de Liquidação</strong>
                     </th>
                     <th>
-                        <strong class="total-conta-liquidacao"></strong>
+                        <strong class="total-conta-liquidacao pull-right"></strong>
                     </th>
                 </tr>
             </table>

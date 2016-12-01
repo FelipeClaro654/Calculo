@@ -4,6 +4,7 @@ $(function () {
         print_autor: function () {
             $(".container").switchClass("container", "print-container");
             $(".container-autor-table").toggleClass("width-percent-70");
+            $(".container-autor-table").toggleClass("margin-left-90");
         },
 
         retorna_indice_autor: function (input) {
@@ -125,17 +126,17 @@ $(function () {
     $(document).on("click","#print_autor_table", function() {
         $(".container").css("visibility", "hidden");
         Autor_Table.print_autor();
-
         setTimeout(function () {
             $(".print-container").css("visibility", "visible");
             window.print();
             $(".print-container").css("visibility", "hidden");
             $(".print-container").switchClass("print-container", "container");
             $(".container-autor-table").toggleClass("width-percent-70");
+            $(".container-autor-table").toggleClass("margin-left-90");
             setTimeout(function () {
                 $(".container").css("visibility", "visible");
-            },500)
-        }, 500)
+            },500);
+        }, 500);
     });
 
     $(document).on("change",".periodo-value", function() {
