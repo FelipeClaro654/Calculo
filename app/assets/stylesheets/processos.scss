@@ -38,12 +38,6 @@ label:not(.checkbox, .radio):after {
     }
 }
 
-@-moz-document url-prefix() {
-  .process-form {
-     letter-spacing: -1px;
-  }
-}
-
 .btn-add-autor-position{
     margin: -46px 64px;
 }
