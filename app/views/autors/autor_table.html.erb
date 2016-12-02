@@ -222,7 +222,7 @@
                         /<%=p.periodo_final[2..3] %>
                     </td>
                     <% end %>
-                    <td style='mso-number-format:"#,##0.00"' class="periodo-value-td">
+                    <td class="periodo-value-td">
                         <input class="periodo-value form-control pull-right" type="text" name="name"
                         value="<%= number_with_delimiter(('%.02f' % p.periodo_value), separator: ",", delimiter: ".") %>">
                     </td>
