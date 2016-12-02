@@ -13,12 +13,12 @@
  */
 
  @import "bootstrap-sprockets";
+ @import "font-kit-rails/open-sans";
  @import "var_overwrites";
  @import "colors";
  @import "bootstrap";
  @import "overwrites";
  @import "bootstrap-datetimepicker";
- @import "font-kit-rails/open-sans";
  @import "jquery.ui.all";
  @import "useful";
  @import "processos";
