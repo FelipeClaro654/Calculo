@@ -11,7 +11,7 @@
 
 <h1>Processos</h1>
 
-<table class="table">
+<table class="table width-percent-65">
     <thead>
         <tr>
             <th>Autor</th>
@@ -19,7 +19,7 @@
             <th>Vara</th>
             <th>Data base</th>
             <th>Re</th>
-            <th colspan="3"></th>
+            <th colspan="2"></th>
         </tr>
     </thead>
 
@@ -31,10 +31,13 @@
             </td>
             <td><%= processo.numero %></td>
             <td><%= processo.vara %></td>
-            <td><%= processo.data_base %></td>
+            <td><%= processo.data_base.strftime("%d/%m/%Y") %></td>
             <td><%= processo.re %></td>
-            <td><%= link_to 'Editar', edit_processo_path(processo) %></td>
-            <td><%= link_to 'Excluir', processo, method: :delete, data: { confirm: 'Deseja excluir este processo?' } %></td>
+            <td>
+                <%= link_to 'Editar', edit_processo_path(processo) %>
+                <%= link_to 'Excluir', processo, method: :delete,
+                    data: { confirm: 'Deseja excluir este processo?' }, class: "pull-right" %>
+            </td>
         </tr>
         <% end %>
     </tbody>

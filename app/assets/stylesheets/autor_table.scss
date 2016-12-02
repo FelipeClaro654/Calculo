@@ -52,9 +52,9 @@
 
 .print-container{
     font-size: 11px !important;
-
-    margin-left: 15mm;
-    width: 89.5%;
+    margin-left: 10mm;
+    width: 92.5%;
+    margin-right: 0;
 
     .panel-body{
         padding: 10px;
@@ -64,6 +64,7 @@
         width: 104.7%;
         margin-left: -16px;
         table{
+            font-size: 11px !important;
             td{
                 line-height: 10px;
                 padding: 0px !important;
@@ -112,7 +113,7 @@
         }
     }
     .table-liquidacao tr td:nth-child(1), .table-liquidacao tr td:nth-child(2) {
-        padding-right: 16px !important;
+        padding-right: 5px !important;
     }
 }
 

@@ -31,9 +31,13 @@
 
         tbody{
             border: 1px solid #ddd;
+            tr{
+                td{
+                    padding: 2px !important;
+                }
+            }
         }
     }
-    @extend .common-tabelas;
 }
 
 input[type=text].valor-tabela{

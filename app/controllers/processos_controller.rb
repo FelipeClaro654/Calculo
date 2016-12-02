@@ -43,6 +43,8 @@ class ProcessosController < ApplicationController
     # PATCH/PUT /processos/1.json
     def update
         respond_to do |format|
+
+
             old_autores = @processo.autors
             @old_ids = []
             old_autores.each do |o|
@@ -50,6 +52,8 @@ class ProcessosController < ApplicationController
             end
 
             if @processo.update(processo_params)
+
+
                 calcula_custas(@processo)
 
                 if @processo.autors.count > 0
@@ -92,6 +96,7 @@ class ProcessosController < ApplicationController
     end
 
     def calcula_custas(processo)
+
         autores = processo.autors.count
         indice = retorna_indice(processo.custas_data, processo.tabela_atualizacao.nome)
         custas = processo.custas_valor / indice * processo.indice_tabela

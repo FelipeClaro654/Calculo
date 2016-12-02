@@ -60,13 +60,11 @@ $(document).on('turbolinks:load', function() {
         }
     }
 
-
     $(document).on("change",".panel-autor .calendario", function() {
         if($(this).val() != ""){
             Autor_Table.retorna_indice_autor($(this));
         }
     });
-
 
     $(".calendario").datepicker({
         changeMonth: true,
@@ -74,8 +72,6 @@ $(document).on('turbolinks:load', function() {
         dateFormat: "dd/mm/yy",
         yearRange: "1950:" + ano_atual
     });
-
-    //$(".calendario").mask('00/00/0000');
 
     $('#autors').on('cocoon:before-insert', function(e, insertedItem) {
         insertedItem.find(".calendario").datepicker({
@@ -112,7 +108,7 @@ $(document).on('turbolinks:load', function() {
             }
         })
         .done(function() {
-            window.location.reload();
+            window.location.href = window.location.href;
         });
 
     });

@@ -5,7 +5,7 @@
     <div class="custom-brand">
        <ul class="nav navbar-nav navbar-left">
            <li>
-               <a href="#">Cálculo</a>
+               <a>Cálculo</a>
            </li>
        </ul>
    </div>
@@ -34,16 +34,16 @@
          </a>
           <ul class="dropdown-menu">
               <li class="<%= 'active' if params[:controller] == 'tabela_opv' %>">
-                  <%= link_to "Tabela PCA-E ", controller: "tabela_opv", action: "edit_table" %>
+                  <%= link_to "Atualização Monetária - IPCA-E", controller: "tabela_opv", action: "edit_table" %>
               </li>
               <li class="<%= 'active' if params[:controller] == 'tabela_judicial' %>">
-                  <%= link_to "Tabela TPDJSP", controller: "tabela_judicial", action: "edit_table" %>
+                  <%= link_to "TPDJSP (INPC)", controller: "tabela_judicial", action: "edit_table" %>
               </li>
               <li class="<%= 'active' if params[:controller] == 'tabela_fazenda' %>">
-                  <%= link_to "Tabela Modulada", controller: "tabela_fazenda", action: "edit_table" %>
+                  <%= link_to "Lei nº 11.960/09 - Modulada", controller: "tabela_fazenda", action: "edit_table" %>
               </li>
               <li class="<%= 'active' if params[:controller] == 'tabela_juro' %>">
-                  <%= link_to "Tabela Juros", controller: "tabela_juro", action: "edit_table" %>
+                  <%= link_to "Juros", controller: "tabela_juro", action: "edit_table" %>
               </li>
           </ul>
         </li>

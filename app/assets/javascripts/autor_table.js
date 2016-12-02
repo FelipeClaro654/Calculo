@@ -5,6 +5,7 @@ $(function () {
             $(".container").switchClass("container", "print-container");
             $(".container-autor-table").toggleClass("width-percent-70");
             $(".container-autor-table").toggleClass("margin-left-90");
+            $(".table-liquidacao td:last-child div").removeClass("margin-right-10");
         },
 
         retorna_indice_autor: function (input) {
@@ -139,7 +140,6 @@ $(function () {
         }, 500);
     });
 
-
     $(document).on("click","#excel_autor_table", function() {
         $(".container").css("visibility", "hidden");
         $(".container").append("<table id='excel_table'></table>");
@@ -258,7 +258,6 @@ $(function () {
     });
     Autor_Table.update_totals();
 });
-
 
 window.onafterprint = function(){
       window.location.reload(true);
