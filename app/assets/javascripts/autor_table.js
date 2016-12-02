@@ -150,7 +150,11 @@ $(function () {
 
         $.each(liquidacao_trs, function (i, e) {
             $.each($(e).find("td"), function (i, e_td) {
-                $(e_td).attr("colspan", 4);
+                 if (i % 2 === 0) {
+                     $(e_td).attr("colspan", 2);
+                 }else{
+                     $(e_td).attr("colspan", 3);
+                 }
             });
             $("#excel_table").append(e);
         });
@@ -171,7 +175,9 @@ $(function () {
         });
 
     	$("#excel_table").table2excel({
-    		name: "Resumo Individual"
+    		name: "Resumo Individual",
+            filename: "Resumo",
+            fileext: ".xls"
     	});
 
         $("#excel_table").remove();
