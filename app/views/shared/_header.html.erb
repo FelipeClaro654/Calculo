@@ -13,9 +13,20 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="custom-nav">
       <ul class="nav navbar-nav">
-        <li class="<%= 'active' if params[:controller] == 'processos' %>">
-            <%= link_to "Processo", controller: "processos", action: "new" %>
-        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"
+             data-toggle="dropdown" role="button"
+             aria-haspopup="true" aria-expanded="false">Processos <span class="caret"></span>
+         </a>
+          <ul class="dropdown-menu">
+              <li class="<%= 'active' if params[:controller] == 'processos' && params[:action] == "new"  %>">
+                  <%= link_to "Novo Processo", controller: "processos", action: "new" %>
+              </li>
+              <li class="<%= 'active' if params[:controller] == 'processos' && params[:action] == "index" %>">
+                  <%= link_to "Lista de Processos", controller: "processos", action: "index" %>
+              </li>
+          </ul>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle"
              data-toggle="dropdown" role="button"

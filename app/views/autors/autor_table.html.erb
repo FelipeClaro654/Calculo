@@ -6,7 +6,7 @@
             <button id="print_autor_table" type="button" class="btn btn pull-right bg-custom-primary neg-margin-top-6 neg-margin-right-8">
                 <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir
             </button>
-            <button id="excel_autor_table" type="button" class="hidden btn btn pull-right btn-success neg-margin-top-6 margin-right-6">
+            <button id="excel_autor_table" type="button" class="btn btn pull-right btn-success neg-margin-top-6 margin-right-6">
                 <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> Excel
             </button>
         </div>
@@ -16,88 +16,62 @@
                     <tr>
                         <td>
                             <label class="pull-left">Ré(u):</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.re %></div>
                         </td>
                         <td>
                             <label class="pull-left">Distribuição:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.data_distribuicao.strftime("%d/%m/%Y") %></div>
                         </td>
                         <td>
                             <label class="pull-left">Fórum:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.forum %></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="pull-left">Ação:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.tipo_processo %></div>
                         </td>
                         <td>
                             <label class="pull-left">Citação:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.data_citacao.strftime("%d/%m/%Y") %></div>
                         </td>
                         <td>
                             <label class="pull-left">Cartório:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.vara %></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="pull-left">Data Base:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.data_base.strftime("%d/%m/%Y") %></div>
                         </td>
                         <td>
                             <label class="pull-left">Sentença Fls.:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.sentenca %></div>
                         </td>
                         <td>
                             <label class="pull-left">Processo:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.numero %></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="pull-left">Índice da Data Base:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.indice_tabela.to_s.gsub(".",",") %></div>
                         </td>
                         <td>
                             <label class="pull-left">Acordão Fls.:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.acordao %></div>
                         </td>
                         <td>
                             <label class="pull-left">Autor(a):</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.processo_autor %></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="pull-left">Juros:</label>
-                        </td>
-                        <td>
                             <div data-juros="<%= @autor.processo.juros %>"
                                 class="juros-processo pull-right margin-right-10">
                                 <%= (@autor.processo.juros * 12 ).to_s.gsub(".",",") %> % aa
@@ -105,8 +79,6 @@
                         </td>
                         <td>
                             <label class="pull-left">Previdência (<%= @autor.processo.cbpm_ipesp.nome %>):</label>
-                        </td>
-                        <td>
                             <div data-previdencia="<%= @autor.processo.cbpm_ipesp_valor %>"
                                 class="previdencia-processo pull-right margin-right-10">
                                 <%= @autor.processo.cbpm_ipesp_valor.to_s.gsub(".", ",") %> %
@@ -114,24 +86,18 @@
                         </td>
                         <td>
                             <label class="pull-left">Base de Calculo do Autor(a) Fls.:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10"><%= @autor.processo.base_calculo_autor %></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="pull-left">A partir da:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10">
                                 <%= @autor.processo.data_calculo.nome %>
                             </div>
                         </td>
                         <td>
                             <label class="pull-left">Assist. Médica (<%= @autor.processo.cruz_iamspe.nome %>):</label>
-                        </td>
-                        <td>
                             <div data-assistencia="<%= @autor.processo.cruz_iamspe_valor %>"
                                 class="assistencia-processo pull-right margin-right-10">
                                 <%= @autor.processo.cruz_iamspe_valor.to_s.gsub(".", ",") %> %
@@ -139,18 +105,16 @@
                         </td>
                         <td>
                             <label class="pull-left">Período:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10">
                                 <%= @autor.periodo_inicial.strftime("%d/%m/%Y") %> a <%= @autor.periodo_final.strftime("%d/%m/%Y") %>
                             </div>
                         </td>
+
                     </tr>
                     <tr>
+
                         <td class="tabela-atualizacao-desc">
                             <label class="pull-left">Tabela:</label>
-                        </td>
-                        <td>
                             <div class="pull-right margin-right-10">
                                 <% if @autor.processo.tabela_atualizacao.nome == "PCA-E" %>
                                     Atualização Monetária - IPCA-E
@@ -160,6 +124,8 @@
                                     Lei nº 11.960/09 - Modulada
                                 <% end %>
                             </div>
+                        </td>
+                        <td>
                         </td>
                         <td>
                         </td>

@@ -1,3 +1,5 @@
+var ano_atual = moment().year().toString();
+
 $(document).on('turbolinks:load', function() {
 
     Forms ={
@@ -6,6 +8,7 @@ $(document).on('turbolinks:load', function() {
             $("#processo_cbpm_ipesp_valor").val($("#processo_cbpm_ipesp_valor").val().replace(",", "."));
             $("#processo_cruz_iamspe_valor").val($("#processo_cruz_iamspe_valor").val().replace(",", "."));
             $("#processo_custas_valor").val($("#processo_custas_valor").val().replace(",", "."));
+            $("#processo_indice_tabela").val($("#processo_indice_tabela").val().replace(",", "."));
         },
 
         esconde_autores_ja_salvos: function () {
@@ -64,11 +67,12 @@ $(document).on('turbolinks:load', function() {
         }
     });
 
+
     $(".calendario").datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat: "dd/mm/yy",
-        yearRange: "1950:2016"
+        yearRange: "1950:" + ano_atual
     });
 
     //$(".calendario").mask('00/00/0000');
@@ -78,7 +82,7 @@ $(document).on('turbolinks:load', function() {
             changeMonth: true,
             changeYear: true,
             dateFormat: "dd/mm/yy",
-            yearRange: "1950:2016"
+            yearRange: "1950:" + ano_atual
         });
     });
 

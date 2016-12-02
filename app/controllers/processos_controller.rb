@@ -30,7 +30,7 @@ class ProcessosController < ApplicationController
             if @processo.save
                 calcula_custas(@processo)
                 create_pagamentos(@processo.autors)
-                format.html { render :edit, notice: 'Processo was successfully created.' }
+                format.html { render :edit, notice: 'Processo criado com sucesso.' }
                 format.json { render :show, status: :created, location: @processo }
             else
                 format.html { render :new, collection: @tabela_atualizacao }
@@ -72,7 +72,7 @@ class ProcessosController < ApplicationController
                     end
                 end
 
-                format.html { render :edit, notice: 'Processo was successfully updated.' }
+                format.html { render :edit, notice: 'Processo atualizado com sucesso.' }
                 format.json { render json: @processo, status: :ok, location: @processo }
             else
                 format.html { render :edit }
@@ -86,7 +86,7 @@ class ProcessosController < ApplicationController
     def destroy
         @processo.destroy
         respond_to do |format|
-            format.html { redirect_to processos_url, notice: 'Processo was successfully destroyed.' }
+            format.html { redirect_to processos_url, notice: 'Processo excluído com sucesso.' }
             format.json { head :no_content }
         end
     end
