@@ -52,8 +52,8 @@
 
 .print-container{
     font-size: 11px;
-    margin-left: 27mm;
-    width: 85%;
+    margin-left: 15mm;
+    width: 89.5%;
 
     .panel-body{
         padding: 10px;
@@ -73,7 +73,7 @@
                 line-height: 10px;
                 padding: 0px !important;
                 div{
-                    max-width: 165px;
+                    max-width: 171px;
                 }
             }
         }
@@ -128,7 +128,7 @@
     @page
     {
         size:  auto;   /* auto is the initial value */
-        margin: 0mm 12mm;  /* this affects the margin in the printer settings */
+        margin: 0mm 13mm;  /* this affects the margin in the printer settings */
     }
 
     html

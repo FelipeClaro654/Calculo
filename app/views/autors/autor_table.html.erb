@@ -102,7 +102,7 @@
                         <td>
                             <label class="pull-left">Período:</label>
                             <div class="pull-right margin-right-10">
-                                <%= @autor.periodo_inicial.strftime("%d/%m/%Y") %> até <%= @autor.periodo_final.strftime("%d/%m/%Y") %>
+                                <%= @autor.periodo_inicial.strftime("%d/%m/%Y") %> a <%= @autor.periodo_final.strftime("%d/%m/%Y") %>
                             </div>
                         </td>
 
@@ -145,7 +145,7 @@
                     Fls. <%= @autor.processo.base_calculo_autor %>
                 </th>
                 <th>
-                    Índice<br>da Data da<br>Obrigação
+                    Índice<br>da Mês da<br>Obrigação
                 </th>
                 <th>
                     Índice<br>da Data da<br>Atualização<br>
@@ -182,7 +182,7 @@
                     <% end %>
                 </th>
                 <th>
-                    Hon. Adv. <br> 10% <br> sobre o <br>
+                    Hon. Adv. <br> 10% <br> Sobre o <br>
                     Valor <br>
                     Principal <br>
                     Atualizado
