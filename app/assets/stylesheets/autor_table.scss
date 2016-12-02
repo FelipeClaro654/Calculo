@@ -11,11 +11,6 @@
             width: 70px !important;
         }
     }
-    tfoot{
-        th{
-            padding-right: 3px !important;
-        }
-    }
 }
 
 .autor-details-panel{
@@ -78,7 +73,7 @@
                 line-height: 10px;
                 padding: 0px !important;
                 div{
-                    max-width: 190px;
+                    max-width: 165px;
                 }
             }
         }
@@ -86,11 +81,11 @@
 
     .autor-table{
         th{
-            padding-bottom: 0px;
-            padding-top: 0px;
+            padding: 0 0 0 0;
         }
         td{
             border-top: 1px solid #f3f3f3 !important;
+            padding: 0px !important;
         }
     }
 
@@ -113,7 +108,7 @@
         tr{
             td{
                 &:nth-child(1), &:nth-child(3){
-                    width: 30%;
+                    width: 28%;
                 }
                 &:nth-child(2){
                     width: 23%;
@@ -122,7 +117,7 @@
         }
     }
     .table-liquidacao tr td:nth-child(1), .table-liquidacao tr td:nth-child(2) {
-        padding-right: 21px !important;
+        padding-right: 16px !important;
     }
 }
 

@@ -124,9 +124,9 @@ $(function () {
     });
 
     $(document).on("click","#print_autor_table", function() {
-        $(".container").css("visibility", "hidden");
+        //$(".container").css("visibility", "hidden");
         Autor_Table.print_autor();
-        setTimeout(function () {
+        /*setTimeout(function () {
             $(".print-container").css("visibility", "visible");
             window.print();
             $(".print-container").css("visibility", "hidden");
@@ -136,7 +136,7 @@ $(function () {
             setTimeout(function () {
                 $(".container").css("visibility", "visible");
             },500);
-        }, 500);
+        }, 500);*/
     });
 
     $(document).on("change",".periodo-value", function() {

@@ -132,7 +132,7 @@
     <%= hidden_field_tag :autor_id, @autor.id %>
 
     <div class="row">
-        <table class="table autor-table">
+        <table id="autor_table" class="table autor-table">
             <thead>
                 <th>
                     Mês<br>de<br>Referência
@@ -239,8 +239,6 @@
                     </td>
                 </tr>
                 <% end %>
-            </tbody>
-            <tfoot>
                 <tr>
                     <th class="">
                     </th>
@@ -266,7 +264,7 @@
                     <th class="total-honorario text-right">
                     </th>
                 </tr>
-            </tfoot>
+            </tbody>
         </table>
     </div>
     <br>
