@@ -51,18 +51,13 @@
 }
 
 .print-container{
-    font-size: 11px;
+    font-size: 11px !important;
+
     margin-left: 15mm;
     width: 89.5%;
 
     .panel-body{
         padding: 10px;
-    }
-
-    .container,
-    .autor-table,
-    .autor-details-panel table {
-        font-size: 10px;
     }
 
     .autor-details-panel{

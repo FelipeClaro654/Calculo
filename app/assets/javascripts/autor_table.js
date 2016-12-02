@@ -124,9 +124,9 @@ $(function () {
     });
 
     $(document).on("click","#print_autor_table", function() {
-        //$(".container").css("visibility", "hidden");
+        $(".container").css("visibility", "hidden");
         Autor_Table.print_autor();
-        /*setTimeout(function () {
+        setTimeout(function () {
             $(".print-container").css("visibility", "visible");
             window.print();
             $(".print-container").css("visibility", "hidden");
@@ -136,8 +136,47 @@ $(function () {
             setTimeout(function () {
                 $(".container").css("visibility", "visible");
             },500);
-        }, 500);*/
+        }, 500);
     });
+
+
+    $(document).on("click","#excel_autor_table", function() {
+        $(".container").css("visibility", "hidden");
+        $(".container").append("<table id='excel_table'></table>");
+
+        var liquidacao_trs = $(".table-liquidacao tr"),
+            autor_trs = $(".autor-table tr"),
+            totals_tr = $(".autor-totals-container tr");
+
+        $.each(liquidacao_trs, function (i, e) {
+            $.each($(e).find("td"), function (i, e_td) {
+                $(e_td).attr("colspan", 4);
+            });
+            $("#excel_table").append(e);
+        });
+
+        $("#excel_table").append("<tr></tr><tr></tr>");
+
+        $.each(autor_trs, function (i, e) {
+            $.each($(e).find(".periodo-value"), function (i, e_td) {
+                $(e_td).parent().html($(e_td).val());
+            });
+            $("#excel_table").append(e);
+        });
+
+        $("#excel_table").append("<tr></tr><tr></tr>");
+
+        $.each(totals_tr, function (i, e) {
+            $("#excel_table").append(e);
+        });
+
+    	$("#excel_table").table2excel({
+    		name: "Resumo Individual"
+    	});
+
+        $("#excel_table").remove();
+        window.location.reload();
+     });
 
     $(document).on("change",".periodo-value", function() {
         var parent = $(this).parents("tr"),

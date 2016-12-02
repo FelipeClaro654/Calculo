@@ -2,8 +2,12 @@
     <div class="panel panel-default autor-details-panel">
         <div class="panel-heading">
             CONTA DE LIQUIDAÇÃO
+
             <button id="print_autor_table" type="button" class="btn btn pull-right bg-custom-primary neg-margin-top-6 neg-margin-right-8">
                 <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir
+            </button>
+            <button id="excel_autor_table" type="button" class="btn btn pull-right btn-success neg-margin-top-6 margin-right-6">
+                <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> Excel
             </button>
         </div>
         <div class="panel-body">
@@ -108,9 +112,18 @@
 
                     </tr>
                     <tr>
-                        <td>
-                            <label class="pull-left">Tabela Atualização:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.tabela_atualizacao.nome %></div>
+
+                        <td class="tabela-atualizacao-desc">
+                            <label class="pull-left">Tabela:</label>
+                            <div class="pull-right margin-right-10">
+                                <% if @autor.processo.tabela_atualizacao.nome == "PCA-E" %>
+                                    Atualização Monetária - IPCA-E
+                                <% elsif @autor.processo.tabela_atualizacao.nome == "TPDJSP" %>
+                                    TPDJSP (INPC)
+                                <% else %>
+                                    Lei nº 11.960/09 - Modulada
+                                <% end %>
+                            </div>
                         </td>
                         <td>
                         </td>
@@ -125,7 +138,7 @@
         <div class="col-xs-6">
         </div>
         <div class="col-xs-6">
-            <p> Autor(a): <%= @autor.nome %></p>
+            <p class="autor-name"> Autor(a): <%= @autor.nome %></p>
         </div>
     </div>
 
@@ -209,7 +222,7 @@
                         /<%=p.periodo_final[2..3] %>
                     </td>
                     <% end %>
-                    <td>
+                    <td style='mso-number-format:"#,##0.00"' class="periodo-value-td">
                         <input class="periodo-value form-control pull-right" type="text" name="name"
                         value="<%= number_with_delimiter(('%.02f' % p.periodo_value), separator: ",", delimiter: ".") %>">
                     </td>
