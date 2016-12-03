@@ -27,10 +27,8 @@ $(document).on('turbolinks:load', function() {
 
         if(e.keyCode === 32){
             var $this = $(this);
-
             if($this.data("decimal") === 2){
-                $this.data("decimal", 5);
-
+                $this.data("decimal", 6);
             }else{
                 $this.data("decimal", 2);
             }

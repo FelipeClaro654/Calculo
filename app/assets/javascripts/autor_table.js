@@ -6,6 +6,7 @@ $(function () {
             $(".container-autor-table").toggleClass("width-percent-70");
             $(".container-autor-table").toggleClass("margin-left-90");
             $(".table-liquidacao td:last-child div").removeClass("margin-right-10");
+            $(".autor-details-panel table td div").toggleClass("autor-table-overflow");
         },
 
         retorna_indice_autor: function (input) {

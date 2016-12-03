@@ -1,6 +1,7 @@
 .autor-table{
     th{
         text-align: right !important;
+        padding-right: 3px !important;
     }
     td{
         text-align: right !important;
@@ -20,7 +21,7 @@
         td{
             padding: 2px !important;
             border-top: 0 !important;
-            div{
+            .autor-table-overflow{
                 max-width: 214px;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -50,8 +51,12 @@
     }
 }
 
+.table-liquidacao tr td:nth-child(1), .table-liquidacao tr td:nth-child(2) {
+    padding-right: 20px !important;
+}
+
 .print-container{
-    font-size: 11px !important;
+    font-size: 10px !important;
     margin-left: 10mm;
     width: 92.5%;
     margin-right: 0;
@@ -64,20 +69,17 @@
         width: 104.7%;
         margin-left: -16px;
         table{
-            font-size: 11px !important;
+            font-size: 10px !important;
             td{
                 line-height: 10px;
                 padding: 0px !important;
-                div{
-                    max-width: 171px;
-                }
             }
         }
     }
 
     .autor-table{
         th{
-            padding: 0 0 0 0;
+            padding: 0 0 0 0 !important;
         }
         td{
             border-top: 1px solid #f3f3f3 !important;
@@ -107,13 +109,14 @@
                     width: 28%;
                 }
                 &:nth-child(2){
-                    width: 23%;
+                    width: 20%;
                 }
             }
         }
     }
+
     .table-liquidacao tr td:nth-child(1), .table-liquidacao tr td:nth-child(2) {
-        padding-right: 5px !important;
+        padding-right: 20px !important;
     }
 }
 

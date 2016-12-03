@@ -10,7 +10,7 @@
     @extend .common-tabelas;
     table{
         text-align: center;
-        width: 93px;
+        width: 79px;
         border-bottom: 1px solid #ddd;
         th{
             text-align: center;
@@ -23,7 +23,7 @@
 }
 
 .month-container{
-    width: 53px;
+    width: 63px;
     float: left;
     text-align: center;
 
@@ -47,5 +47,5 @@ input[type=text].valor-tabela{
 }
 
 .valores-juros{
-    width: 240px;
+    width: 222px;
 }

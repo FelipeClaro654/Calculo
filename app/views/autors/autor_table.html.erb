@@ -16,96 +16,96 @@
                     <tr>
                         <td>
                             <label class="pull-left">Ré(u):</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.re %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.re %></div>
                         </td>
                         <td>
                             <label class="pull-left">Distribuição:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.data_distribuicao.strftime("%d/%m/%Y") %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.data_distribuicao.strftime("%d/%m/%Y") %></div>
                         </td>
                         <td>
                             <label class="pull-left">Fórum:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.forum %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.forum %></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="pull-left">Ação:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.tipo_processo %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.tipo_processo %></div>
                         </td>
                         <td>
                             <label class="pull-left">Citação:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.data_citacao.strftime("%d/%m/%Y") %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.data_citacao.strftime("%d/%m/%Y") %></div>
                         </td>
                         <td>
                             <label class="pull-left">Cartório:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.vara %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.vara %></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="pull-left">Data Base:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.data_base.strftime("%d/%m/%Y") %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.data_base.strftime("%d/%m/%Y") %></div>
                         </td>
                         <td>
                             <label class="pull-left">Sentença Fls.:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.sentenca %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.sentenca %></div>
                         </td>
                         <td>
                             <label class="pull-left">Processo:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.numero %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.numero %></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="pull-left">Índice da Data Base:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.indice_tabela.to_s.gsub(".",",") %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.indice_tabela.to_s.gsub(".",",") %></div>
                         </td>
                         <td>
                             <label class="pull-left">Acordão Fls.:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.acordao %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.acordao %></div>
                         </td>
                         <td>
                             <label class="pull-left">Autor(a):</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.processo_autor %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.processo_autor %></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="pull-left">Juros:</label>
                             <div data-juros="<%= @autor.processo.juros %>"
-                                class="juros-processo pull-right margin-right-10">
+                                class="juros-processo pull-right autor-table-overflow">
                                 <%= (@autor.processo.juros * 12 ).to_s.gsub(".",",") %> % aa
                             </div>
                         </td>
                         <td>
                             <label class="pull-left">Previdência (<%= @autor.processo.cbpm_ipesp.nome %>):</label>
                             <div data-previdencia="<%= @autor.processo.cbpm_ipesp_valor %>"
-                                class="previdencia-processo pull-right margin-right-10">
+                                class="previdencia-processo pull-right autor-table-overflow">
                                 <%= @autor.processo.cbpm_ipesp_valor.to_s.gsub(".", ",") %> %
                             </div>
                         </td>
                         <td>
                             <label class="pull-left">Base de Calculo do Autor(a) Fls.:</label>
-                            <div class="pull-right margin-right-10"><%= @autor.processo.base_calculo_autor %></div>
+                            <div class="pull-right autor-table-overflow"><%= @autor.processo.base_calculo_autor %></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="pull-left">A partir da:</label>
-                            <div class="pull-right margin-right-10">
+                            <div class="pull-right autor-table-overflow">
                                 <%= @autor.processo.data_calculo.nome %>
                             </div>
                         </td>
                         <td>
                             <label class="pull-left">Assist. Médica (<%= @autor.processo.cruz_iamspe.nome %>):</label>
                             <div data-assistencia="<%= @autor.processo.cruz_iamspe_valor %>"
-                                class="assistencia-processo pull-right margin-right-10">
+                                class="assistencia-processo pull-right autor-table-overflow">
                                 <%= @autor.processo.cruz_iamspe_valor.to_s.gsub(".", ",") %> %
                             </div>
                         </td>
                         <td>
                             <label class="pull-left">Período:</label>
-                            <div class="pull-right margin-right-10">
+                            <div class="pull-right autor-table-overflow">
                                 <%= @autor.periodo_inicial.strftime("%d/%m/%Y") %> a <%= @autor.periodo_final.strftime("%d/%m/%Y") %>
                             </div>
                         </td>
@@ -115,7 +115,7 @@
 
                         <td class="tabela-atualizacao-desc">
                             <label class="pull-left">Tabela:</label>
-                            <div class="pull-right margin-right-10">
+                            <div class="pull-right autor-table-overflow">
                                 <% if @autor.processo.tabela_atualizacao.nome == "PCA-E" %>
                                     Atualização Monetária - IPCA-E
                                 <% elsif @autor.processo.tabela_atualizacao.nome == "TPDJSP" %>
@@ -151,7 +151,7 @@
                     Mês<br>de<br>Referência
                 </th>
                 <th>
-                    Data<br>da<br>Obrigação<br>
+                    Mês<br>da<br>Obrigação<br>
                 </th>
                 <th>
                     Diferença<br>Apurada<br>

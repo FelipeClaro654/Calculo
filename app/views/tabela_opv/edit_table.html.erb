@@ -16,8 +16,8 @@
 </div>
 <div class="month-container">
     <%  @meses =  @tabela.count
-        (0..@meses).each do |m| %>
-            <% if m%144 == 0 %>
+        (0..(@meses -1)).each do |m| %>
+            <% if m%168 == 0 %>
                 <table class="table">
                     <thead>
                         <tr>
@@ -112,7 +112,7 @@
                     <td>
                         <input type="text"
                             <% if t.valor.to_s.split(".")[1].length > 2 %>
-                                data-decimal="5"
+                                data-decimal="6"
                             <% else %>
                                 data-decimal="2"
                             <% end %>
