@@ -27,4 +27,17 @@ class AutorsController < ApplicationController
         @autor.destroy
         render :json => { :success => true, autor_id: params[:autor_id] }
     end
+
+    def salva_totais
+        @autor = Autor.find(params[:autor_id])
+        @autor.update_attributes(
+            :bruto => params[:bruto],
+            :juros => params[:juros],
+            :assistencia => params[:assistencia],
+            :liquido => params[:liquido],
+            :honorario => params[:honorario],
+            :total_individual => params[:total_individual]
+        )
+        head :ok
+    end
 end

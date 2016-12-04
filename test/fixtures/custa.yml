@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  processo: one
+  custas_data: 2016-12-04
+  custas_valor: 9.99
+  custas_corrigida: 9.99
+  indice: 9.99
+  folhas: MyString
+
+two:
+  processo: two
+  custas_data: 2016-12-04
+  custas_valor: 9.99
+  custas_corrigida: 9.99
+  indice: 9.99
+  folhas: MyString

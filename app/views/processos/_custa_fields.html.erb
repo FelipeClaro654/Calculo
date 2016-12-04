@@ -1,0 +1,42 @@
+<div class="nested-fields">
+    <div class="row">
+        <div class="col-xs-2">
+            <%= f.input :custas_data, label: "Data",
+            as: :string,
+            :input_html => { :placeholder => "__/__/__",
+                             :class => "calendario custas-data" }%>
+        </div>
+        <div class="col-xs-2">
+            <%= f.input :custas_valor,
+            as: :string,
+            :input_html => {
+                :class => "custas-valor"
+            }%>
+        </div>
+        <div class="col-xs-2">
+            <%= f.input :indice,
+            as: :string,
+            :input_html => {
+                :disabled => true,
+                :class => "custas-indice"
+            }%>
+        </div>
+        <div class="col-xs-2">
+            <%= f.input :custas_corrigida,
+            as: :string,
+            :input_html => {
+                :disabled => true,
+                :class => "custas-corrigida"
+            }%>
+        </div>
+        <div class="col-xs-2">
+            <%= f.input :folhas%>
+        </div>
+        <div class="col-xs-1">
+            <%= link_to_remove_association "Remover", f,
+                  :class => "btn btn-danger pull-right margin-left-5 btn-remove-autor margin-top-14 neg-margin-right-38"%>
+        </div>
+    </div>
+    <hr>
+
+</div>

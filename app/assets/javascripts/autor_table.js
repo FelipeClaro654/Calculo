@@ -95,6 +95,21 @@ $(function () {
             $(".total-juros").html(totals[3]);
             $(".total-honorario").html(totals[4]);
             $(".total-conta-liquidacao").html(total);
+
+            $.ajax({
+                url: "/autors/salva_totais",
+                type: "post",
+                data: {
+                    autor_id: $("#autor_id").val(),
+                    bruto: totals[0] != 0 ? totals[0] : 0 ,
+                    previdencia: totals[1] != 0 ? totals[1] : 0 ,
+                    liquido: totals[2] != 0 ? totals[2] : 0 ,
+                    juros: totals[3] != 0 ? totals[3] : 0 ,
+                    honorario: totals[4] != 0 ? totals[4] : 0 ,
+                    total_individual: total != 0 ? total : 0
+                }
+            });
+
         }
     }
 

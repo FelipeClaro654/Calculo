@@ -16,10 +16,10 @@ class Processo < ApplicationRecord
   validates :juros, presence: true
   validates :cruz_iamspe_valor, presence: true
   validates :processo_autor, presence: true
-  validates :custas_data, presence: true
-  validates :custas_valor, presence: true
   has_many :autors, :dependent => :destroy, :inverse_of => :processo
+  has_many :custas, :dependent => :destroy, :inverse_of => :processo
   accepts_nested_attributes_for :autors, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :custas, reject_if: :all_blank, allow_destroy: true
   belongs_to :cbpm_ipesp
   belongs_to :cruz_iamspe
   belongs_to :data_calculo

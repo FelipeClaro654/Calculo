@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122144007) do
+ActiveRecord::Schema.define(version: 20161204114630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,15 @@ ActiveRecord::Schema.define(version: 20161122144007) do
     t.string   "nome"
     t.date     "periodo_inicial"
     t.date     "periodo_final"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.decimal  "liquido"
+    t.decimal  "assistencia"
+    t.decimal  "bruto"
+    t.decimal  "juros"
+    t.decimal  "honorario"
+    t.decimal  "custas"
+    t.decimal  "total_individual"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "processo_id"
   end
 
@@ -34,6 +41,18 @@ ActiveRecord::Schema.define(version: 20161122144007) do
     t.string   "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "custa", force: :cascade do |t|
+    t.integer  "processo_id"
+    t.date     "custas_data"
+    t.decimal  "custas_valor"
+    t.decimal  "custas_corrigida"
+    t.decimal  "indice"
+    t.string   "folhas"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["processo_id"], name: "index_custa_on_processo_id", using: :btree
   end
 
   create_table "data_calculos", force: :cascade do |t|
@@ -72,9 +91,13 @@ ActiveRecord::Schema.define(version: 20161122144007) do
     t.string   "tipo_processo"
     t.date     "data_base"
     t.decimal  "indice_tabela"
-    t.date     "custas_data"
-    t.decimal  "custas_valor"
-    t.decimal  "custas_resultado"
+    t.decimal  "custas_total"
+    t.decimal  "liquido_total"
+    t.decimal  "juros_total"
+    t.decimal  "assistencia_total"
+    t.decimal  "subtotal"
+    t.decimal  "honorarios_base"
+    t.decimal  "total_apurado"
     t.string   "sentenca"
     t.string   "re"
     t.string   "acordao"
@@ -139,5 +162,6 @@ ActiveRecord::Schema.define(version: 20161122144007) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "custa", "processos"
   add_foreign_key "pagamentos", "autors"
 end

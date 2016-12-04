@@ -4,6 +4,13 @@ class CreateAutors < ActiveRecord::Migration[5.0]
       t.string :nome
       t.date :periodo_inicial
       t.date :periodo_final
+      t.decimal :liquido
+      t.decimal :assistencia
+      t.decimal :bruto
+      t.decimal :juros
+      t.decimal :honorario
+      t.decimal :custas
+      t.decimal :total_individual
       t.timestamps
     end
   end

@@ -10,9 +10,15 @@ class CreateProcessos < ActiveRecord::Migration[5.0]
       t.string :tipo_processo
       t.date :data_base
       t.decimal :indice_tabela
-      t.date :custas_data
-      t.decimal :custas_valor
-      t.decimal :custas_resultado
+      
+      t.decimal :custas_total
+      t.decimal :liquido_total
+      t.decimal :juros_total
+      t.decimal :assistencia_total
+      t.decimal :subtotal
+      t.decimal :honorarios_base
+      t.decimal :total_apurado
+
       t.string :sentenca
       t.string :re
       t.string :acordao

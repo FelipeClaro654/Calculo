@@ -28,7 +28,7 @@ class ProcessosController < ApplicationController
         @processo = Processo.new(processo_params)
         respond_to do |format|
             if @processo.save
-                calcula_custas(@processo)
+                #calcula_custas(@processo)
                 create_pagamentos(@processo.autors)
                 format.html { render :edit, notice: 'Processo criado com sucesso.' }
                 format.json { render :show, status: :created, location: @processo }
@@ -43,8 +43,6 @@ class ProcessosController < ApplicationController
     # PATCH/PUT /processos/1.json
     def update
         respond_to do |format|
-
-
             old_autores = @processo.autors
             @old_ids = []
             old_autores.each do |o|
@@ -96,14 +94,14 @@ class ProcessosController < ApplicationController
     end
 
     def calcula_custas(processo)
-
+        custas = Custa.sum(:custas_corrigida)
         autores = processo.autors.count
-        indice = retorna_indice(processo.custas_data, processo.tabela_atualizacao.nome)
-        custas = processo.custas_valor / indice * processo.indice_tabela
+        custas_autor = custas / autores
         if autores > 0
-            custas = custas / autores
+            processo.autors.each do |a|
+                a.update_attribute(:custas, custas_autor)
+            end
         end
-        processo.update_attribute(:custas_resultado, custas)
     end
 
     def update_autores(old_autores)
@@ -276,8 +274,7 @@ class ProcessosController < ApplicationController
         :cruz_iamspe_id,
         :cruz_iamspe_valor,
         :data_calculo_id,
-        :custas_data,
-        :custas_valor,
-        autors_attributes: [:id, :nome, :periodo_inicial, :periodo_final, :_destroy])
+        autors_attributes: [:id, :nome, :periodo_inicial, :periodo_final, :_destroy],
+        custas_attributes: [:id, :custas_data, :custas_valor, :custas_corrigida, :indice, :folhas, :_destroy])
     end
 end

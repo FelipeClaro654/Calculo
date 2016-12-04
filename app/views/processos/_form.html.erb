@@ -182,33 +182,6 @@
                 </div>
             </div>
             <br>
-            <div class="row">
-                <div class="col-xs-2">
-                    <%= f.input :custas_data, label: "Data Custas",
-                        as: :string,
-                        :input_html => {
-                            :placeholder => "__/__/__",
-                            :value =>  @processo.custas_data.blank? ? '' : @processo.custas_data.strftime('%d/%m/%Y'),
-                            :class => "calendario"
-                    } %>
-                </div>
-                <div class="col-xs-2">
-                    <%= f.input :custas_valor, label: "Valor Custas",
-                        as: :string,
-                        :input_html => {
-                        :placeholder => "Valor %",
-                        :value => @processo.custas_valor.nil? ? "" : '%.02f' % @processo.custas_valor,
-                    }%>
-                </div>
-                <div class="col-xs-2">
-                    <%= f.input :custas_resultado, label: "Custas",
-                        as: :string,
-                        disabled: true,
-                        :input_html => {
-                        :value => @processo.custas_resultado.nil? ? "" : '%.02f' % @processo.custas_resultado,
-                    }%>
-                </div>
-            </div>
             <div class="row width-percent-85">
                 <br>
                 <div class="actions pull-right">
@@ -221,11 +194,69 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h6 class="panel-title">
-
+                            Custas
                         </h6>
                     </div>
                     <div class="panel-body">
+                        <ul class="list-inline">
+                            <li>
+                                Data
+                            </li>
+                            <li>
+                                Custas
+                            </li>
+                            <li>
+                                Índice na Data<br>da Obrigação
+                            </li>
+                            <li>
+                                Índice na data<br>da Atualização
+                            </li>
+                            <li>Corrigida</li>
+                            <li>Fls</li>
+                        </ul>
+                        <% unless @processo.custas.empty?
+                            @processo.custas.each do |c| %>
+                                <% unless c.new_record? %>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <%=
+                                                c.custas_data.strftime("%d/%m/%Y")
+                                            %>
+                                        </li>
+                                        <li>
+                                            <%= ('%.02f' % c.custas_valor).gsub(".", ",") %>
+                                        </li>
+                                        <li>
+                                            <%= c.indice.to_s.gsub(".", ",") %>
+                                        </li>
+                                        <li>
+                                            <%= @processo.indice_tabela.to_s.gsub(".", ",") %>
+                                        </li>
+                                        <li>
+                                            <% ('%.02f' % c.custas_corrigida).gsub(".", ",") %>
+                                        </li>
+                                        <li>
+                                            <%= c.folhas %>
+                                        </li>
+                                        <li>
+                                            <span class="glyphicon glyphicon-trash text-danger cursor-pointer delete-custa"
+                                                aria-hidden="true" data-custa-id="<%= c.id %>"></span>
+                                        </li>
+                                    </ul>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                        <hr>
+                        <div id="custas">
+                            <div class="hidden-form-custas hidden">
+                                <%= f.fields_for :custas do |custa| %>
+                                  <%= render "custa_fields", :f => custa %>
+                                <% end %>
+                            </div>
 
+                            <%= link_to_add_association "Adicionar", f, :custas,
+                            :class => "btn btn-success pull-right btn-add-custa" %>
+                        </div>
                     </div>
                 </div>
             </div>
