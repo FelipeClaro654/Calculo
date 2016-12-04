@@ -1,0 +1,29 @@
+<h1>Autores</h1>
+
+<table class="table width-percent-65">
+    <thead>
+        <tr>
+            <th>Valor<br>Principal<br>Líquido</th>
+            <th>Desconto<br></th>
+            <th>Valor<br>Principal<br>Bruto</th>
+            <th>a partir de</th>
+            <th>Hon. Adv. 10% sobre</th>
+            <th>Total Individual</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @processo.autors.each do |a| %>
+            <tr>
+                <td>
+                    <%= a.liquido.nil? ? "" : ('%.02f' % a.liquido).gsub(".", ",") %>
+                </td>
+                <td>assistencia?</td>
+                <td><%= a.bruto.nil? ?  "" : ('%.02f' % a.bruto).gsub(".", ",") %></td>
+                <td><%= a.juros.nil? ? "" : ('%.02f' % a.juros).gsub(".", ",") %></td>
+                <td><%= a.honorario.nil? ? "" : ('%.02f' % a.honorario).gsub(".", ",") %></td>
+                <td><%= a.total_individual.nil? ? "" : ('%.02f' % a.total_individual).gsub(".", ",") %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

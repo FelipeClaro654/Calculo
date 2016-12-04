@@ -34,6 +34,7 @@
             <td><%= processo.data_base.strftime("%d/%m/%Y") %></td>
             <td><%= processo.re %></td>
             <td>
+                <%= link_to 'Resumo', :controller => "processos", :action => "render_resumo", :processo_id => processo.id %>
                 <%= link_to 'Editar', edit_processo_path(processo) %>
                 <%= link_to 'Excluir', processo, method: :delete,
                     data: { confirm: 'Deseja excluir este processo?' }, class: "pull-right" %>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
         get "retorna_indice", on: :collection
         get "retorna_indice_front", on: :collection
         get "atualiza_juros", on: :collection
+        get "render_resumo", on: :collection
     end
     resources :autors do
         get "show_autor_table", on: :collection

@@ -93,6 +93,11 @@ class ProcessosController < ApplicationController
         end
     end
 
+    def render_resumo
+        @processo = Processo.find(params[:processo_id])
+        render 'resumo'
+    end
+
     def calcula_custas(processo)
         custas = Custa.sum(:custas_corrigida)
         autores = processo.autors.count
