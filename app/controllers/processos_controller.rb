@@ -93,17 +93,6 @@ class ProcessosController < ApplicationController
 
     def render_resumo
         @processo = Processo.find(params[:processo_id])
-        @total_bruto = @processo.autors.sum(:bruto)
-        @total_previdencia = @processo.autors.sum(:previdencia)
-        @total_liquido = @processo.autors.sum(:liquido)
-        @total_juros = @processo.autors.sum(:juros)
-        @total_honorario = @processo.autors.sum(:honorario)
-        @total_custas = @processo.autors.sum(:custas)
-        @total_individual = @processo.autors.sum(:total_individual)
-        @total_assistencia = 0
-        @processo.autors.each do |a|
-            @total_assistencia += (a.bruto.nil? ? 0 : a.bruto) * (a.processo.cruz_iamspe_valor/100)
-        end
         render 'resumo'
     end
 

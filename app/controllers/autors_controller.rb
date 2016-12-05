@@ -24,7 +24,9 @@ class AutorsController < ApplicationController
 
     def destroy
         @autor = Autor.find(params[:autor_id])
+        @processo = @autor.processo
         @autor.destroy
+        calcula_custas(@processo)
         render :json => { :success => true, autor_id: params[:autor_id] }
     end
 
