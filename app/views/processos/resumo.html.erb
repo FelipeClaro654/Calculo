@@ -2,7 +2,7 @@
     <button id="print_resumo" type="button" class="btn btn pull-right bg-custom-primary neg-margin-top-6 neg-margin-right-72">
         <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir
     </button>
-    <table class="table width-percent-50 table-resumo-top">
+    <table class="table width-percent-55 table-resumo-top">
         <thead>
             <tr>
                 <td>
@@ -102,7 +102,7 @@
     </table>
     <br>
     <br>
-    <div class="panel panel-default table-resumo-top width-percent-50">
+    <div class="panel panel-default table-resumo-top width-percent-55">
         <div class="panel-heading">
                 Resumo Total Parcial
             <div class="pull-right">
@@ -126,7 +126,7 @@
                         Índice na data<br>da Atualização
                     </th>
                     <th class="text-right">
-                        Corrigida
+                        Custas Atualizadas
                     </th>
                     <th class="text-right">
                         Fls
@@ -162,6 +162,9 @@
                         <td>
                             Valor Principal  Líquido
                         </td>
+                        <td class="text-center">
+                            a
+                        </td>
                         <td class="text-right">
                             <%= @total_liquido.nil? ? "0" : ('%.02f' % @total_liquido).gsub(".", ",") %>
                         </td>
@@ -169,6 +172,9 @@
                     <tr>
                         <td>
                             Desconto Previdência
+                        </td>
+                        <td class="text-center">
+                            b
                         </td>
                         <td class="text-right">
                             <%= @total_previdencia.nil? ? "0" : ('%.02f' % @total_previdencia).gsub(".", ",") %>
@@ -178,12 +184,18 @@
                         <td>
                             Desconto Assist. Médica
                         </td>
+                        <td class="text-center">
+                            c
+                        </td>
                         <td class="text-right total-assistencia">
                         </td>
                     </tr>
                     <tr>
                         <td>
                             Valor Principal Bruto
+                        </td>
+                        <td class="text-center">
+                            d=a-b-c
                         </td>
                         <td class="text-right">
                             <%= @total_bruto.nil? ? "0" : ('%.02f' % @total_bruto).gsub(".", ",") %>
@@ -193,6 +205,9 @@
                         <td>
                             Juros
                         </td>
+                        <td class="text-center">
+                            b
+                        </td>
                         <td class="text-right">
                             <%= @total_juros.nil? ? "0" : ('%.02f' % @total_juros).gsub(".", ",") %>
                         </td>
@@ -200,6 +215,9 @@
                     <tr>
                         <td>
                             Subtotal
+                        </td>
+                        <td class="text-center">
+                            d=a+b+c
                         </td>
                         <td class="text-right">
                             <% @subtotal = (@total_bruto.nil? ? 0 : @total_bruto) + (@total_juros.nil? ? 0 :  @total_juros) %>
@@ -210,6 +228,9 @@
                         <td>
                             Honorarios na base de 10%  s/ Subtotal
                         </td>
+                        <td class="text-center">
+                            e=10%xd
+                        </td>
                         <td class="text-right">
                             <%= @total_honorario.nil? ? "0" : ('%.02f' % @total_honorario).gsub(".", ",") %>
                         </td>
@@ -218,8 +239,34 @@
                         <td>
                             Total Apurado s/ Custas
                         </td>
+                        <td class="text-center">
+                            f=d+e
+                        </td>
                         <td class="text-right">
-                            <%= ('%.02f' % ( (@subtotal.nil? ? 0 : @subtotal) + (@total_honorario.nil? ? 0 : @total_honorario) ) ).gsub(".", ",")  %>
+                            <% @total_sem_custas = (@subtotal.nil? ? 0 : @subtotal) + (@total_honorario.nil? ? 0 :  @total_honorario) %>
+                            <%= ('%.02f' % @total_sem_custas).gsub(".", ",") %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Custas Dispendidas
+                        </td>
+                        <td class="text-center">
+                            g
+                        </td>
+                        <td class="text-right">
+                            <%= @total_custas.nil? ?  "0" : ('%.02f' % @total_custas).gsub(".", ",") %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            TOTAL APURADO NESTA CONTA
+                        </td>
+                        <td class="text-center">
+                            h=f+g
+                        </td>
+                        <td class="text-right">
+                            <%= ('%.02f' % ((@total_sem_custas.nil? ? 0 : @total_sem_custas) + (@total_custas.nil? ? 0 : @total_custas)) ).gsub(".", ",") %>
                         </td>
                     </tr>
                 </tbody>
