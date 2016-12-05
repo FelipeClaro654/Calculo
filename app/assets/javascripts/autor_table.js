@@ -104,8 +104,6 @@ $(function () {
             $(".total-honorario").html(totals[4]);
             $(".total-conta-liquidacao").html(total);
 
-            debugger;
-
             $.ajax({
                 url: "/autors/salva_totais",
                 type: "post",
