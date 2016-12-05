@@ -50,8 +50,6 @@ class ProcessosController < ApplicationController
             end
 
             if @processo.update(processo_params)
-
-
                 calcula_custas(@processo)
 
                 if @processo.autors.count > 0
@@ -104,6 +102,7 @@ class ProcessosController < ApplicationController
         custas_autor = custas / autores
         if autores > 0
             processo.autors.each do |a|
+
                 a.update_attribute(:custas, custas_autor)
             end
         end
@@ -279,7 +278,8 @@ class ProcessosController < ApplicationController
         :cruz_iamspe_id,
         :cruz_iamspe_valor,
         :data_calculo_id,
-        autors_attributes: [:id, :nome, :periodo_inicial, :periodo_final, :_destroy],
-        custas_attributes: [:id, :custas_data, :custas_valor, :custas_corrigida, :indice, :folhas, :_destroy])
+        custas_attributes: [:id, :custas_data, :custas_valor, :custas_corrigida, :indice, :folhas, :_destroy],
+        autors_attributes: [:id, :nome, :periodo_inicial, :periodo_final, :_destroy]
+        )
     end
 end

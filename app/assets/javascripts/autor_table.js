@@ -272,7 +272,11 @@ $(function () {
             }
         });
     });
-    Autor_Table.update_totals();
+
+    if($(".total-conta-liquidacao").length > 0){
+        Autor_Table.update_totals();
+    }
+
 });
 
 window.onafterprint = function(){

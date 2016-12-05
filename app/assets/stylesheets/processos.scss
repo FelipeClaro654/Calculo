@@ -52,7 +52,7 @@ label:not(.checkbox, .radio):after {
 
 .list-autor{
     :first-child{
-        width: 58%;
+        width: 52%;
     }
     :nth-child(2), :nth-child(3){
         width: 18%;
@@ -62,8 +62,26 @@ label:not(.checkbox, .radio):after {
     }
 }
 
+
 .btn-add-autor{
-    position: absolute;
-    top: 69px;
+    @extend .absolute;
+    top: 256px;
     right: 4px;
+}
+
+.btn-add-custa{
+    @extend .absolute;
+    top: 4px;
+    right: 4px;
+}
+
+.panel-autor,
+.panel-custas{
+    height: 205px;
+    overflow: hidden;
+    overflow-y: scroll;
+
+    li{
+        width: 17%;
+    }
 }

@@ -197,7 +197,7 @@
                             Custas
                         </h6>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body panel-custas">
                         <ul class="list-inline">
                             <li>
                                 Data
@@ -207,9 +207,6 @@
                             </li>
                             <li>
                                 Índice na Data<br>da Obrigação
-                            </li>
-                            <li>
-                                Índice na data<br>da Atualização
                             </li>
                             <li>Corrigida</li>
                             <li>Fls</li>
@@ -230,16 +227,11 @@
                                             <%= c.indice.to_s.gsub(".", ",") %>
                                         </li>
                                         <li>
-                                            <%= @processo.indice_tabela.to_s.gsub(".", ",") %>
-                                        </li>
-                                        <li>
-                                            <% ('%.02f' % c.custas_corrigida).gsub(".", ",") %>
+                                            <%= ('%.02f' % c.custas_corrigida).gsub(".", ",") %>
                                         </li>
                                         <li>
                                             <%= c.folhas %>
-                                        </li>
-                                        <li>
-                                            <span class="glyphicon glyphicon-trash text-danger cursor-pointer delete-custa"
+                                            <span class="glyphicon glyphicon-trash text-danger cursor-pointer delete-custa pull-right"
                                                 aria-hidden="true" data-custa-id="<%= c.id %>"></span>
                                         </li>
                                     </ul>
@@ -261,13 +253,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="panel panel-default panel-autor">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h6 class="panel-title">
                             Inserir Autores
                         </h6>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body panel-autor">
                         <ul class="list-inline list-autor">
                             <li>
                                 Nome

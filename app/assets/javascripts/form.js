@@ -7,8 +7,8 @@ $(document).on('turbolinks:load', function() {
             if(valor === "" || obrigacao === "" || atualizacao === ""){
                 return false;
             }
-            ;
-            return (valor / obrigacao * atualizacao)
+
+            return (valor / obrigacao * atualizacao);
         },
         retorna_indice: function (data, tabela, element) {
             $.ajax({
@@ -27,7 +27,7 @@ $(document).on('turbolinks:load', function() {
                         }, 3000);
                         return false;
                     }
-                    data.parents(".row").find(element).val(result.indice_tabela.replace(".", ","));
+                    data.parents(".nested-fields").find(element).val(result.indice_tabela.replace(".", ","));
                 }
             });
         },
@@ -55,6 +55,15 @@ $(document).on('turbolinks:load', function() {
             });
 
             $(".hidden-form-autors").removeClass('hidden');
+        },
+        esconde_custas_ja_salvas: function () {
+            var inputs = $("#custas input[name*='[id]']");
+
+            $.each(inputs, function () {
+                $(this).prev().hide();
+            });
+
+            $(".hidden-form-custas").removeClass('hidden');
         },
         show_message: function (msg, type) {
             var div = '<div class="alert quick-alert '+type+'" role="alert">'+msg+'</div>';
@@ -93,6 +102,17 @@ $(document).on('turbolinks:load', function() {
             }else{
                 $(".process-form").submit();
             }
+        },
+        set_custas_corrigida: function (element) {
+            var parent = element.parents(".nested-fields");
+                corrigida = Forms.calcula_custas_corrigida(parseFloat(parent.find(".custas-valor").val()),
+                                                            parseFloat(parent.find(".custas-indice").val().replace(",", ".")),
+                                                            parseFloat($("#processo_indice_tabela").val())
+                                                        );
+            if(!corrigida){
+                return false;
+            }
+            parent.find(".custas-corrigida").val(corrigida.toFixed(2).replace(".",","));
         }
     }
 
@@ -118,26 +138,19 @@ $(document).on('turbolinks:load', function() {
         });
 
         insertedItem.find(".custas-data").change(function () {
+            var $this = $(this);
             Forms.retorna_indice(
                 $(this),
                 $("#processo_tabela_atualizacao_id option:selected").text(),
                 ".custas-indice"
             );
             setTimeout(function () {
-                $(this).parents(".row").find(".custas-valor").trigger('change');
-            }, 700);
+                Forms.set_custas_corrigida($this.parents(".nested-fields").find(".custas-valor"));
+            }, 300);
         });
 
         insertedItem.find(".custas-valor").change(function () {
-            var parent = $(this).parents(".row");
-                corrigida = Forms.calcula_custas_corrigida(parseFloat(parent.find(".custas-valor").val()),
-                                                            parseFloat(parent.find(".custas-indice").val().replace(",", ".")),
-                                                            parseFloat($("#processo_indice_tabela").val())
-                                                        );
-            if(!corrigida){
-                return false;
-            }
-            parent.find(".custas-corrigida").val(corrigida.toFixed(2).replace(".",","));
+            Forms.set_custas_corrigida($(this));
         });
     });
 
@@ -195,4 +208,5 @@ $(document).on('turbolinks:load', function() {
         mask('000,00', {reverse: true});
 
     Forms.esconde_autores_ja_salvos();
+    Forms.esconde_custas_ja_salvas();
 });
