@@ -152,6 +152,9 @@ $(document).on('turbolinks:load', function() {
         insertedItem.find(".custas-valor").change(function () {
             Forms.set_custas_corrigida($(this));
         });
+
+        insertedItem.find(".custas-valor").mask('000,00', {reverse: true});
+
     });
 
     $(".has-error input").focus(function () {
@@ -204,7 +207,7 @@ $(document).on('turbolinks:load', function() {
 
     });
 
-    $("#processo_juros, #processo_cbpm_ipesp_valor, #processo_cruz_iamspe_valor, #custas-valor").
+    $("#processo_juros, #processo_cbpm_ipesp_valor, #processo_cruz_iamspe_valor").
         mask('000,00', {reverse: true});
 
     Forms.esconde_autores_ja_salvos();
