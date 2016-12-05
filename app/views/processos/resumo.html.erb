@@ -166,7 +166,7 @@
                             a
                         </td>
                         <td class="text-right">
-                            <%= @total_liquido.nil? ? "0" : ('%.02f' % @total_liquido).gsub(".", ",") %>
+                            <%= @total_liquido.nil? ? "0" : number_with_delimiter(('%.02f' % @total_liquido).to_d, separator: ",", delimiter: ".") %>
                         </td>
                     </tr>
                     <tr>
@@ -177,7 +177,7 @@
                             b
                         </td>
                         <td class="text-right">
-                            <%= @total_previdencia.nil? ? "0" : ('%.02f' % @total_previdencia).gsub(".", ",") %>
+                            <%= @total_previdencia.nil? ? "0" : number_with_delimiter(('%.02f' % @total_previdencia).to_d, separator: ",", delimiter: ".") %>
                         </td>
                     </tr>
                     <tr>
@@ -198,7 +198,7 @@
                             d=a-b-c
                         </td>
                         <td class="text-right">
-                            <%= @total_bruto.nil? ? "0" : ('%.02f' % @total_bruto).gsub(".", ",") %>
+                            <%= @total_bruto.nil? ? "0" : number_with_delimiter(('%.02f' % @total_bruto).to_d, separator: ",", delimiter: ".") %>
                         </td>
                     </tr>
                     <tr>
@@ -209,7 +209,7 @@
                             b
                         </td>
                         <td class="text-right">
-                            <%= @total_juros.nil? ? "0" : ('%.02f' % @total_juros).gsub(".", ",") %>
+                            <%= @total_juros.nil? ? "0" : number_with_delimiter(('%.02f' % @total_juros).to_d, separator: ",", delimiter: ".") %>
                         </td>
                     </tr>
                     <tr>
@@ -221,7 +221,7 @@
                         </td>
                         <td class="text-right">
                             <% @subtotal = (@total_bruto.nil? ? 0 : @total_bruto) + (@total_juros.nil? ? 0 :  @total_juros) %>
-                            <%= ('%.02f' % @subtotal).gsub(".", ",") %>
+                            <%= @subtotal.nil? ? "0" : number_with_delimiter(('%.02f' % @subtotal).to_d, separator: ",", delimiter: ".") %>
                         </td>
                     </tr>
                     <tr>
@@ -232,7 +232,7 @@
                             e=10%xd
                         </td>
                         <td class="text-right">
-                            <%= @total_honorario.nil? ? "0" : ('%.02f' % @total_honorario).gsub(".", ",") %>
+                            <%= @total_honorario.nil? ? "0" : number_with_delimiter(('%.02f' % @total_honorario).to_d, separator: ",", delimiter: ".") %>
                         </td>
                     </tr>
                     <tr>
@@ -244,7 +244,7 @@
                         </td>
                         <td class="text-right">
                             <% @total_sem_custas = (@subtotal.nil? ? 0 : @subtotal) + (@total_honorario.nil? ? 0 :  @total_honorario) %>
-                            <%= ('%.02f' % @total_sem_custas).gsub(".", ",") %>
+                            <%= @total_sem_custas.nil? ? "0" : number_with_delimiter(('%.02f' % @total_sem_custas).to_d, separator: ",", delimiter: ".") %>
                         </td>
                     </tr>
                     <tr>
@@ -255,7 +255,7 @@
                             g
                         </td>
                         <td class="text-right">
-                            <%= @total_custas.nil? ?  "0" : ('%.02f' % @total_custas).gsub(".", ",") %>
+                            <%= @total_custas.nil? ? "0" : number_with_delimiter(('%.02f' % @total_custas).to_d, separator: ",", delimiter: ".") %>
                         </td>
                     </tr>
                     <tr>
@@ -266,7 +266,8 @@
                             h=f+g
                         </td>
                         <td class="text-right">
-                            <%= ('%.02f' % ((@total_sem_custas.nil? ? 0 : @total_sem_custas) + (@total_custas.nil? ? 0 : @total_custas)) ).gsub(".", ",") %>
+                            <% @total_apurado = (@total_sem_custas.nil? ? 0 : @total_sem_custas) + (@total_custas.nil? ? 0 : @total_custas)  %>
+                            <%= @total_apurado.nil? ? "0" : number_with_delimiter(('%.02f' % @total_apurado).to_d, separator: ",", delimiter: ".") %>
                         </td>
                     </tr>
                 </tbody>
@@ -325,27 +326,30 @@
                     <td>
                         <%= a.nome %>
                     </td>
-                    <td class="text-right"><%= a.bruto.nil? ?  "0" : ('%.02f' % a.bruto).gsub(".", ",") %></td>
                     <td class="text-right">
-                        <%= a.previdencia.nil? ?  "0" : ('%.02f' % a.previdencia).gsub(".", ",") %>
+                        <%= a.bruto.nil? ? "0" : number_with_delimiter(('%.02f' % a.bruto).to_d, separator: ",", delimiter: ".") %>
+                    </td>
+                    <td class="text-right">
+                        <%= a.previdencia.nil? ? "0" : number_with_delimiter(('%.02f' % a.previdencia).to_d, separator: ",", delimiter: ".") %>
                     </td>
                     <td class="text-right">
                         <% @assistencia = (a.bruto.nil? ? 0 : a.bruto) * (a.processo.cruz_iamspe_valor/100) %>
-                        <%= @assistencia.nil? ?  "0" : ('%.02f' % @assistencia).gsub(".", ",") %>
+                        <%= @assistencia.nil? ? "0" : number_with_delimiter(('%.02f' % @assistencia).to_d, separator: ",", delimiter: ".") %>
                     </td>
                     <td class="text-right">
-                        <%= a.liquido.nil? ? "0" : ('%.02f' % a.liquido).gsub(".", ",") %>
+                        <%= a.liquido.nil? ? "0" : number_with_delimiter(('%.02f' % a.liquido).to_d, separator: ",", delimiter: ".") %>
                     </td>
                     <td class="text-right">
-                        <%= a.juros.nil? ? "0" : ('%.02f' % a.juros).gsub(".", ",") %>
+                        <%= a.juros.nil? ? "0" : number_with_delimiter(('%.02f' % a.juros).to_d, separator: ",", delimiter: ".") %>
                     </td>
                     <td class="text-right">
-                        <%= a.honorario.nil? ? "0" : ('%.02f' % a.honorario).gsub(".", ",") %>
+                        <%= a.honorario.nil? ? "0" : number_with_delimiter(('%.02f' % a.honorario).to_d, separator: ",", delimiter: ".") %>
                     </td>
                     <td class="text-right">
-                        <%= a.custas.nil? ? "0" : ('%.02f' % a.custas).gsub(".", ",") %>
+                        <%= a.custas.nil? ? "0" : number_with_delimiter(('%.02f' % a.custas).to_d, separator: ",", delimiter: ".") %>
                     </td>
-                    <td class="text-right"><%= a.total_individual.nil? ? "0" : ('%.02f' % a.total_individual).gsub(".", ",") %>
+                    <td class="text-right">
+                        <%= a.total_individual.nil? ? "0" : number_with_delimiter(('%.02f' % a.total_individual).to_d, separator: ",", delimiter: ".") %>
                     </td>
                 </tr>
                 <%
@@ -356,14 +360,30 @@
         <tfoot>
             <tr>
                 <th class="text-right"></th>
-                <th class="text-right"><%= @total_bruto.nil? ? "0" : ('%.02f' % @total_bruto).gsub(".", ",") %></th>
-                <th class="text-right"><%= @total_previdencia.nil? ? "0" : ('%.02f' % @total_previdencia).gsub(".", ",") %></th>
-                <th class="text-right total-assistencia-autor"><%= @total_assistencia.nil? ? "0" : ('%.02f' % @total_assistencia).gsub(".", ",") %></th>
-                <th class="text-right"><%= @total_liquido.nil? ? "0" : ('%.02f' % @total_liquido).gsub(".", ",") %></th>
-                <th class="text-right"><%= @total_juros.nil? ? "0" : ('%.02f' % @total_juros).gsub(".", ",") %></th>
-                <th class="text-right"><%= @total_honorario.nil? ? "0" : ('%.02f' % @total_honorario).gsub(".", ",") %></th>
-                <th class="text-right"><%= @total_custas.nil? ? "0" : ('%.02f' % @total_custas).gsub(".", ",") %></th>
-                <th class="text-right"><%= @total_individual.nil? ? "0" : ('%.02f' % @total_individual).gsub(".", ",") %></th>
+                <th class="text-right">
+                    <%= @total_bruto.nil? ? "0" : number_with_delimiter(('%.02f' % @total_bruto).to_d, separator: ",", delimiter: ".") %>
+                </th>
+                <th class="text-right">
+                    <%= @total_previdencia.nil? ? "0" : number_with_delimiter(('%.02f' % @total_previdencia).to_d, separator: ",", delimiter: ".") %>
+                </th>
+                <th class="text-right total-assistencia-autor">
+                    <%= @total_assistencia.nil? ? "0" : number_with_delimiter(('%.02f' % @total_assistencia).to_d, separator: ",", delimiter: ".") %>
+                </th>
+                <th class="text-right">
+                    <%= @total_liquido.nil? ? "0" : number_with_delimiter(('%.02f' % @total_liquido).to_d, separator: ",", delimiter: ".") %>
+                </th>
+                <th class="text-right">
+                    <%= @total_juros.nil? ? "0" : number_with_delimiter(('%.02f' % @total_juros).to_d, separator: ",", delimiter: ".") %>
+                </th>
+                <th class="text-right">
+                    <%= @total_honorario.nil? ? "0" : number_with_delimiter(('%.02f' % @total_honorario).to_d, separator: ",", delimiter: ".") %>
+                </th>
+                <th class="text-right">
+                    <%= @total_custas.nil? ? "0" : number_with_delimiter(('%.02f' % @total_custas).to_d, separator: ",", delimiter: ".") %>
+                </th>
+                <th class="text-right">
+                    <%= @total_individual.nil? ? "0" : number_with_delimiter(('%.02f' % @total_individual).to_d, separator: ",", delimiter: ".") %>
+                </th>
             </tr>
         </tfoot>
     </table>
