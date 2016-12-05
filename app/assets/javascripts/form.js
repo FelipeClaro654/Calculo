@@ -204,7 +204,7 @@ $(document).on('turbolinks:load', function() {
 
     });
 
-    $("#processo_juros, #processo_cbpm_ipesp_valor, #processo_cruz_iamspe_valor").
+    $("#processo_juros, #processo_cbpm_ipesp_valor, #processo_cruz_iamspe_valor, #custas-valor").
         mask('000,00', {reverse: true});
 
     Forms.esconde_autores_ja_salvos();

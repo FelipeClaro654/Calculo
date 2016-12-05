@@ -77,6 +77,7 @@ $(function () {
                 $.each(this, function (i, e) {
                     t += parseFloat($(e).data("valor"));
                 });
+                
                 if($(e).hasClass('liquido-atualizado')
                 || $(e).hasClass('juros')
                 || $(e).hasClass('honorario')
@@ -89,6 +90,7 @@ $(function () {
                 t = t.join(",");
                 totals[i] = t;
             });
+
             total += parseFloat($(".custas-resultado").html());
             total = total.toFixed(2);
             total = total.split(".");
