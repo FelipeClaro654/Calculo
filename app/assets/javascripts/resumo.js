@@ -74,6 +74,10 @@ $(function () {
 
     $(".total-custas").html(totals.custas.toString().replace(".",","));
 
+    total_apurado = total_apurado.toFixed(2);
+    total_apurado = total_apurado.split(".");
+    total_apurado[0] = Useful.formata_numero(total_apurado[0]);
+    total_apurado = total_apurado.join(",");
     $(".total-apurado").html(total_apurado);
 
     totals.liquido = totals.liquido.toFixed(2);

@@ -283,20 +283,20 @@
                 <th></th>
                 <th class="text-right">Valor<br>Principal<br>Bruto</th>
                 <th class="text-right">
-                    <strong>Desconto</strong><br>
+                    Desconto<br>
                     Previdência<br>
                     <%= @processo.cbpm_ipesp.nome.to_s.gsub(".", ",") %>
                     <%= @processo.cbpm_ipesp_valor.to_s.gsub(".", ",") %>%
                 </th>
                 <th class="text-right">
-                    <strong>Desconto</strong><br>
+                    Desconto<br>
                     Assist. Médica<br>
                     <%= @processo.cruz_iamspe.nome.to_s.gsub(".", ",") %>
                     <%= @processo.cruz_iamspe_valor.to_s.gsub(".", ",") %>%
                 </th>
                 <th class="text-right">Valor<br>Principal<br>Líquido</th>
                 <th class="text-right">
-                    <strong>Juros</strong><br>
+                    Juros<br>
                     <%= (@processo.juros * 12 ).to_s.gsub(".",",") %>% aa<br>
                     a partir da<br>
                     <% if @processo.data_calculo == "Data" %>
