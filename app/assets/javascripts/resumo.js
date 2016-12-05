@@ -4,14 +4,14 @@ $(function () {
     },700);
 
     $(document).on("click","#print_resumo", function() {
-        //$(".container").css("visibility", "hidden");
+        $(".container").css("visibility", "hidden");
         $(".resumo-page").addClass("print-resumo");
-        /*setTimeout(function () {
+        setTimeout(function () {
             $(".container").css("visibility", "visible");
             window.print();
             setTimeout(function () {
                 $(".resumo-page").removeClass("print-resumo");
             },500);
-        }, 500);*/
+        }, 500);
     });
 });
