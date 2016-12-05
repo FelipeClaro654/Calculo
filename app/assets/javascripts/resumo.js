@@ -1,8 +1,4 @@
 $(function () {
-    setTimeout(function () {
-        $(".total-assistencia").html($(".total-assistencia-autor").html());
-    },700);
-
     $(document).on("click","#print_resumo", function() {
         $(".container").css("visibility", "hidden");
         $(".resumo-page").toggleClass("print-resumo");

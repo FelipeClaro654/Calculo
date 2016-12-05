@@ -100,6 +100,10 @@ class ProcessosController < ApplicationController
         @total_honorario = @processo.autors.sum(:honorario)
         @total_custas = @processo.autors.sum(:custas)
         @total_individual = @processo.autors.sum(:total_individual)
+        @total_assistencia = 0
+        @processo.autors.each do |a|
+            @total_assistencia += (a.bruto.nil? ? 0 : a.bruto) * (a.processo.cruz_iamspe_valor/100)
+        end
         render 'resumo'
     end
 

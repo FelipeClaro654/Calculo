@@ -187,7 +187,8 @@
                         <td class="text-center">
                             c
                         </td>
-                        <td class="text-right total-assistencia">
+                        <td class="text-right">
+                            <%= @total_assistencia.nil? ? "0" : number_with_delimiter(('%.02f' % @total_assistencia).to_d, separator: ",", delimiter: ".") %>
                         </td>
                     </tr>
                     <tr>
@@ -318,9 +319,6 @@
             </tr>
         </thead>
         <tbody>
-            <%
-                @total_assistencia = 0
-            %>
             <% @processo.autors.each do |a| %>
                 <tr>
                     <td>
@@ -352,9 +350,6 @@
                         <%= a.total_individual.nil? ? "0" : number_with_delimiter(('%.02f' % a.total_individual).to_d, separator: ",", delimiter: ".") %>
                     </td>
                 </tr>
-                <%
-                    @total_assistencia += @assistencia.nil? ?  0 : @assistencia
-                %>
             <% end %>
         </tbody>
         <tfoot>
