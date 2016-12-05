@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20161204114630) do
     t.date     "periodo_inicial"
     t.date     "periodo_final"
     t.decimal  "liquido"
-    t.decimal  "assistencia"
+    t.decimal  "previdencia"
     t.decimal  "bruto"
     t.decimal  "juros"
     t.decimal  "honorario"

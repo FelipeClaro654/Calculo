@@ -10,11 +10,17 @@ $(function () {
         },
 
         retorna_indice_autor: function (input) {
+            var data_base = "";
+            if(input.parent().hasClass("processo_autors_periodo_final")){
+                data_base = moment(input.val(), "DD/MM/YYYY").add(1,"M").format("DD/MM/YYYY");
+            }else{
+                data_base = input.val();
+            }
             $.ajax({
                 url: "/processos/retorna_indice_front",
                 dataType: "json",
                 data: {
-                    data_base: input.val(),
+                    data_base: data_base,
                     tabela: $("#processo_tabela_atualizacao_id option:selected").text(),
                     type: "JSON"
                 }

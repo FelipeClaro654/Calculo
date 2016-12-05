@@ -5,7 +5,7 @@ class CreateAutors < ActiveRecord::Migration[5.0]
       t.date :periodo_inicial
       t.date :periodo_final
       t.decimal :liquido
-      t.decimal :assistencia
+      t.decimal :previdencia
       t.decimal :bruto
       t.decimal :juros
       t.decimal :honorario

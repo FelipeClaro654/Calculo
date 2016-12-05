@@ -332,7 +332,7 @@
                     </th>
                     <th>
                         <strong class="custas-resultado text-right text-danger pull-right">
-                            <%= ('%.02f' % @autor.custas).gsub(".", ",") %>
+                            <%= @autor.custas.nil? ? "0" : ('%.02f' % @autor.custas).gsub(".", ",") %>
                         </strong>
                     </th>
                 </tr>

@@ -1,29 +1,323 @@
-<h1>Autores</h1>
-
-<table class="table width-percent-65">
-    <thead>
-        <tr>
-            <th>Valor<br>Principal<br>Líquido</th>
-            <th>Desconto<br></th>
-            <th>Valor<br>Principal<br>Bruto</th>
-            <th>a partir de</th>
-            <th>Hon. Adv. 10% sobre</th>
-            <th>Total Individual</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @processo.autors.each do |a| %>
+<div class="resumo-page width-percent-70">
+    <button id="print_resumo" type="button" class="btn btn pull-right bg-custom-primary neg-margin-top-6 neg-margin-right-72">
+        <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir
+    </button>
+    <table class="table width-percent-50 table-resumo-top">
+        <thead>
             <tr>
                 <td>
-                    <%= a.liquido.nil? ? "" : ('%.02f' % a.liquido).gsub(".", ",") %>
+                    Distribuição
                 </td>
-                <td>assistencia?</td>
-                <td><%= a.bruto.nil? ?  "" : ('%.02f' % a.bruto).gsub(".", ",") %></td>
-                <td><%= a.juros.nil? ? "" : ('%.02f' % a.juros).gsub(".", ",") %></td>
-                <td><%= a.honorario.nil? ? "" : ('%.02f' % a.honorario).gsub(".", ",") %></td>
-                <td><%= a.total_individual.nil? ? "" : ('%.02f' % a.total_individual).gsub(".", ",") %>
+                <td class="text-right">
+                    <%= @processo.data_distribuicao.strftime("%d/%m/%Y") %>
+                </td>
+                <td class="padding-left-50 text-right">
+                    Autor(a)
+                </td>
+                <td class="text-right">
+                    <%= @processo.processo_autor %>
                 </td>
             </tr>
-        <% end %>
-    </tbody>
-</table>
+            <tr>
+                <td class="">
+                    Citação
+                </td>
+                <td class="text-right">
+                    <%= @processo.data_citacao.strftime("%d/%m/%Y") %>
+                </td>
+                <td class="padding-left-50 text-right">
+                    Processo
+                </td>
+                <td class="text-right">
+                    <%= @processo.numero %>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    Sentença Fls.
+                </td>
+                <td class="text-right">
+                    <%= @processo.sentenca %>
+                </td>
+                <td class="padding-left-50 text-right">
+                    Cartório
+                </td>
+                <td class="text-right">
+                    <%= @processo.vara %>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    Acordão Fls.
+                </td>
+                <td class="text-right">
+                    <%= @processo.acordao %>
+                </td>
+                <td class="padding-left-50 text-right">
+                    Tabela
+                </td>
+                <td class="text-right">
+                    <% if @processo.tabela_atualizacao.nome == "PCA-E" %>
+                        Atualização Monetária - IPCA-E
+                    <% elsif @processo.tabela_atualizacao.nome == "TPDJSP" %>
+                        TPDJSP (INPC)
+                    <% else %>
+                        Lei nº 11.960/09 - Modulada
+                    <% end %>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    Juros ao ano
+                </td>
+                <td class="text-right">
+                    <%= (@processo.juros * 12 ).to_s.gsub(".",",") %>%
+                </td>
+                <td class="padding-left-50 text-right">
+                    Data Base
+                </td>
+                <td class="text-right">
+                    <%= @processo.data_base.strftime("%d/%m/%Y") %>
+                </td>
+            </tr>
+            <tr>
+                <td class="">
+                    Juros a partir de
+                </td>
+                <td class="text-right">
+                    <% if @processo.data_calculo.nome == "Data" %>
+                        <%= @processo.data_base.strftime("%d/%m/%Y") %>
+                    <% else %>
+                        <%= @processo.data_citacao.strftime("%d/%m/%Y") %>
+                    <% end %>
+                </td>
+                <td class="padding-left-50 text-right">
+                    Índice
+                </td>
+                <td class="text-right">
+                    <%= @processo.indice_tabela.to_s.gsub(".", ",") %>
+                </td>
+            </tr>
+        </thead>
+    </table>
+    <br>
+    <br>
+    <div class="panel panel-default table-resumo-top width-percent-50">
+        <div class="panel-heading">
+                Resumo Total Parcial
+            <div class="pull-right">
+                <%= @processo.data_base.strftime("%d/%m/%Y") %>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            <table class="table">
+                <thead>
+                    <th class="text-right">
+                        Data
+                    </th>
+                    <th class="text-right">
+                        Custas
+                    </th>
+                    <th class="text-right">
+                        Índice na data<br>da Obrigação
+                    </th>
+                    <th class="text-right">
+                        Índice na data<br>da Atualização
+                    </th>
+                    <th class="text-right">
+                        Corrigida
+                    </th>
+                    <th class="text-right">
+                        Fls
+                    </th>
+                </thead>
+                <tbody>
+                    <% @processo.custas.each do |c| %>
+                        <tr>
+                            <td class="text-right"><%= c.custas_data.strftime("%d/%m/%Y") %></td>
+                            <td class="text-right"><%= c.custas_valor.nil? ?  "0" : ('%.02f' % c.custas_valor).gsub(".", ",") %></td>
+                            <td class="text-right"><%= c.indice.to_s.gsub(".", ",") %></td>
+                            <td class="text-right"><%= @processo.indice_tabela.to_s.gsub(".", ",") %></td>
+                            <td class="text-right"><%= c.custas_corrigida.nil? ?  "0" : ('%.02f' % c.custas_corrigida).gsub(".", ",") %> </td>
+                            <td class="text-right"><%= c.folhas %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+                <tfoot>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="text-right">
+                        <strong>Total das Custas</strong>
+                    </th>
+                    <th class="text-right"><%= @total_custas.nil? ?  "0" : ('%.02f' % @total_custas).gsub(".", ",") %>  </th>
+                    <th></th>
+                </tfoot>
+            </table>
+
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>
+                            Valor Principal  Líquido
+                        </td>
+                        <td class="text-right">
+                            <%= @total_liquido.nil? ? "0" : ('%.02f' % @total_liquido).gsub(".", ",") %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Desconto Previdência
+                        </td>
+                        <td class="text-right">
+                            <%= @total_previdencia.nil? ? "0" : ('%.02f' % @total_previdencia).gsub(".", ",") %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Desconto Assist. Médica
+                        </td>
+                        <td class="text-right total-assistencia">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Valor Principal Bruto
+                        </td>
+                        <td class="text-right">
+                            <%= @total_bruto.nil? ? "0" : ('%.02f' % @total_bruto).gsub(".", ",") %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Juros
+                        </td>
+                        <td class="text-right">
+                            <%= @total_juros.nil? ? "0" : ('%.02f' % @total_juros).gsub(".", ",") %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Subtotal
+                        </td>
+                        <td class="text-right">
+                            <% @subtotal = (@total_bruto.nil? ? 0 : @total_bruto) + (@total_juros.nil? ? 0 :  @total_juros) %>
+                            <%= ('%.02f' % @subtotal).gsub(".", ",") %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Honorarios na base de 10%  s/ Subtotal
+                        </td>
+                        <td class="text-right">
+                            <%= @total_honorario.nil? ? "0" : ('%.02f' % @total_honorario).gsub(".", ",") %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Total Apurado s/ Custas
+                        </td>
+                        <td class="text-right">
+                            <%= ('%.02f' % ( (@subtotal.nil? ? 0 : @subtotal) + (@total_honorario.nil? ? 0 : @total_honorario) ) ).gsub(".", ",")  %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <br>
+    <h5 class="text-center">Resumo Individual</h5>
+    <h5 class="text-center"><%= @processo.data_base.strftime("%d/%m/%Y") %></h5>
+    <table class="table table-resumo-individual">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="text-right">Valor<br>Principal<br>Bruto</th>
+                <th class="text-right">
+                    <strong>Desconto</strong><br>
+                    Previdência<br>
+                    <%= @processo.cbpm_ipesp.nome.to_s.gsub(".", ",") %>
+                    <%= @processo.cbpm_ipesp_valor.to_s.gsub(".", ",") %>%
+                </th>
+                <th class="text-right">
+                    <strong>Desconto</strong><br>
+                    Assist. Médica<br>
+                    <%= @processo.cruz_iamspe.nome.to_s.gsub(".", ",") %>
+                    <%= @processo.cruz_iamspe_valor.to_s.gsub(".", ",") %>%
+                </th>
+                <th class="text-right">Valor<br>Principal<br>Líquido</th>
+                <th class="text-right">
+                    <strong>Juros</strong><br>
+                    <%= (@processo.juros * 12 ).to_s.gsub(".",",") %>% aa<br>
+                    a partir da<br>
+                    <% if @processo.data_calculo == "Data" %>
+                        <%= @processo.data_base.strftime("%d/%m/%Y") %>
+                    <% else %>
+                        <%= @processo.data_citacao.strftime("%d/%m/%Y") %>
+                    <% end %>
+                </th>
+                <th class="text-right">
+                    Hon. Adv.<br>
+                    10% sobre<br>
+                    (Princ+juros)
+                </th>
+                <th class="text-right">
+                    Custas
+                </th>
+                <th class="text-right">Total<br>Individual</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+                @total_assistencia = 0
+            %>
+            <% @processo.autors.each do |a| %>
+                <tr>
+                    <td>
+                        <%= a.nome %>
+                    </td>
+                    <td class="text-right"><%= a.bruto.nil? ?  "0" : ('%.02f' % a.bruto).gsub(".", ",") %></td>
+                    <td class="text-right">
+                        <%= a.previdencia.nil? ?  "0" : ('%.02f' % a.previdencia).gsub(".", ",") %>
+                    </td>
+                    <td class="text-right">
+                        <% @assistencia = (a.bruto.nil? ? 0 : a.bruto) * (a.processo.cruz_iamspe_valor/100) %>
+                        <%= @assistencia.nil? ?  "0" : ('%.02f' % @assistencia).gsub(".", ",") %>
+                    </td>
+                    <td class="text-right">
+                        <%= a.liquido.nil? ? "0" : ('%.02f' % a.liquido).gsub(".", ",") %>
+                    </td>
+                    <td class="text-right">
+                        <%= a.juros.nil? ? "0" : ('%.02f' % a.juros).gsub(".", ",") %>
+                    </td>
+                    <td class="text-right">
+                        <%= a.honorario.nil? ? "0" : ('%.02f' % a.honorario).gsub(".", ",") %>
+                    </td>
+                    <td class="text-right">
+                        <%= a.custas.nil? ? "0" : ('%.02f' % a.custas).gsub(".", ",") %>
+                    </td>
+                    <td class="text-right"><%= a.total_individual.nil? ? "0" : ('%.02f' % a.total_individual).gsub(".", ",") %>
+                    </td>
+                </tr>
+                <%
+                    @total_assistencia += @assistencia.nil? ?  0 : @assistencia
+                %>
+            <% end %>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th class="text-right"></th>
+                <th class="text-right"><%= @total_bruto.nil? ? "0" : ('%.02f' % @total_bruto).gsub(".", ",") %></th>
+                <th class="text-right"><%= @total_previdencia.nil? ? "0" : ('%.02f' % @total_previdencia).gsub(".", ",") %></th>
+                <th class="text-right total-assistencia-autor"><%= @total_assistencia.nil? ? "0" : ('%.02f' % @total_assistencia).gsub(".", ",") %></th>
+                <th class="text-right"><%= @total_liquido.nil? ? "0" : ('%.02f' % @total_liquido).gsub(".", ",") %></th>
+                <th class="text-right"><%= @total_juros.nil? ? "0" : ('%.02f' % @total_juros).gsub(".", ",") %></th>
+                <th class="text-right"><%= @total_honorario.nil? ? "0" : ('%.02f' % @total_honorario).gsub(".", ",") %></th>
+                <th class="text-right"><%= @total_custas.nil? ? "0" : ('%.02f' % @total_custas).gsub(".", ",") %></th>
+                <th class="text-right"><%= @total_individual.nil? ? "0" : ('%.02f' % @total_individual).gsub(".", ",") %></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

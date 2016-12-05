@@ -1,0 +1,16 @@
+.resumo-page{
+    &.print-resumo{
+        padding-top: 53px;
+        margin-left: 120px;
+    }
+    .table-resumo-top,
+    .table-resumo-individual{
+        margin: 0 auto;
+        td{
+            border: 0 !important;
+        }
+        th,td{
+            padding: 2px !important;
+        }
+    }
+}

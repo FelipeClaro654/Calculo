@@ -28,7 +28,7 @@ class ProcessosController < ApplicationController
         @processo = Processo.new(processo_params)
         respond_to do |format|
             if @processo.save
-                #calcula_custas(@processo)
+                calcula_custas(@processo)
                 create_pagamentos(@processo.autors)
                 format.html { render :edit, notice: 'Processo criado com sucesso.' }
                 format.json { render :show, status: :created, location: @processo }
@@ -93,6 +93,13 @@ class ProcessosController < ApplicationController
 
     def render_resumo
         @processo = Processo.find(params[:processo_id])
+        @total_bruto = @processo.autors.sum(:bruto)
+        @total_previdencia = @processo.autors.sum(:previdencia)
+        @total_liquido = @processo.autors.sum(:liquido)
+        @total_juros = @processo.autors.sum(:juros)
+        @total_honorario = @processo.autors.sum(:honorario)
+        @total_custas = @processo.autors.sum(:custas)
+        @total_individual = @processo.autors.sum(:total_individual)
         render 'resumo'
     end
 
@@ -187,7 +194,6 @@ class ProcessosController < ApplicationController
                 else
                     periodo_value = 100
                 end
-
                 meses = month_difference(a.processo.data_citacao, a.processo.data_base)
                 results = calcula_pagamentos(
                                             periodo_value,

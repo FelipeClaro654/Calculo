@@ -33,7 +33,7 @@ class AutorsController < ApplicationController
         @autor.update_attributes(
             :bruto => params[:bruto],
             :juros => params[:juros],
-            :assistencia => params[:assistencia],
+            :previdencia => params[:previdencia],
             :liquido => params[:liquido],
             :honorario => params[:honorario],
             :total_individual => params[:total_individual]
