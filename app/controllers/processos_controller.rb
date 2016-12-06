@@ -96,17 +96,6 @@ class ProcessosController < ApplicationController
         render 'resumo'
     end
 
-    def calcula_custas(processo)
-        custas = Custa.where(processo_id: processo.id).sum(:custas_corrigida)
-        autores = processo.autors.count
-        custas_autor = custas / autores
-        if autores > 0
-            processo.autors.each do |a|
-                a.update_attribute(:custas, custas_autor)
-            end
-        end
-    end
-
     def update_autores(old_autores)
         old_autores.each do |a|
             @pagamentos = Pagamento.where(autor_id: a.id)

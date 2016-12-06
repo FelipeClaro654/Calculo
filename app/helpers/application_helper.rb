@@ -77,6 +77,17 @@ module ApplicationHelper
         @indice_tabela[0].valor
     end
 
+    def calcula_custas(processo)
+        custas = Custa.where(processo_id: processo.id).sum(:custas_corrigida)
+        autores = processo.autors.count
+        custas_autor = custas / autores
+        if autores > 0
+            processo.autors.each do |a|
+                a.update_attribute(:custas, custas_autor)
+            end
+        end
+    end
+
     def bootstrap_class_for flash_type
         { success: "alert-success", error: "alert-danger", alert: "alert-warning", notice: "alert-info" }[flash_type] || flash_type.to_s
     end
