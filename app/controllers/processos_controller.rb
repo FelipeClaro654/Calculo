@@ -234,7 +234,7 @@ class ProcessosController < ApplicationController
             p.update_attributes(
                 :indice_tabela => indice_periodo,
                 :bruto_atualizacao => results[:bruto_atualizacao].round(2),
-                :previdencia_assistencia => results[:previdencia].round(2),
+                :previdencia_assistencia => results[:previdencia_assistencia].round(2),
                 :liquido_atualizado => results[:liquido_atualizado].round(2),
                 :juros => results[:juros].round(2),
                 :honorario => results[:honorario].round(2),
