@@ -12,7 +12,6 @@ $(function () {
             },500);
         }, 500);
     });
-/*
     setTimeout(function () {
         totals ={
             custas: 0,
@@ -118,5 +117,4 @@ $(function () {
         $(".total-honorario").html(totals.honorario);
 
     },500);
-*/
 });
