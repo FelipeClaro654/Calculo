@@ -118,7 +118,6 @@ class ProcessosController < ApplicationController
             prev_porc = processo.cbpm_ipesp_valor
             assist_porc = processo.cruz_iamspe_valor
         end
-
         data_calculo = processo.data_calculo.nome
         juros_porc = processo.juros
         d = (a.to_d)/b*c

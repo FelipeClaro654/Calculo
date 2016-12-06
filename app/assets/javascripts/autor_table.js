@@ -230,7 +230,7 @@ $(function () {
             g = parseFloat(parent.find(".meses").data("valor")),
             h = +(parseFloat(f*g*(parseFloat($(".juros-processo").data("juros"))/100)).toFixed(2)),
             i = +(((d+h)*(10/100)).toFixed(2));
-
+debugger;
         $.ajax({
             url: '/autors/salva_pagamentos/',
             type: 'post',
