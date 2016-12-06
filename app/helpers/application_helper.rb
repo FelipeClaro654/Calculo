@@ -83,7 +83,7 @@ module ApplicationHelper
         custas_autor = custas / autores
         if autores > 0
             processo.autors.each do |a|
-                a.update_attribute(:custas, custas_autor)
+                a.update_attribute(:custas, custas_autor.round(2))
             end
         end
     end

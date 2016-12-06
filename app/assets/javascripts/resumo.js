@@ -72,6 +72,10 @@ $(function () {
         subtotal = subtotal.join(",");
         $(".total-subtotal").html(subtotal);
 
+        totals.custas = totals.custas.toFixed(2);
+        totals.custas = totals.custas.split(".");
+        totals.custas[0] = Useful.formata_numero(totals.custas[0]);
+        totals.custas = totals.custas.join(",");
         $(".total-custas").html(totals.custas.toString().replace(".",","));
 
         total_apurado = total_apurado.toFixed(2);
