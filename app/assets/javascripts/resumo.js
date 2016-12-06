@@ -115,12 +115,12 @@ $(function () {
     $(document).on("click","#print_resumo", function() {
         $(".container").css("visibility", "hidden");
         $("body").toggleClass("print-resumo");
-        $(".resumo-page").toggleClass("width-percent-70");
+        $(".resumo-page").switchClass("width-percent-70", "width-percent-100");
         setTimeout(function () {
             $(".container").css("visibility", "visible");
             window.print();
             setTimeout(function () {
-                $(".resumo-page").toggleClass("width-percent-70");
+                $(".resumo-page").switchClass("width-percent-100", "width-percent-70");
                 $("body").toggleClass("print-resumo");
             },500);
         }, 500);
