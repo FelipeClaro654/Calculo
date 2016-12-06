@@ -22,12 +22,12 @@ class AutorsController < ApplicationController
         head :ok
     end
 
-    def destroy
+    def delete_autor
         @autor = Autor.find(params[:autor_id])
         @processo = @autor.processo
         @autor.destroy
         calcula_custas(@processo)
-        render :json => { :success => true, autor_id: params[:autor_id] }
+        render :js => "window.location = '/processos/"+@processo.id.to_s+"/edit'"
     end
 
     def salva_totais

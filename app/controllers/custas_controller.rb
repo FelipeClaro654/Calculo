@@ -8,6 +8,6 @@ class CustasController < ApplicationController
         @processo = @custa.processo
         @custa.destroy
         calcula_custas(@processo)
-        render :json => { :success => true, custa_id: params[:custa_id] }
+        render :js => "window.location = '/processos/"+@processo.id.to_s+"/edit'"
     end
 end

@@ -176,14 +176,11 @@ $(document).on('turbolinks:load', function() {
         }
         var autor = $(this);
         $.ajax({
-            url: "/autors/destroy",
+            url: "/autors/delete_autor",
             type: "post",
             data: {
                 autor_id: $(this).data("autor-id")
             }
-        })
-        .done(function() {
-            window.location.href = window.location.href;
         });
 
     });
@@ -200,9 +197,6 @@ $(document).on('turbolinks:load', function() {
             data: {
                 custa_id: $(this).data("custa-id")
             }
-        })
-        .done(function() {
-            window.location.href = window.location.href;
         });
 
     });

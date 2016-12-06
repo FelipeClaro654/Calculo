@@ -9,7 +9,7 @@ Rails.application.routes.draw do
         get "show_autor_table", on: :collection
         post "salva_pagamentos", on: :collection
         post "salva_totais", on: :collection
-        post "destroy", on: :collection
+        post "delete_autor", on: :collection
     end
     resources :custas do
         post "destroy", on: :collection
