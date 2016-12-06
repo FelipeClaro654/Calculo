@@ -1,17 +1,5 @@
-$(function () {
-    $(document).on("click","#print_resumo", function() {
-        $(".container").css("visibility", "hidden");
-        $(".resumo-page").toggleClass("print-resumo");
-        $(".resumo-page").toggleClass("width-percent-70");
-        setTimeout(function () {
-            $(".container").css("visibility", "visible");
-            window.print();
-            setTimeout(function () {
-                $(".resumo-page").toggleClass("width-percent-70");
-                $(".resumo-page").toggleClass("print-resumo");
-            },500);
-        }, 500);
-    });
+$(document).on("turbolinks:load", function () {
+
     setTimeout(function () {
         totals ={
             custas: 0,
@@ -76,7 +64,7 @@ $(function () {
         totals.custas = totals.custas.split(".");
         totals.custas[0] = Useful.formata_numero(totals.custas[0]);
         totals.custas = totals.custas.join(",");
-        $(".total-custas").html(totals.custas.toString().replace(".",","));
+        $(".total-custas").html(totals.custas);
 
         total_apurado = total_apurado.toFixed(2);
         total_apurado = total_apurado.split(".");
@@ -121,4 +109,20 @@ $(function () {
         $(".total-honorario").html(totals.honorario);
 
     },500);
+});
+
+$(function () {
+    $(document).on("click","#print_resumo", function() {
+        $(".container").css("visibility", "hidden");
+        $(".resumo-page").toggleClass("print-resumo");
+        $(".resumo-page").toggleClass("width-percent-70");
+        setTimeout(function () {
+            $(".container").css("visibility", "visible");
+            window.print();
+            setTimeout(function () {
+                $(".resumo-page").toggleClass("width-percent-70");
+                $(".resumo-page").toggleClass("print-resumo");
+            },500);
+        }, 500);
+    });
 });
