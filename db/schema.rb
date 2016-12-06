@@ -20,14 +20,16 @@ ActiveRecord::Schema.define(version: 20161204114630) do
     t.date     "periodo_inicial"
     t.date     "periodo_final"
     t.decimal  "liquido"
-    t.decimal  "previdencia"
     t.decimal  "bruto"
     t.decimal  "juros"
     t.decimal  "honorario"
     t.decimal  "custas"
     t.decimal  "total_individual"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.decimal  "previdencia_assistencia"
+    t.decimal  "previdencia"
+    t.decimal  "assistencia"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "processo_id"
   end
 
@@ -70,14 +72,16 @@ ActiveRecord::Schema.define(version: 20161204114630) do
     t.decimal  "indice_tabela"
     t.decimal  "indice_atualizacao"
     t.decimal  "bruto_atualizacao"
+    t.decimal  "previdencia_assistencia"
     t.decimal  "previdencia"
+    t.decimal  "assistencia"
     t.decimal  "liquido_atualizado"
     t.decimal  "meses"
     t.decimal  "juros"
     t.decimal  "honorario"
     t.date     "periodo"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.index ["autor_id"], name: "index_pagamentos_on_autor_id", using: :btree
   end
 

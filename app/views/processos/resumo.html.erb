@@ -329,8 +329,7 @@
                         <%= a.previdencia.nil? ? "0" : number_with_delimiter(('%.02f' % a.previdencia).to_d, separator: ",", delimiter: ".") %>
                     </td>
                     <td class="text-right autor-assistencia">
-                        <% @assistencia = (a.bruto.nil? ? 0 : a.bruto) * (a.processo.cruz_iamspe_valor/100) %>
-                        <%= @assistencia.nil? ? "0" : number_with_delimiter(('%.02f' % @assistencia).to_d, separator: ",", delimiter: ".") %>
+                        <%= a.assistencia.nil? ? "0" : number_with_delimiter(('%.02f' % a.assistencia).to_d, separator: ",", delimiter: ".") %>
                     </td>
                     <td class="text-right autor-bruto">
                         <%= a.bruto.nil? ? "0" : number_with_delimiter(('%.02f' % a.bruto).to_d, separator: ",", delimiter: ".") %>

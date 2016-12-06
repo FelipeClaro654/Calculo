@@ -123,21 +123,28 @@ class ProcessosController < ApplicationController
         juros_porc = processo.juros
         d = (a.to_d)/b*c
         d = d.round(2)
-        e = d*((prev_porc/100).round(2) + (assist_porc/100).round(2))
-        e = e.round(2)
+
+        prev = prev_porc*d
+        assist = assist_porc*d
+
+        e = (prev + assist).round(2)
+
         f = d - e
         f = f.round(2)
         h = f*g*juros_porc/100
         h = h.round(2)
         honorario = (d + h)*10/100
         honorario = honorario.round(2)
+
         results = {
             "bruto_atualizacao": d,
-            "previdencia": e,
+            "previdencia_assistencia": e,
             "liquido_atualizado": f,
             "juros": h,
             "honorario": honorario,
-            "meses": g
+            "meses": g,
+            "previdencia": prev.round(2),
+            "assistencia": assist.round(2)
         }
         return results
     end
@@ -193,11 +200,13 @@ class ProcessosController < ApplicationController
                   p.indice_tabela = indice_periodo
                   p.indice_atualizacao = a.processo.indice_tabela
                   p.bruto_atualizacao = results[:bruto_atualizacao].round(2)
-                  p.previdencia = results[:previdencia].round(2)
+                  p.previdencia_assistencia = results[:previdencia_assistencia].round(2)
                   p.liquido_atualizado = results[:liquido_atualizado].round(2)
                   p.juros = results[:juros].round(2)
                   p.honorario = results[:honorario].round(2)
                   p.meses = results[:meses]
+                  p.assistencia = results[:assistencia].round(2)
+                  p.previdencia = results[:previdencia].round(2)
                   p.periodo = per.kind_of?(Array) ? ("01/"+per[2].to_s + "/" + per[3].to_s).to_datetime : @periodo_final
                 end
                 pagamento.save!
@@ -225,11 +234,13 @@ class ProcessosController < ApplicationController
             p.update_attributes(
                 :indice_tabela => indice_periodo,
                 :bruto_atualizacao => results[:bruto_atualizacao].round(2),
-                :previdencia => results[:previdencia].round(2),
+                :previdencia_assistencia => results[:previdencia].round(2),
                 :liquido_atualizado => results[:liquido_atualizado].round(2),
                 :juros => results[:juros].round(2),
                 :honorario => results[:honorario].round(2),
-                :meses => results[:meses]
+                :meses => results[:meses],
+                :assistencia => results[:assistencia].round(2),
+                :previdencia => results[:previdencia].round(2)
             )
         end
     end

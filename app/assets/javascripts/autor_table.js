@@ -65,10 +65,13 @@ $(function () {
         },
         update_totals: function () {
             var totals = [  $(".bruto-atualizacao"),
-                            $(".previdencia"),
+                            $(".previdencia-assistencia"),
                             $(".liquido-atualizado"),
                             $(".juros"),
-                            $(".honorario") ];
+                            $(".honorario"),
+                            $(".assistencia"),
+                            $(".previdencia")
+                        ];
 
             var total = 0;
 
@@ -96,12 +99,14 @@ $(function () {
             total = total.split(".");
             total[0] = Useful.formata_numero(total[0]);
             total = total.join(",");
-
+            
             $(".total-bruto-atualizacao").html(totals[0]);
-            $(".total-previdencia").html(totals[1]);
+            $(".total-previdencia-assistencia").html(totals[1]);
             $(".total-liquido-atualizado").html(totals[2]);
             $(".total-juros").html(totals[3]);
             $(".total-honorario").html(totals[4]);
+            $(".total-assistencia").html(totals[5]);
+            $(".total-previdencia").html(totals[6]);
             $(".total-conta-liquidacao").html(total);
 
             $.ajax({
@@ -110,10 +115,12 @@ $(function () {
                 data: {
                     autor_id: $("#autor_id").val(),
                     bruto: totals[0] != 0 ? totals[0].replace(/\./g,'').replace(",", ".") : 0 ,
-                    previdencia: totals[1] != 0 ? totals[1].replace(/\./g,'').replace(",", ".") : 0 ,
+                    previdencia_assistencia: totals[1] != 0 ? totals[1].replace(/\./g,'').replace(",", ".") : 0 ,
                     liquido: totals[2] != 0 ? totals[2].replace(/\./g,'').replace(",", ".") : 0 ,
                     juros: totals[3] != 0 ? totals[3].replace(/\./g,'').replace(",", ".") : 0 ,
                     honorario: totals[4] != 0 ? totals[4].replace(/\./g,'').replace(",", ".") : 0 ,
+                    assistencia: totals[5] != 0 ? totals[5].replace(/\./g,'').replace(",", ".") : 0 ,
+                    previdencia: totals[6] != 0 ? totals[6].replace(/\./g,'').replace(",", ".") : 0 ,
                     total_individual: total != 0 ? total.replace(/\./g,'').replace(",", ".") : 0
                 }
             });
@@ -216,7 +223,9 @@ $(function () {
             b = parseFloat(parent.find(".indice-tabela").data("valor")),
             c = parseFloat(parent.find(".indice-atualizacao").data("valor")),
             d = +(parseFloat(((a / b)*c)).toFixed(2)),
-            e = +(parseFloat((d*(prev + assist)).toFixed(2))),
+            assist = assist*d,
+            prev = prev*d,
+            e = prev + assist,
             f = +(parseFloat((d - e)).toFixed(2)),
             g = parseFloat(parent.find(".meses").data("valor")),
             h = +(parseFloat(f*g*(parseFloat($(".juros-processo").data("juros"))/100)).toFixed(2)),
@@ -231,11 +240,13 @@ $(function () {
                 indice_tabela: b,
                 indice_atualizacao: c,
                 bruto_atualizacao: d,
-                previdencia: e,
+                previdencia_assistencia: e,
                 liquido_atualizado: f,
                 meses: g,
                 juros: h,
-                honorario: i
+                honorario: i,
+                assistencia: assist,
+                previdencia: prev
             },
             success: function () {
                 d = d.toFixed(2);
@@ -243,12 +254,16 @@ $(function () {
                 f = f.toFixed(2);
                 h = h.toFixed(2);
                 i = i.toFixed(2);
+                assist = assist.toFixed(2);
+                prev = prev.toFixed(2);
 
                 parent.find(".bruto-atualizacao").data("valor", d);
-                parent.find(".previdencia").data("valor", e);
+                parent.find(".previdencia-assistencia").data("valor", e);
                 parent.find(".liquido-atualizado").data("valor", f);
                 parent.find(".juros").data("valor", h);
                 parent.find(".honorario").data("valor", i);
+                parent.find(".assistencia").data("valor", assist);
+                parent.find(".previdencia").data("valor", prev);
 
                 d = d.split(".");
                 d[0] = Useful.formata_numero(d[0]);
@@ -271,7 +286,9 @@ $(function () {
                 i = i.join(",");
 
                 parent.find(".bruto-atualizacao").html(d);
-                parent.find(".previdencia").html(e);
+                parent.find(".previdencia-assistencia").html(e);
+                parent.find(".assistencia").html(assist);
+                parent.find(".previdencia").html(prev);
                 parent.find(".liquido-atualizado").html(f);
                 parent.find(".juros").html(h);
                 parent.find(".honorario").html(i);
@@ -282,7 +299,9 @@ $(function () {
     });
 
     if($(".total-conta-liquidacao").length > 0){
-        Autor_Table.update_totals();
+        setTimeout(function () {
+            Autor_Table.update_totals();
+        }, 700)
     }
 
 });

@@ -9,7 +9,9 @@ class CreatePagamentos < ActiveRecord::Migration[5.0]
       t.decimal :indice_tabela
       t.decimal :indice_atualizacao
       t.decimal :bruto_atualizacao
+      t.decimal :previdencia_assistencia
       t.decimal :previdencia
+      t.decimal :assistencia
       t.decimal :liquido_atualizado
       t.decimal :meses
       t.decimal :juros

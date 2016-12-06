@@ -38,6 +38,10 @@ $(document).on('turbolinks:load', function() {
             $("#processo_cruz_iamspe_valor").val($("#processo_cruz_iamspe_valor").val().replace(",", "."));
             $("#processo_indice_tabela").val($("#processo_indice_tabela").val().replace(",", "."));
 
+            $.each($(".custas-valor"), function (i, e) {
+                $(e).val($(e).val().replace(",", "."));
+            });
+
             $.each($(".custas-indice"), function (i, e) {
                 $(e).val($(e).val().replace(",", "."));
             });

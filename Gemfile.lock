@@ -64,7 +64,6 @@ GEM
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
     eventmachine (1.2.0.1)
-    eventmachine (1.2.0.1-x86-mingw32)
     execjs (2.7.0)
     ffi (1.9.14)
     ffi (1.9.14-x86-mingw32)

@@ -35,10 +35,12 @@ class AutorsController < ApplicationController
         @autor.update_attributes(
             :bruto => params[:bruto],
             :juros => params[:juros],
-            :previdencia => params[:previdencia],
+            :previdencia_assistencia => params[:previdencia_assistencia],
             :liquido => params[:liquido],
             :honorario => params[:honorario],
-            :total_individual => params[:total_individual]
+            :total_individual => params[:total_individual],
+            :previdencia => params[:previdencia],
+            :assistencia => params[:assistencia]
         )
         head :ok
     end
