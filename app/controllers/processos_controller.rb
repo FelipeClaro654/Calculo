@@ -124,8 +124,8 @@ class ProcessosController < ApplicationController
         d = (a.to_d)/b*c
         d = d.round(2)
 
-        prev = prev_porc*d
-        assist = assist_porc*d
+        prev = (prev_porc/100)*d
+        assist = (assist_porc/100)*d
 
         e = (prev + assist).round(2)
 

@@ -99,7 +99,7 @@ $(function () {
             total = total.split(".");
             total[0] = Useful.formata_numero(total[0]);
             total = total.join(",");
-            
+
             $(".total-bruto-atualizacao").html(totals[0]);
             $(".total-previdencia-assistencia").html(totals[1]);
             $(".total-liquido-atualizado").html(totals[2]);
@@ -223,8 +223,8 @@ $(function () {
             b = parseFloat(parent.find(".indice-tabela").data("valor")),
             c = parseFloat(parent.find(".indice-atualizacao").data("valor")),
             d = +(parseFloat(((a / b)*c)).toFixed(2)),
-            assist = assist*d,
-            prev = prev*d,
+            assist = (assist/100)*d,
+            prev = (prev/100)*d,
             e = prev + assist,
             f = +(parseFloat((d - e)).toFixed(2)),
             g = parseFloat(parent.find(".meses").data("valor")),
@@ -297,13 +297,14 @@ $(function () {
             }
         });
     });
+});
 
+$(document).on("turbolinks:load", function () {
     if($(".total-conta-liquidacao").length > 0){
         setTimeout(function () {
             Autor_Table.update_totals();
         }, 700)
     }
-
 });
 
 window.onafterprint = function(){
