@@ -317,7 +317,7 @@
             </tr>
         </thead>
         <tbody>
-            <% @processo.autors.each do |a| %>
+            <% @processo.autors.order("nome").each do |a| %>
                 <tr>
                     <td>
                         <%= a.nome %>
