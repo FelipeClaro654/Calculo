@@ -223,14 +223,16 @@ $(function () {
             b = parseFloat(parent.find(".indice-tabela").data("valor")),
             c = parseFloat(parent.find(".indice-atualizacao").data("valor")),
             d = +(parseFloat(((a / b)*c)).toFixed(2)),
-            assist = (assist/100)*d,
-            prev = (prev/100)*d,
-            e = prev + assist,
+            assist = +(((assist/100)*d).toFixed(2)),
+            prev = +(((prev/100)*d).toFixed(2)),
+            e = +((prev + assist).toFixed(2)),
             f = +(parseFloat((d - e)).toFixed(2)),
             g = parseFloat(parent.find(".meses").data("valor")),
             h = +(parseFloat(f*g*(parseFloat($(".juros-processo").data("juros"))/100)).toFixed(2)),
             i = +(((d+h)*(10/100)).toFixed(2));
-debugger;
+
+
+
         $.ajax({
             url: '/autors/salva_pagamentos/',
             type: 'post',
@@ -245,8 +247,8 @@ debugger;
                 meses: g,
                 juros: h,
                 honorario: i,
-                assistencia: assist,
-                previdencia: prev
+                assistencia: assist.toFixed(2),
+                previdencia: prev.toFixed(2)
             },
             success: function () {
                 d = d.toFixed(2);
@@ -254,8 +256,7 @@ debugger;
                 f = f.toFixed(2);
                 h = h.toFixed(2);
                 i = i.toFixed(2);
-                assist = assist.toFixed(2);
-                prev = prev.toFixed(2);
+
 
                 parent.find(".bruto-atualizacao").data("valor", d);
                 parent.find(".previdencia-assistencia").data("valor", e);
