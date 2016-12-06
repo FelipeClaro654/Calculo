@@ -81,7 +81,7 @@
                             <label class="pull-left">Previdência (<%= @autor.processo.cbpm_ipesp.nome %>):</label>
                             <div data-previdencia="<%= @autor.processo.cbpm_ipesp_valor %>"
                                 class="previdencia-processo pull-right autor-table-overflow">
-                                <%= @autor.processo.cbpm_ipesp_valor.to_s.gsub(".", ",") %> %
+                                <%=  @autor.processo.cbpm_ipesp_valor == 0 ? "0" : @autor.processo.cbpm_ipesp_valor.to_s.gsub(".", ",") %> %
                             </div>
                         </td>
                         <td>
@@ -100,7 +100,7 @@
                             <label class="pull-left">Assist. Médica (<%= @autor.processo.cruz_iamspe.nome %>):</label>
                             <div data-assistencia="<%= @autor.processo.cruz_iamspe_valor %>"
                                 class="assistencia-processo pull-right autor-table-overflow">
-                                <%= @autor.processo.cruz_iamspe_valor.to_s.gsub(".", ",") %> %
+                                <%= @autor.processo.cruz_iamspe_valor == 0 ? "0" : @autor.processo.cruz_iamspe_valor.to_s.gsub(".", ",") %> %
                             </div>
                         </td>
                         <td>

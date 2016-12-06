@@ -171,7 +171,8 @@
                     <tr>
                         <td>
                             Desconto Previdência
-                            <span class="margin-left-44"> <%= @processo.cbpm_ipesp.nome %> (<%= @processo.cbpm_ipesp_valor %>%) </span>
+                            <span class="margin-left-44">
+                                <%= @processo.cbpm_ipesp.nome %> (<%= @processo.cbpm_ipesp_valor == 0 ? "0" : @processo.cbpm_ipesp_valor.to_s.gsub(".",",") %>%) </span>
                         </td>
                         <td class="text-center">
                             b
@@ -183,7 +184,8 @@
                     <tr>
                         <td>
                             Desconto Assist. Médica
-                            <span class="margin-left-20"><%= @processo.cruz_iamspe.nome %> (<%= @processo.cruz_iamspe_valor %>%) </span>
+                            <span class="margin-left-20">
+                                <%= @processo.cruz_iamspe.nome %> (<%= @processo.cruz_iamspe_valor == 0 ? "0" : @processo.cruz_iamspe_valor.to_s.gsub(".",",") %>%) </span>
                         </td>
                         <td class="text-center">
                             c
