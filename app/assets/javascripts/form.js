@@ -146,6 +146,10 @@ $(document).on('turbolinks:load', function() {
                 Forms.set_custas_corrigida($this.parents(".nested-fields").find(".custas-valor"));
             }, 300);
         });
+
+        input.find(".custas-valor").change(function () {
+            Forms.set_custas_corrigida($(this));
+        });
     });
 
     $(".calendario").datepicker({
