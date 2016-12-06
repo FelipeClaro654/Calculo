@@ -4,7 +4,8 @@ $(document).on('turbolinks:load', function() {
 
     Forms ={
         calcula_custas_corrigida : function (valor, obrigacao, atualizacao) {
-            if(valor === "" || obrigacao === "" || atualizacao === ""){
+            if((valor === "" || obrigacao === "" || atualizacao === "") ||
+                (valor === 0 || obrigacao === 0 || atualizacao === 0)){
                 return false;
             }
 
