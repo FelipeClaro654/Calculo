@@ -132,7 +132,8 @@ $(document).on('turbolinks:load', function() {
         $(this).parents("ul").replaceWith(input);
         input.find(".btn-remove-autor").removeClass("margin-top-14").addClass("neg-margin-top-3");
         input.find("label").remove();
-        input.find(".custas-indice").parents(".col-xs-2").addClass('margin-top-12');
+        input.find(".col-xs-2,.col-xs-1").removeClass('margin-top-12');
+        input.find(".col-xs-2,.col-xs-1").css("height", "32px");
         input.find("hr").remove();
         input.find(".custas-data").change(function () {
             var $this = $(this);
