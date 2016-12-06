@@ -134,6 +134,17 @@ $(document).on('turbolinks:load', function() {
         input.find("label").remove();
         input.find(".custas-indice").parents(".col-xs-2").addClass('margin-top-12');
         input.find("hr").remove();
+        input.find(".custas-data").change(function () {
+            var $this = $(this);
+            Forms.retorna_indice(
+                $(this),
+                $("#processo_tabela_atualizacao_id option:selected").text(),
+                ".custas-indice"
+            );
+            setTimeout(function () {
+                Forms.set_custas_corrigida($this.parents(".nested-fields").find(".custas-valor"));
+            }, 300);
+        });
     });
 
     $(".calendario").datepicker({
