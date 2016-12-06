@@ -9,7 +9,7 @@ $(function () {
             setTimeout(function () {
                 $(".resumo-page").toggleClass("width-percent-70");
                 $(".resumo-page").toggleClass("print-resumo");
-            },500);
+            },500);*/
         }, 500);
     });
 
