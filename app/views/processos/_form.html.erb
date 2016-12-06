@@ -231,8 +231,11 @@
                                         </li>
                                         <li>
                                             <%= c.folhas %>
-                                            <span class="glyphicon glyphicon-trash text-danger cursor-pointer delete-custa pull-right"
+                                            <span data-id="<%= c.id %>" class="glyphicon glyphicon-trash text-danger cursor-pointer delete-custa pull-right"
                                                 aria-hidden="true" data-custa-id="<%= c.id %>"></span>
+                                            <span class="margin-right-10 glyphicon glyphicon-pencil text-info cursor-pointer edit-custa pull-right"
+                                                aria-hidden="true" data-custa-id="<%= c.id %>"></span>
+
                                         </li>
                                     </ul>
                                 <% end %>
@@ -268,7 +271,7 @@
                                 Período Inicial
                             </li>
                             <li>
-                                Período Inicial
+                                Período Final
                             </li>
                             <li>
                             </li>

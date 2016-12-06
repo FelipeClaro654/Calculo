@@ -126,12 +126,35 @@ $(document).on('turbolinks:load', function() {
         }
     });
 
+    $(document).on("click",".edit-custa", function() {
+        var input = $(".hidden-form-custas input[value='"+$(this).data("custa-id")+"']").prev();
+        input.css("display","block");
+        $(this).parents("ul").replaceWith(input);
+        input.find(".btn-remove-autor").removeClass("margin-top-14").addClass("neg-margin-top-3");
+        input.find("label").remove();
+        input.find(".custas-indice").parents(".col-xs-2").addClass('margin-top-12');
+        input.find("hr").remove();
+    });
+
     $(".calendario").datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat: "dd/mm/yy",
         yearRange: "1950:" + ano_atual
     });
+
+    setTimeout(function () {
+        if($(".custas-indice").length > 0){
+            $(".custas-indice").val($(".custas-indice").val().replace(".", ","));
+        }
+        $(".custas-valor").mask('000,00', {reverse: true});
+        $(".custas-corrigida").mask('000,00', {reverse: true});
+
+        $.each($(".custas-data"), function (i, e) {
+            var string = $(e).val().split("-");
+            $(e).val(string[2]+"/"+string[1]+"/"+string[0]);
+        });
+    }, 500);
 
     $('#autors, #custas').on('cocoon:before-insert', function(e, insertedItem) {
         insertedItem.find(".calendario").datepicker({

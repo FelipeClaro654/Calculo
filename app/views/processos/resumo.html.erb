@@ -267,7 +267,7 @@
                         </td>
                         <td class="text-right total-apurado">
                             <% @total_apurado = (@total_sem_custas.nil? ? 0 : @total_sem_custas) + (@total_custas.nil? ? 0 : @total_custas)  %>
-                            <%= @total_apurado.nil? ? "0" : number_with_delimiter(('%.02f' % @total_apurado).to_d, separator: ",", delimiter: ".") %>
+                            <%= @total_apurado.nil? ? "0" :  number_to_currency(@total_apurado, unit: "", separator: ",", delimiter: ".", format: "%n %u") %>
                         </td>
                     </tr>
                 </tbody>
@@ -323,28 +323,28 @@
                         <%= a.nome %>
                     </td>
                     <td class="text-right autor-liquido">
-                        <%= a.liquido.nil? ? "0" : number_with_delimiter(('%.02f' % a.liquido).to_d, separator: ",", delimiter: ".") %>
+                        <%= a.liquido.nil? ? "0" : number_to_currency(a.liquido, unit: "", separator: ",", delimiter: ".", format: "%n %u") %>
                     </td>
                     <td class="text-right autor-previdencia">
-                        <%= a.previdencia.nil? ? "0" : number_with_delimiter(('%.02f' % a.previdencia).to_d, separator: ",", delimiter: ".") %>
+                        <%= a.previdencia.nil? ? "0" : number_to_currency(a.previdencia, unit: "", separator: ",", delimiter: ".", format: "%n %u") %>
                     </td>
                     <td class="text-right autor-assistencia">
-                        <%= a.assistencia.nil? ? "0" : number_with_delimiter(('%.02f' % a.assistencia).to_d, separator: ",", delimiter: ".") %>
+                        <%= a.assistencia.nil? ? "0" : number_to_currency(a.assistencia, unit: "", separator: ",", delimiter: ".", format: "%n %u") %>
                     </td>
                     <td class="text-right autor-bruto">
-                        <%= a.bruto.nil? ? "0" : number_with_delimiter(('%.02f' % a.bruto).to_d, separator: ",", delimiter: ".") %>
+                        <%= a.bruto.nil? ? "0" : number_to_currency(a.bruto, unit: "", separator: ",", delimiter: ".", format: "%n %u") %>
                     </td>
                     <td class="text-right autor-juros">
-                        <%= a.juros.nil? ? "0" : number_with_delimiter(('%.02f' % a.juros).to_d, separator: ",", delimiter: ".") %>
+                        <%= a.juros.nil? ? "0" : number_to_currency(a.juros, unit: "", separator: ",", delimiter: ".", format: "%n %u") %>
                     </td>
                     <td class="text-right autor-honorario">
-                        <%= a.honorario.nil? ? "0" : number_with_delimiter(('%.02f' % a.honorario).to_d, separator: ",", delimiter: ".") %>
+                        <%= a.honorario.nil? ? "0" : number_to_currency(a.honorario, unit: "", separator: ",", delimiter: ".", format: "%n %u") %>
                     </td>
                     <td class="text-right autor-custas">
-                        <%= a.custas.nil? ? "0" : number_with_delimiter(('%.02f' % a.custas).to_d, separator: ",", delimiter: ".") %>
+                        <%= a.custas.nil? ? "0" : number_to_currency(a.custas, unit: "", separator: ",", delimiter: ".", format: "%n %u") %>
                     </td>
                     <td class="text-right autor-total-individual">
-                        <%= a.total_individual.nil? ? "0" : number_with_delimiter(('%.02f' % a.total_individual).to_d, separator: ",", delimiter: ".") %>
+                        <%= a.total_individual.nil? ? "0" : number_to_currency(a.total_individual, unit: "", separator: ",", delimiter: ".", format: "%n %u") %>
                     </td>
                 </tr>
             <% end %>
