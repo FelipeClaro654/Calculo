@@ -156,6 +156,8 @@ $(function () {
     });
 
     $(document).on("click","#print_autor_table", function() {
+        var $this = $(this);
+        $this.hide();
         $(".container").css("visibility", "hidden");
         Autor_Table.print_autor();
         setTimeout(function () {
@@ -167,6 +169,7 @@ $(function () {
             $(".container-autor-table").toggleClass("margin-left-90");
             setTimeout(function () {
                 $(".container").css("visibility", "visible");
+                $this.show();
             },500);
         }, 500);
     });
