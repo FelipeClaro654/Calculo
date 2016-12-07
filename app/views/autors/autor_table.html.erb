@@ -74,7 +74,7 @@
                             <label class="pull-left">Juros:</label>
                             <div data-juros="<%= @autor.processo.juros %>"
                                 class="juros-processo pull-right autor-table-overflow">
-                                <%= (@autor.processo.juros * 12 ).to_s.gsub(".",",") %> % aa
+                                <%= (@autor.processo.juros * 12 ).to_s.gsub(".",",") %>%
                             </div>
                         </td>
                         <td>
@@ -97,7 +97,7 @@
                             </div>
                         </td>
                         <td>
-                            <label class="pull-left">Assist. Médica (<%= @autor.processo.cruz_iamspe.nome %>):</label>
+                            <label class="pull-left">Assist. Méd. (<%= @autor.processo.cruz_iamspe.nome %>):</label>
                             <div data-assistencia="<%= @autor.processo.cruz_iamspe_valor %>"
                                 class="assistencia-processo pull-right autor-table-overflow">
                                 <%= @autor.processo.cruz_iamspe_valor == 0 ? "0" : @autor.processo.cruz_iamspe_valor.to_s.gsub(".", ",") %> %
@@ -155,7 +155,8 @@
                 </th>
                 <th>
                     Diferença<br>Apurada<br>
-                    Fls. <%= @autor.processo.base_calculo_autor %>
+                    Fls.<br>
+                    <%= @autor.processo.base_calculo_autor %>
                 </th>
                 <th>
                     Índice<br>da Mês da<br>Obrigação
@@ -301,7 +302,7 @@
             <tr>
                 <th>
                     <strong>
-                        Desc. <%= @autor.processo.cruz_iamspe.nome %>
+                        Desconto <%= @autor.processo.cruz_iamspe.nome %>
                         (<%= ('%.02f' % @autor.processo.cruz_iamspe_valor).gsub(".", ",") %>%)
                     </strong>
                 </th>
@@ -312,7 +313,7 @@
             <tr>
                 <th>
                     <strong>
-                        Desc. <%= @autor.processo.cbpm_ipesp.nome %>
+                        Desconto <%= @autor.processo.cbpm_ipesp.nome %>
                         (<%= ('%.02f' % @autor.processo.cbpm_ipesp_valor).gsub(".", ",") %>%)
                     </strong>
                 </th>

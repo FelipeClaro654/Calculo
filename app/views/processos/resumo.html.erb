@@ -103,7 +103,7 @@
     <br>
     <div class="panel panel-default table-resumo-top width-percent-55">
         <div class="panel-heading">
-                Resumo Total Parcial
+                Resumo Total
             <div class="pull-right">
                 <%= @processo.data_base.strftime("%d/%m/%Y") %>
             </div>
@@ -232,7 +232,7 @@
                             Honorarios na base de 10%  s/ Subtotal
                         </td>
                         <td class="text-center">
-                            e=10%xf
+                            g=10%xf
                         </td>
                         <td class="text-right total-honorario">
 
@@ -243,7 +243,7 @@
                             Total Apurado s/ Custas
                         </td>
                         <td class="text-center">
-                            g=f+e
+                            h=f+g
                         </td>
                         <td class="text-right total-sem-custas">
 
@@ -254,7 +254,7 @@
                             Custas Dispendidas
                         </td>
                         <td class="text-center">
-                            h
+                            i
                         </td>
                         <td class="text-right total-custas">
 
@@ -265,7 +265,7 @@
                             TOTAL APURADO NESTA CONTA
                         </td>
                         <td class="text-center">
-                            i=h+g
+                            j=h+i
                         </td>
                         <td class="text-right total-apurado">
                             <% @total_apurado = (@total_sem_custas.nil? ? 0 : @total_sem_custas) + (@total_custas.nil? ? 0 : @total_custas)  %>
@@ -376,7 +376,7 @@
                 <th class="text-right total-custas">
                     <%# @total_custas.nil? ? "0" : number_with_delimiter(('%.02f' % @total_custas).to_d, separator: ",", delimiter: ".") %>
                 </th>
-                <th class="text-right total_individual">
+                <th class="text-right total-individual">
                     <%# @total_individual.nil? ? "0" : number_with_delimiter(('%.02f' % @total_individual).to_d, separator: ",", delimiter: ".") %>
                 </th>
             </tr>

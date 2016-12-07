@@ -11,7 +11,8 @@ $(document).on("turbolinks:load", function () {
             subtotal: 0,
             honorario: 0,
             total_sem_custas: 0,
-            total_apurado: 0
+            total_apurado: 0,
+            total_individual: 0
         }
 
         $.each($(".custas-atualizada"), function (i, e) {
@@ -41,6 +42,10 @@ $(document).on("turbolinks:load", function () {
 
         $.each($(".autor-honorario"), function (i, e) {
             totals.honorario += parseFloat($(e).html().split('.').join("").replace(",","."));
+        });
+
+        $.each($(".autor-total-individual"), function (i, e) {
+            totals.total_individual += parseFloat($(e).html().split('.').join("").replace(",","."));
         });
 
         var subtotal = totals.bruto + totals.juros,
@@ -108,11 +113,19 @@ $(document).on("turbolinks:load", function () {
         totals.honorario = totals.honorario.join(",");
         $(".total-honorario").html(totals.honorario);
 
+        totals.total_individual = totals.total_individual.toFixed(2);
+        totals.total_individual = totals.total_individual.split(".");
+        totals.total_individual[0] = Useful.formata_numero(totals.total_individual[0]);
+        totals.total_individual = totals.total_individual.join(",");
+        $(".total-individual").html(totals.total_individual);
+
     },500);
 });
 
 $(function () {
     $(document).on("click","#print_resumo", function() {
+        var $this = $(this);
+        $this.hide();
         $(".container").css("visibility", "hidden");
         $("body").toggleClass("print-resumo");
         $(".resumo-page").switchClass("width-percent-70", "width-percent-100");
@@ -122,6 +135,7 @@ $(function () {
             setTimeout(function () {
                 $(".resumo-page").switchClass("width-percent-100", "width-percent-70");
                 $("body").toggleClass("print-resumo");
+                $this.show();
             },500);
         }, 500);
     });
