@@ -171,6 +171,20 @@ $(document).on('turbolinks:load', function() {
             var string = $(e).val().split("-");
             $(e).val(string[2]+"/"+string[1]+"/"+string[0]);
         });
+
+        var error_custas = $(".custas-error");
+
+        if(error_custas.length > 0){
+            $.each(error_custas , function(i, e){
+                var edit_btn = $(e).parents("ul").find(".edit-custa");
+                edit_btn.trigger('click');
+            });
+        }
+
+        $(".processo_custas_custas_data.has-error").parents(".col-xs-2").css("height", "45px");
+
+        $(".processo_custas_custas_data.has-error input").val("");
+
     }, 500);
 
     $('#autors, #custas').on('cocoon:before-insert', function(e, insertedItem) {

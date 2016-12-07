@@ -216,12 +216,11 @@
                                 <% unless c.new_record? %>
                                     <ul class="list-inline">
                                         <li>
-                                            <%=
-                                                c.custas_data.strftime("%d/%m/%Y")
+                                            <%= c.custas_data.nil? ? "<span class='custas-error text-danger'>Data Inválida!</span>".html_safe : c.custas_data.strftime("%d/%m/%Y")
                                             %>
                                         </li>
                                         <li>
-                                            <%= ('%.02f' % c.custas_valor).gsub(".", ",") %>
+                                            <%= c.custas_valor.nil? ? "<span class='custas-error text-danger'>Valor Inválido!<span>".html_safe : ('%.02f' % c.custas_valor).gsub(".", ",") %>
                                         </li>
                                         <li>
                                             <%= c.indice.to_s.gsub(".", ",") %>
