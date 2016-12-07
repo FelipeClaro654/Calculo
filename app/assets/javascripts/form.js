@@ -62,13 +62,13 @@ $(document).on('turbolinks:load', function() {
             $(".hidden-form-autors").removeClass('hidden');
         },
         esconde_custas_ja_salvas: function () {
-            var inputs = $("#custas input[name*='[id]']");
+            /*var inputs = $("#custas input[name*='[id]']");
 
             $.each(inputs, function () {
                 $(this).prev().hide();
             });
 
-            $(".hidden-form-custas").removeClass('hidden');
+            $(".hidden-form-custas").removeClass('hidden');*/
         },
         show_message: function (msg, type) {
             var div = '<div class="alert quick-alert '+type+'" role="alert">'+msg+'</div>';
@@ -132,9 +132,10 @@ $(document).on('turbolinks:load', function() {
         input.css("display","block");
         $(this).parents("ul").replaceWith(input);
         input.find(".btn-remove-autor").removeClass("margin-top-14").addClass("neg-margin-top-3");
+        debugger;
         input.find("label").remove();
         input.find(".col-xs-2,.col-xs-1").removeClass('margin-top-12');
-        input.find(".col-xs-2,.col-xs-1").css("height", "32px");
+        input.find(".col-xs-2,.col-xs-1").css("height", "42px");
         input.find("hr").remove();
         input.find(".custas-data").change(function () {
             var $this = $(this);
@@ -176,15 +177,18 @@ $(document).on('turbolinks:load', function() {
 
         if(error_custas.length > 0){
             $.each(error_custas , function(i, e){
-                var edit_btn = $(e).parents("ul").find(".edit-custa");
-                edit_btn.trigger('click');
+                $(e).parents("ul").addClass('error-ul-custas');
             });
+
+            $(".error-ul-custas").find(".edit-custa").trigger("click");
+
+            setTimeout(function () {
+                $.each($(".processo_custas_custas_data.has-error") , function(i, e){
+                    $(e).find("input").val("");
+                    $(e).parents(".col-xs-2").css("height", "48px");
+                });
+            },700)
         }
-
-        $(".processo_custas_custas_data.has-error").parents(".col-xs-2").css("height", "45px");
-
-        $(".processo_custas_custas_data.has-error input").val("");
-
     }, 500);
 
     $('#autors, #custas').on('cocoon:before-insert', function(e, insertedItem) {
