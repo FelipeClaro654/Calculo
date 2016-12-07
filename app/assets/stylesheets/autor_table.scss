@@ -61,6 +61,14 @@
     width: 92.5%;
     margin-right: 0;
 
+    .diferenca-column{
+        width: 4%;
+    }
+
+    .meses-column{
+        width: 7%;
+    }
+
     .panel-body{
         padding: 10px;
     }
@@ -116,7 +124,7 @@
     }
 
     .table-liquidacao tr td:nth-child(1), .table-liquidacao tr td:nth-child(2) {
-        padding-right: 18px !important;
+        padding-right: 20px !important;
     }
 }
 
