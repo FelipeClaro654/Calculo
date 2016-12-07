@@ -71,7 +71,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label class="pull-left">Juros:</label>
+                            <label class="pull-left">Juros ao Ano:</label>
                             <div data-juros="<%= @autor.processo.juros %>"
                                 class="juros-processo pull-right autor-table-overflow">
                                 <%= (@autor.processo.juros * 12 ).to_s.gsub(".",",") %>%
@@ -171,11 +171,11 @@
                 <th>
                     Desconto da<br>Previdência<br>
                     <% if @autor.processo.cbpm_ipesp_valor > 0 %>
-                        <%= @autor.processo.cbpm_ipesp.nome %>
+                        <%= @autor.processo.cbpm_ipesp.nome %><br>
                         <%= ('%.02f' % @autor.processo.cbpm_ipesp_valor).gsub(".", ",") %>%<br>
                     <% end %>
                     <% if @autor.processo.cruz_iamspe_valor > 0%>
-                        <%= @autor.processo.cruz_iamspe.nome %>
+                        <%= @autor.processo.cruz_iamspe.nome %><br>
                         <%= ('%.02f' % @autor.processo.cruz_iamspe_valor).gsub(".", ",") %>%
                     <% end %>
                 </th>

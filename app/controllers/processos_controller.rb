@@ -276,7 +276,7 @@ class ProcessosController < ApplicationController
         :cruz_iamspe_valor,
         :data_calculo_id,
         custas_attributes: [:id, :custas_data, :custas_valor, :custas_corrigida, :indice, :folhas, :_destroy],
-        autors_attributes: [:id, :nome, :periodo_inicial, :periodo_final, :_destroy]
+        autors_attributes: [:id, :nome, :periodo_inicial, :periodo_final, :folhas, :_destroy]
         )
     end
 end

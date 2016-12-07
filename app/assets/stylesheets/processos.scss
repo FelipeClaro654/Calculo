@@ -52,12 +52,15 @@ label:not(.checkbox, .radio):after {
 
 .list-autor{
     :first-child{
-        width: 52%;
+        width: 35%;
     }
     :nth-child(2), :nth-child(3){
         width: 18%;
     }
     :nth-child(4){
+        width: 10%;
+    }
+    :nth-child(5){
         width: 2%;
     }
 }

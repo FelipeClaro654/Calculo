@@ -1,6 +1,6 @@
 <div class="nested-fields">
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-4">
             <%= f.input :nome %>
         </div>
         <div class="col-xs-2">
@@ -12,6 +12,9 @@
             <%= f.input :periodo_final, label: false,
             as: :string,
             :input_html => { :placeholder => "__/__/__", :class => "calendario margin-top-17" }%>
+        </div>
+        <div class="col-xs-2">
+            <%= f.input :folhas %>
         </div>
         <div class="col-xs-1">
             <%= link_to_remove_association "Remover", f,
