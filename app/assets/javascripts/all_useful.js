@@ -14,5 +14,6 @@ $(document).on("click",".toggle-panel", function() {
     }
 
     icon.parents(".panel").find(".panel-body").toggleClass('hidden');
+    icon.parents(".panel").find(".toggle-optional").toggleClass('hidden');
 
 });

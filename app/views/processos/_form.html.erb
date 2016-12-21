@@ -199,7 +199,7 @@
                             <span class="custas-total toggle-optional pull-right">
                                 <% unless @processo.autors.empty? %>
                                     <%= @processo.autors.first.custas.nil? ? "0" : ('%.02f' % @processo.autors.first.custas).gsub(".", ",") %>
-                                <% end %>
+                                <% end %> por autor
                             </span>
                         </h6>
                     </div>
