@@ -151,10 +151,6 @@ $(function () {
         }
     });
 
-    $(document).on("change","#processo_data_base", function() {
-        Autor_Table.retorna_indice();
-    });
-
     $(document).on("click","#print_autor_table", function() {
         var $this = $(this);
         $this.hide();

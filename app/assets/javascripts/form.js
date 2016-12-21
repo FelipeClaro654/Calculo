@@ -62,13 +62,13 @@ $(document).on('turbolinks:load', function() {
             $(".hidden-form-autors").removeClass('hidden');
         },
         esconde_custas_ja_salvas: function () {
-            /*var inputs = $("#custas input[name*='[id]']");
+            var inputs = $("#custas input[name*='[id]']");
 
             $.each(inputs, function () {
                 $(this).prev().hide();
             });
 
-            $(".hidden-form-custas").removeClass('hidden');*/
+            $(".hidden-form-custas").removeClass('hidden');
         },
         show_message: function (msg, type) {
             var div = '<div class="alert quick-alert '+type+'" role="alert">'+msg+'</div>';
@@ -109,6 +109,11 @@ $(document).on('turbolinks:load', function() {
             }
         },
         set_custas_corrigida: function (element) {
+            if($("#processo_indice_tabela").val() === ""){
+                Forms.show_message("Selecione a Data Base no processo para calcular custas.", "alert-warning");
+                $("#processo_data_base").effect("highlight").focus();
+                return false;
+            }
             var parent = element.parents(".nested-fields");
                 corrigida = Forms.calcula_custas_corrigida(parseFloat(parent.find(".custas-valor").val()),
                                                             parseFloat(parent.find(".custas-indice").val().replace(",", ".")),
@@ -118,8 +123,17 @@ $(document).on('turbolinks:load', function() {
                 return false;
             }
             parent.find(".custas-corrigida").val(corrigida.toFixed(2).replace(".",","));
+            parent.find(".help-block").remove();
+            parent.find(".has-error").removeClass("has-error");
         }
     }
+
+    $(document).on("change","#processo_data_base", function() {
+        Autor_Table.retorna_indice();
+        $.each($(".custas-valor"), function (i, e) {
+            Forms.set_custas_corrigida($(e));
+        });
+    });
 
     $(document).on("change",".panel-autor .calendario", function() {
         if($(this).val() != ""){
@@ -127,12 +141,27 @@ $(document).on('turbolinks:load', function() {
         }
     });
 
+    $(document).on("change",".custas-valor", function() {
+        Forms.set_custas_corrigida($(this));
+    });
+
+    $(document).on("change",".custas-data", function() {
+        var $this = $(this);
+        Forms.retorna_indice(
+            $(this),
+            $("#processo_tabela_atualizacao_id option:selected").text(),
+            ".custas-indice"
+        );
+        setTimeout(function () {
+            Forms.set_custas_corrigida($this.parents(".nested-fields").find(".custas-valor"));
+        }, 300);
+    });
+
     $(document).on("click",".edit-custa", function() {
-        var input = $(".hidden-form-custas input[value='"+$(this).data("custa-id")+"']").prev();
+        var input = $(".hidden-form-custas input[type='hidden'][value='"+$(this).data("custa-id")+"']").prev();
         input.css("display","block");
         $(this).parents("ul").replaceWith(input);
         input.find(".btn-remove-autor").removeClass("margin-top-14").addClass("neg-margin-top-3");
-        debugger;
         input.find("label").remove();
         input.find(".col-xs-2,.col-xs-1").removeClass('margin-top-12');
         input.find(".col-xs-2,.col-xs-1").css("height", "42px");
@@ -165,12 +194,23 @@ $(document).on('turbolinks:load', function() {
         if($(".custas-indice").length > 0){
             $(".custas-indice").val($(".custas-indice").val().replace(".", ","));
         }
+
+        $.each($(".custas-valor"), function (i, e) {
+            var decimal = $(e).val().split(".")[1];
+            if(decimal.length < 2){
+                decimal = decimal + "0";
+                $(e).val( $(e).val().split(".")[0]+ decimal);
+            }
+        });
+
         $(".custas-valor").mask('000,00', {reverse: true});
         $(".custas-corrigida").mask('000,00', {reverse: true});
 
         $.each($(".custas-data"), function (i, e) {
             var string = $(e).val().split("-");
-            $(e).val(string[2]+"/"+string[1]+"/"+string[0]);
+            if(string.length > 1){
+                $(e).val(string[2]+"/"+string[1]+"/"+string[0]);
+            }
         });
 
         var error_custas = $(".custas-error");
@@ -179,17 +219,16 @@ $(document).on('turbolinks:load', function() {
             $.each(error_custas , function(i, e){
                 $(e).parents("ul").addClass('error-ul-custas');
             });
-
             $(".error-ul-custas").find(".edit-custa").trigger("click");
-
-            setTimeout(function () {
-                $.each($(".processo_custas_custas_data.has-error") , function(i, e){
-                    $(e).find("input").val("");
-                    $(e).parents(".col-xs-2").css("height", "48px");
-                });
-            },700)
         }
-    }, 500);
+    }, 200);
+
+    setTimeout(function () {
+        $.each($(".processo_custas_custas_data.has-error") , function(i, e){
+            $(e).find("input").val("");
+            $(e).parents(".col-xs-2").css("height", "48px");
+        });
+    },500)
 
     $('#autors, #custas').on('cocoon:before-insert', function(e, insertedItem) {
         insertedItem.find(".calendario").datepicker({
