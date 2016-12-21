@@ -196,14 +196,15 @@ $(document).on('turbolinks:load', function() {
         }
 
         $.each($(".custas-valor"), function (i, e) {
-            var decimal = $(e).val().split(".")[1];
+            var delimiter = $(e).val().includes(".") ? "." : ",",
+                decimal = $(e).val().split(delimiter)[1];
             if(decimal.length < 2){
                 decimal = decimal + "0";
-                $(e).val( $(e).val().split(".")[0]+ decimal);
+                $(e).val( $(e).val().split(delimiter)[0] + delimiter + decimal);
             }
+            $(e).mask('000,00', {reverse: true});
         });
 
-        $(".custas-valor").mask('000,00', {reverse: true});
         $(".custas-corrigida").mask('000,00', {reverse: true});
 
         $.each($(".custas-data"), function (i, e) {

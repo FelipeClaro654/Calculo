@@ -196,7 +196,7 @@
                         <h6 class="panel-title">
                             <span class="glyphicon glyphicon-menu-right pull-left icon-toggle-panel" aria-hidden="true"></span>
                             Custas
-                            <span class="custas-total toggle-optional">
+                            <span class="custas-total toggle-optional pull-right">
                                 <% unless @processo.autors.empty? %>
                                     <%= @processo.autors.first.custas.nil? ? "0" : ('%.02f' % @processo.autors.first.custas).gsub(".", ",") %>
                                 <% end %>
