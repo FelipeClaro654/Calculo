@@ -174,15 +174,24 @@
             </div>
             <div class="row">
                 <div class="col-xs-4">
-                    <div class=" form-group">
-                        <%= f.label :base_calculo_autor %>
-                        <%= f.text_field :base_calculo_autor,
+                    <%= f.label :base_calculo_autor %>
+                    <%= f.text_field :base_calculo_autor,
                         class: "form-control" %>
-                    </div>
                 </div>
                 <div class="col-xs-2">
-                    <div class=" form-group">
-                        <%= f.input :sucumbencia %>
+                    <%= f.input :sucumbencia, as: :string,
+                    :input_html => {
+                        :placeholder => "Valor %",
+                        :value => @processo.sucumbencia.nil? ? "" : '%.02f' % @processo.sucumbencia,
+                    } %>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <%= f.label :tipo_sucumbencia_id %>
+                        <%= f.collection_select :tipo_sucumbencia_id,
+                            TipoSucumbencia.all, :id, :nome,
+                            {:include_blank => false},
+                            {:class => 'form-control '} %>
                     </div>
                 </div>
             </div>

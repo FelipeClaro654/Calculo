@@ -38,6 +38,7 @@ $(document).on('turbolinks:load', function() {
             $("#processo_cbpm_ipesp_valor").val($("#processo_cbpm_ipesp_valor").val().replace(",", "."));
             $("#processo_cruz_iamspe_valor").val($("#processo_cruz_iamspe_valor").val().replace(",", "."));
             $("#processo_indice_tabela").val($("#processo_indice_tabela").val().replace(",", "."));
+            $("#processo_sucumbencia").val($("#processo_sucumbencia").val().replace(",", "."));
 
             $.each($(".custas-valor"), function (i, e) {
                 $(e).val($(e).val().replace(",", "."));
@@ -101,10 +102,12 @@ $(document).on('turbolinks:load', function() {
                 })
                 .done(function(result) {
                     $("#processo_juros").val(result.juros_atualizado);
+                    $("#processo_indice_tabela, .custas-indice, .custas-corrigida").removeAttr("disabled");
                     $(".process-form").submit();
                 });
 
             }else{
+                $("#processo_indice_tabela, .custas-indice, .custas-corrigida").removeAttr("disabled");
                 $(".process-form").submit();
             }
         },
@@ -276,8 +279,8 @@ $(document).on('turbolinks:load', function() {
 
     $(".gerar-pagamentos").click(function () {
         Forms.corrige_decimais();
-        $("#processo_indice_tabela, .custas-indice, .custas-corrigida").removeAttr("disabled");
         Forms.atualiza_juros();
+
     })
 
     $(".delete-autor").click(function() {
@@ -312,7 +315,7 @@ $(document).on('turbolinks:load', function() {
 
     });
 
-    $("#processo_juros, #processo_cbpm_ipesp_valor, #processo_cruz_iamspe_valor").
+    $("#processo_juros, #processo_cbpm_ipesp_valor, #processo_cruz_iamspe_valor, #processo_sucumbencia").
         mask('000,00', {reverse: true});
 
     Forms.esconde_autores_ja_salvos();

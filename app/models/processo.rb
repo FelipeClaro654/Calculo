@@ -16,6 +16,8 @@ class Processo < ApplicationRecord
   validates :juros, presence: true
   validates :cruz_iamspe_valor, presence: true
   validates :processo_autor, presence: true
+  validates :sucumbencia, presence: true
+  validates :tipo_sucumbencia, presence: true
   has_many :autors, :dependent => :destroy, :inverse_of => :processo
   has_many :custas, :dependent => :destroy, :inverse_of => :processo
   accepts_nested_attributes_for :autors, reject_if: :all_blank, allow_destroy: true
@@ -25,4 +27,5 @@ class Processo < ApplicationRecord
   belongs_to :data_calculo
   belongs_to :tabela_atualizacao
   belongs_to :tipo_juro
+  belongs_to :tipo_sucumbencia
 end

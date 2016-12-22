@@ -14,3 +14,6 @@ CruzIamspe.create!(nome: 'IAMSPE')
 
 DataCalculo.create!(nome: 'Data')
 DataCalculo.create!(nome: 'Citação')
+
+TipoSucumbencia.create!(nome: '%')
+TipoSucumbencia.create!(nome: 'valor')

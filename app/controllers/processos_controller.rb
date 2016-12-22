@@ -108,7 +108,6 @@ class ProcessosController < ApplicationController
 
     def calcula_pagamentos(a, b, g, processo, periodo, is_decimo)
         g = atualiza_meses(processo.data_citacao, periodo, g)
-
         c = processo.indice_tabela
 
         if is_decimo
@@ -118,6 +117,7 @@ class ProcessosController < ApplicationController
             prev_porc = processo.cbpm_ipesp_valor
             assist_porc = processo.cruz_iamspe_valor
         end
+
         data_calculo = processo.data_calculo.nome
         juros_porc = processo.juros
         d = (a.to_d)/b*c
@@ -132,8 +132,13 @@ class ProcessosController < ApplicationController
         f = f.round(2)
         h = f*g*juros_porc/100
         h = h.round(2)
-        honorario = (d + h)*10/100
-        honorario = honorario.round(2)
+
+        if processo.tipo_sucumbencia.nome == "%"
+            honorario = (d + h)*processo.sucumbencia/100
+            honorario = honorario.round(2)
+        else
+            honorario = 0
+        end
 
         results = {
             "bruto_atualizacao": d,
@@ -275,6 +280,8 @@ class ProcessosController < ApplicationController
         :cruz_iamspe_id,
         :cruz_iamspe_valor,
         :data_calculo_id,
+        :sucumbencia,
+        :tipo_sucumbencia_id,
         custas_attributes: [:id, :custas_data, :custas_valor, :custas_corrigida, :indice, :folhas, :_destroy],
         autors_attributes: [:id, :nome, :periodo_inicial, :periodo_final, :folhas, :_destroy]
         )

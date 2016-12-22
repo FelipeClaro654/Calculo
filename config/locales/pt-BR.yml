@@ -29,6 +29,7 @@ pt-BR:
         cruz_iamspe_id: "Assist. Médica"
         data_calculo_id: "Data cálculo"
         sucumbencia: "Sucumbência"
+        sucumbencia_tipo: "Tipo Sucumbência"
   date:
     abbr_day_names:
     - Dom

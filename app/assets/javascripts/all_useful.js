@@ -4,16 +4,18 @@ Useful = {
     }
 }
 
-$(document).on("click",".toggle-panel", function() {
-    var icon = $(this).find(".icon-toggle-panel");
+$(document).on('turbolinks:load', function() {
+    $(document).on("click",".toggle-panel", function() {
+        var icon = $(this).find(".icon-toggle-panel");
 
-    if(icon.hasClass("glyphicon-menu-right")){
-        icon.switchClass("glyphicon-menu-right", "glyphicon-menu-down", "fast");
-    }else{
-        icon.switchClass("glyphicon-menu-down", "glyphicon-menu-right", "fast");
-    }
+        if(icon.hasClass("glyphicon-menu-right")){
+            icon.switchClass("glyphicon-menu-right", "glyphicon-menu-down", "fast");
+        }else{
+            icon.switchClass("glyphicon-menu-down", "glyphicon-menu-right", "fast");
+        }
 
-    icon.parents(".panel").find(".panel-body").toggleClass('hidden');
-    icon.parents(".panel").find(".toggle-optional").toggleClass('hidden');
+        icon.parents(".panel").find(".panel-body").toggleClass('hidden');
+        icon.parents(".panel").find(".toggle-optional").toggleClass('hidden');
 
+    });
 });
