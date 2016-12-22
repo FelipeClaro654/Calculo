@@ -128,6 +128,15 @@ $(document).on('turbolinks:load', function() {
         }
     }
 
+    $(document).on("click", ".custas-heading", function () {
+        if($(".btn-add-autor").hasClass('default-position')){
+            $(".btn-add-autor").css("top", "256px");
+        }else{
+            $(".btn-add-autor").css("top", "51px");
+        }
+        $(".btn-add-autor").toggleClass('default-position');
+    });
+
     $(document).on("change","#processo_data_base", function() {
         Autor_Table.retorna_indice();
         $.each($(".custas-valor"), function (i, e) {

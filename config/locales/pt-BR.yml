@@ -28,6 +28,7 @@ pt-BR:
         cbpm_ipesp_id: "Previdência"
         cruz_iamspe_id: "Assist. Médica"
         data_calculo_id: "Data cálculo"
+        sucumbencia: "Sucumbência"
   date:
     abbr_day_names:
     - Dom
