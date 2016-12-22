@@ -78,8 +78,9 @@ label:not(.checkbox, .radio):after {
     right: 4px;
 }
 
-.panel-autor,
-.panel-custas{
+.panel-body-autor,
+.panel-body-custas,
+.panel-body-sucumbencia{
     height: 205px;
     overflow: hidden;
     overflow-y: scroll;

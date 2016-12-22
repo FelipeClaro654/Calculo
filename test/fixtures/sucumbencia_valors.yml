@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  valor: 9.99
+  sucumbencia_data: 2016-12-22
+  sucumbencia_corrigida: 9.99
+  indice: 9.99
+  folhas: MyString
+  processo: one
+
+two:
+  valor: 9.99
+  sucumbencia_data: 2016-12-22
+  sucumbencia_corrigida: 9.99
+  indice: 9.99
+  folhas: MyString
+  processo: two

@@ -1,17 +1,16 @@
 <div class="nested-fields">
     <div class="row">
         <div class="col-xs-2 margin-top-12">
-            <%= f.input :custas_data, label: "Data",
+            <%= f.input :sucumbencia_data, label: "Data",
             as: :string,
             :input_html => { :placeholder => "__/__/__",
-                             :class => "calendario custas-data" }%>
-
+                             :class => "calendario sucumbencia-data" }%>
         </div>
         <div class="col-xs-2 margin-top-12">
-            <%= f.input :custas_valor, label: "Custas",
+            <%= f.input :valor, label: "Sucumbência",
             as: :string,
             :input_html => {
-                :class => "custas-valor"
+                :class => "sucumbencia-valor"
             }%>
         </div>
         <div class="col-xs-2">
@@ -19,15 +18,15 @@
             as: :string,
             :input_html => {
                 :disabled => true,
-                :class => "custas-indice"
+                :class => "sucumbencia-indice"
             }%>
         </div>
         <div class="col-xs-2 margin-top-12">
-            <%= f.input :custas_corrigida, label: "Corrigida",
+            <%= f.input :sucumbencia_corrigida, label: "Corrigida",
             as: :string,
             :input_html => {
                 :disabled => true,
-                :class => "custas-corrigida"
+                :class => "sucumbencia-corrigida"
             }%>
         </div>
         <div class="col-xs-2 margin-top-12">
@@ -35,7 +34,7 @@
         </div>
         <div class="col-xs-1 margin-top-12">
             <%= link_to_remove_association "Remover", f,
-                  :class => "btn btn-danger pull-right margin-left-5 btn-remove-custa margin-top-14 neg-margin-right-38"%>
+                  :class => "btn btn-danger pull-right margin-left-5 btn-remove-sucumbencia margin-top-14 neg-margin-right-38"%>
         </div>
     </div>
     <hr>

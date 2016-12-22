@@ -1,9 +1,9 @@
 var ano_atual = moment().year().toString();
 
-$(document).on('turbolinks:load', function() {
+$(function () {
 
     Forms ={
-        calcula_custas_corrigida : function (valor, obrigacao, atualizacao) {
+        calcula_corrigida : function (valor, obrigacao, atualizacao) {
             if((valor === "" || obrigacao === "" || atualizacao === "") ||
                 (valor === 0 || obrigacao === 0 || atualizacao === 0)){
                 return false;
@@ -52,24 +52,21 @@ $(document).on('turbolinks:load', function() {
                 $(e).val($(e).val().replace(",", "."));
             });
         },
-
-        esconde_autores_ja_salvos: function () {
-            var inputs = $("#autors input[name*='[id]']");
+        esconde_ja_salvos: function (type) {
+            var inputs = $("#"+type+" input[name*='[id]']");
 
             $.each(inputs, function () {
                 $(this).prev().hide();
             });
 
-            $(".hidden-form-autors").removeClass('hidden');
+            $(".hidden-form-"+type).removeClass('hidden');
         },
-        esconde_custas_ja_salvas: function () {
-            var inputs = $("#custas input[name*='[id]']");
-
-            $.each(inputs, function () {
-                $(this).prev().hide();
-            });
-
-            $(".hidden-form-custas").removeClass('hidden');
+        toggle_sucumbencia: function () {
+            if($("#processo_tipo_sucumbencia_id option:selected").text() == "valor"){
+                $(".panel-sucumbencia").removeClass('hidden');
+            }else{
+                $(".panel-sucumbencia").addClass('hidden');
+            }
         },
         show_message: function (msg, type) {
             var div = '<div class="alert quick-alert '+type+'" role="alert">'+msg+'</div>';
@@ -111,25 +108,29 @@ $(document).on('turbolinks:load', function() {
                 $(".process-form").submit();
             }
         },
-        set_custas_corrigida: function (element) {
+        set_corrigida: function (element, type) {
             if($("#processo_indice_tabela").val() === ""){
-                Forms.show_message("Selecione a Data Base no processo para calcular custas.", "alert-warning");
+                Forms.show_message("Selecione a Data Base no processo para calcular "+type+".", "alert-warning");
                 $("#processo_data_base").effect("highlight").focus();
                 return false;
             }
             var parent = element.parents(".nested-fields");
-                corrigida = Forms.calcula_custas_corrigida(parseFloat(parent.find(".custas-valor").val()),
-                                                            parseFloat(parent.find(".custas-indice").val().replace(",", ".")),
+                corrigida = Forms.calcula_corrigida(parseFloat(parent.find("."+type+"-valor").val()),
+                                                            parseFloat(parent.find("."+type+"-indice").val().replace(",", ".")),
                                                             parseFloat($("#processo_indice_tabela").val())
                                                         );
             if(!corrigida){
                 return false;
             }
-            parent.find(".custas-corrigida").val(corrigida.toFixed(2).replace(".",","));
+            parent.find("."+type+"-corrigida").val(corrigida.toFixed(2).replace(".",","));
             parent.find(".help-block").remove();
             parent.find(".has-error").removeClass("has-error");
         }
     }
+
+    $(document).on("change", "#processo_tipo_sucumbencia_id", function () {
+        Forms.toggle_sucumbencia();
+    });
 
     $(document).on("click", ".custas-heading", function () {
         if($(".btn-add-autor").hasClass('default-position')){
@@ -143,7 +144,8 @@ $(document).on('turbolinks:load', function() {
     $(document).on("change","#processo_data_base", function() {
         Autor_Table.retorna_indice();
         $.each($(".custas-valor"), function (i, e) {
-            Forms.set_custas_corrigida($(e));
+            Forms.set_corrigida($(e), "custas");
+            Forms.set_corrigida($(e), "sucumbencia");
         });
     });
 
@@ -154,7 +156,24 @@ $(document).on('turbolinks:load', function() {
     });
 
     $(document).on("change",".custas-valor", function() {
-        Forms.set_custas_corrigida($(this));
+        Forms.set_corrigida($(this), "custas");
+    });
+
+    $(document).on("change",".sucumbencia-valor", function() {
+        Forms.set_corrigida($(this), "sucumbencia");
+    });
+
+    //TODO: EXTRAIR FUNÇÕES DE DATA E VALOR DAS CUSTAS PARA FUNÇÕES, APROVEITA-LAS PARA SUCUMBENCIA
+    $(document).on("change",".sucumbencia-valor", function() {
+        var $this = $(this);
+        Forms.retorna_indice(
+            $(this),
+            $("#processo_tabela_atualizacao_id option:selected").text(),
+            ".sucumbencia-indice"
+        );
+        setTimeout(function () {
+            Forms.set_corrigida($this.parents(".nested-fields").find(".sucumbencia-valor"), "sucumbencia");
+        }, 300);
     });
 
     $(document).on("change",".custas-data", function() {
@@ -165,7 +184,7 @@ $(document).on('turbolinks:load', function() {
             ".custas-indice"
         );
         setTimeout(function () {
-            Forms.set_custas_corrigida($this.parents(".nested-fields").find(".custas-valor"));
+            Forms.set_corrigida($this.parents(".nested-fields").find(".custas-valor"), "custas");
         }, 300);
     });
 
@@ -186,12 +205,38 @@ $(document).on('turbolinks:load', function() {
                 ".custas-indice"
             );
             setTimeout(function () {
-                Forms.set_custas_corrigida($this.parents(".nested-fields").find(".custas-valor"));
+                Forms.set_corrigida($this.parents(".nested-fields").find(".custas-valor"), "custas");
             }, 300);
         });
 
         input.find(".custas-valor").change(function () {
-            Forms.set_custas_corrigida($(this));
+            Forms.set_corrigida($(this), "custas");
+        });
+    });
+
+    $(document).on("click",".edit-sucumbencia", function() {
+        var input = $(".hidden-form-sucumbencia input[type='hidden'][value='"+$(this).data("custa-id")+"']").prev();
+        input.css("display","block");
+        $(this).parents("ul").replaceWith(input);
+        input.find(".btn-remove-autor").removeClass("margin-top-14").addClass("neg-margin-top-3");
+        input.find("label").remove();
+        input.find(".col-xs-2,.col-xs-1").removeClass('margin-top-12');
+        input.find(".col-xs-2,.col-xs-1").css("height", "42px");
+        input.find("hr").remove();
+        input.find(".sucumbencia-data").change(function () {
+            var $this = $(this);
+            Forms.retorna_indice(
+                $(this),
+                $("#processo_tabela_atualizacao_id option:selected").text(),
+                ".sucumbencia-indice"
+            );
+            setTimeout(function () {
+                Forms.set_corrigida($this.parents(".nested-fields").find(".sucumbencia-valor"), "sucumbencia");
+            }, 300);
+        });
+
+        input.find(".sucumbencia-valor").change(function () {
+            Forms.set_corrigida($(this), "sucumbencia");
         });
     });
 
@@ -234,6 +279,38 @@ $(document).on('turbolinks:load', function() {
             });
             $(".error-ul-custas").find(".edit-custa").trigger("click");
         }
+
+        if($(".sucumbencia-indice").length > 0){
+            $(".sucumbencia-indice").val($(".sucumbencia-indice").val().replace(".", ","));
+        }
+
+        $.each($(".sucumbencia-valor"), function (i, e) {
+            var delimiter = $(e).val().includes(".") ? "." : ",",
+                decimal = $(e).val().split(delimiter)[1];
+            if(decimal.length < 2){
+                decimal = decimal + "0";
+                $(e).val( $(e).val().split(delimiter)[0] + delimiter + decimal);
+            }
+            $(e).mask('000,00', {reverse: true});
+        });
+
+        $(".sucumbencia-corrigida").mask('000,00', {reverse: true});
+
+        $.each($(".sucumbencia-data"), function (i, e) {
+            var string = $(e).val().split("-");
+            if(string.length > 1){
+                $(e).val(string[2]+"/"+string[1]+"/"+string[0]);
+            }
+        });
+
+        var error_sucumbencia = $(".sucumbencia-error");
+
+        if(error_sucumbencia.length > 0){
+            $.each(error_sucumbencia , function(i, e){
+                $(e).parents("ul").addClass('error-ul-sucumbencia');
+            });
+            $(".error-ul-sucumbencia").find(".edit-sucumbencia").trigger("click");
+        }
     }, 200);
 
     setTimeout(function () {
@@ -241,16 +318,9 @@ $(document).on('turbolinks:load', function() {
             $(e).find("input").val("");
             $(e).parents(".col-xs-2").css("height", "48px");
         });
-    },500)
+    },500);
 
-    $('#autors, #custas').on('cocoon:before-insert', function(e, insertedItem) {
-        insertedItem.find(".calendario").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: "dd/mm/yy",
-            yearRange: "1950:" + ano_atual
-        });
-
+    $('#custas').on('cocoon:before-insert', function(e, insertedItem) {
         insertedItem.find(".custas-data").change(function () {
             var $this = $(this);
             Forms.retorna_indice(
@@ -259,16 +329,44 @@ $(document).on('turbolinks:load', function() {
                 ".custas-indice"
             );
             setTimeout(function () {
-                Forms.set_custas_corrigida($this.parents(".nested-fields").find(".custas-valor"));
+                Forms.set_corrigida($this.parents(".nested-fields").find(".custas-valor"), "custas");
             }, 300);
         });
 
         insertedItem.find(".custas-valor").change(function () {
-            Forms.set_custas_corrigida($(this));
+            Forms.set_corrigida($(this), "custas");
         });
 
         insertedItem.find(".custas-valor").mask('000,00', {reverse: true});
+    });
 
+    $('#sucumbencia_valors').on('cocoon:before-insert', function(e, insertedItem) {
+        insertedItem.find(".sucumbencia-data").change(function () {
+            var $this = $(this);
+            Forms.retorna_indice(
+                $(this),
+                $("#processo_tabela_atualizacao_id option:selected").text(),
+                ".sucumbencia-indice"
+            );
+            setTimeout(function () {
+                Forms.set_corrigida($this.parents(".nested-fields").find(".sucumbencia-valor"), "sucumbencia");
+            }, 300);
+        });
+
+        insertedItem.find(".sucumbencia-valor").change(function () {
+            Forms.set_corrigida($(this), "sucumbencia");
+        });
+
+        insertedItem.find(".sucumbencia-valor").mask('000,00', {reverse: true});
+    });
+
+    $('#autors').on('cocoon:before-insert', function(e, insertedItem) {
+        insertedItem.find(".calendario").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            yearRange: "1950:" + ano_atual
+        });
     });
 
     $(".has-error input").focus(function () {
@@ -318,6 +416,8 @@ $(document).on('turbolinks:load', function() {
     $("#processo_juros, #processo_cbpm_ipesp_valor, #processo_cruz_iamspe_valor, #processo_sucumbencia").
         mask('000,00', {reverse: true});
 
-    Forms.esconde_autores_ja_salvos();
-    Forms.esconde_custas_ja_salvas();
+    Forms.esconde_ja_salvos("autors");
+    Forms.esconde_ja_salvos("custas");
+    Forms.toggle_sucumbencia("custas");
+
 });

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222170809) do
+ActiveRecord::Schema.define(version: 20161222193031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,18 @@ ActiveRecord::Schema.define(version: 20161222170809) do
     t.integer  "tipo_sucumbencia_id"
   end
 
+  create_table "sucumbencia_valors", force: :cascade do |t|
+    t.decimal  "valor"
+    t.date     "sucumbencia_data"
+    t.decimal  "sucumbencia_corrigida"
+    t.decimal  "indice"
+    t.string   "folhas"
+    t.integer  "processo_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["processo_id"], name: "index_sucumbencia_valors_on_processo_id", using: :btree
+  end
+
   create_table "tabela_atualizacaos", force: :cascade do |t|
     t.string   "nome"
     t.datetime "created_at", null: false
@@ -177,4 +189,5 @@ ActiveRecord::Schema.define(version: 20161222170809) do
 
   add_foreign_key "custa", "processos"
   add_foreign_key "pagamentos", "autors"
+  add_foreign_key "sucumbencia_valors", "processos"
 end

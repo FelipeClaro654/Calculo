@@ -4,8 +4,9 @@ Useful = {
     }
 }
 
-$(document).on('turbolinks:load', function() {
+$(function () {
     $(document).on("click",".toggle-panel", function() {
+        debugger;
         var icon = $(this).find(".icon-toggle-panel");
 
         if(icon.hasClass("glyphicon-menu-right")){

@@ -179,13 +179,6 @@
                         class: "form-control" %>
                 </div>
                 <div class="col-xs-2">
-                    <%= f.input :sucumbencia, as: :string,
-                    :input_html => {
-                        :placeholder => "Valor %",
-                        :value => @processo.sucumbencia.nil? ? "" : '%.02f' % @processo.sucumbencia,
-                    } %>
-                </div>
-                <div class="col-xs-2">
                     <div class="form-group">
                         <%= f.label :tipo_sucumbencia_id %>
                         <%= f.collection_select :tipo_sucumbencia_id,
@@ -193,6 +186,13 @@
                             {:include_blank => false},
                             {:class => 'form-control '} %>
                     </div>
+                </div>
+                <div class="col-xs-2">
+                    <%= f.input :sucumbencia, as: :string,
+                    :input_html => {
+                        :placeholder => "Valor %",
+                        :value => @processo.sucumbencia.nil? ? "" : '%.02f' % @processo.sucumbencia,
+                    } %>
                 </div>
             </div>
             <br>
@@ -204,6 +204,71 @@
             </div>
         </div>
         <div class="col-xs-5">
+            <div class="row">
+                <div class="panel panel-default panel-sucumbencia hidden">
+                    <div class="panel-heading toggle-panel cursor-pointer">
+                        <h6 class="panel-title">
+                            <span class="glyphicon glyphicon-menu-right pull-left icon-toggle-panel" aria-hidden="true"></span>
+                            Sucumbências
+                        </h6>
+                    </div>
+                    <div class="panel-body hidden panel-body-sucumbencia">
+                        <ul class="list-inline">
+                            <li>
+                                Data
+                            </li>
+                            <li>
+                                Sucumbência
+                            </li>
+                            <li>
+                                Índice na Data<br>da Obrigação
+                            </li>
+                            <li>Corrigida</li>
+                            <li>Fls</li>
+                        </ul>
+                        <% unless @processo.sucumbencia_valors.empty?
+                            @processo.sucumbencia_valors.each do |s| %>
+                                <% unless s.new_record? %>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <%= c.sucumbencia_data.nil? ? "<span class='custas-error text-danger'>Data Inválida!</span>".html_safe : c.custas_data.strftime("%d/%m/%Y")
+                                            %>
+                                        </li>
+                                        <li>
+                                            <%= c.valor.nil? ? "<span class='custas-error text-danger'>Valor Inválido!<span>".html_safe : ('%.02f' % c.custas_valor).gsub(".", ",") %>
+                                        </li>
+                                        <li>
+                                            <%= c.indice.to_s.gsub(".", ",") %>
+                                        </li>
+                                        <li>
+                                            <%= ('%.02f' % c.sucumbencia_corrigida).gsub(".", ",") %>
+                                        </li>
+                                        <li>
+                                            <%= (c.folhas.nil? || c.folhas.empty?) ? "<span class='custas-error text-danger'>Valor Inválido!<span>".html_safe :  c.folhas %>
+                                            <span data-id="<%= c.id %>" class="glyphicon glyphicon-trash text-danger cursor-pointer delete-custa pull-right"
+                                                aria-hidden="true" data-custa-id="<%= c.id %>"></span>
+                                            <span class="margin-right-10 glyphicon glyphicon-pencil text-info cursor-pointer edit-custa pull-right"
+                                                aria-hidden="true" data-custa-id="<%= c.id %>"></span>
+
+                                        </li>
+                                    </ul>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                        <hr>
+                        <div id="sucumbencia_valors">
+                            <div class="hidden-form-sucumbencia_valors hidden">
+                                <%= f.fields_for :sucumbencia_valors do |sucumbencia_valor| %>
+                                  <%= render "sucumbencia_valor_fields", :f => sucumbencia_valor %>
+                                <% end %>
+                            </div>
+
+                            <%= link_to_add_association "Adicionar", f, :sucumbencia_valors,
+                            :class => "btn btn-success pull-right btn-add-sucumbencia_valor" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="panel panel-default">
                     <div class="panel-heading toggle-panel cursor-pointer custas-heading">
@@ -218,7 +283,7 @@
                             </span>
                         </h6>
                     </div>
-                    <div class="panel-body panel-custas hidden">
+                    <div class="panel-body panel-body-custas hidden">
                         <ul class="list-inline">
                             <li>
                                 Data
@@ -282,7 +347,7 @@
                             Inserir Autores
                         </h6>
                     </div>
-                    <div class="panel-body panel-autor">
+                    <div class="panel-body panel-body-autor">
                         <ul class="list-inline list-autor">
                             <li>
                                 Nome

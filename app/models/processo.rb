@@ -20,8 +20,10 @@ class Processo < ApplicationRecord
   validates :tipo_sucumbencia, presence: true
   has_many :autors, :dependent => :destroy, :inverse_of => :processo
   has_many :custas, :dependent => :destroy, :inverse_of => :processo
+  has_many :sucumbencia_valors, :dependent => :destroy, :inverse_of => :processo
   accepts_nested_attributes_for :autors, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :custas, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :sucumbencia_valors, reject_if: :all_blank, allow_destroy: true
   belongs_to :cbpm_ipesp
   belongs_to :cruz_iamspe
   belongs_to :data_calculo
