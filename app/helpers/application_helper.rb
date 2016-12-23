@@ -1,5 +1,9 @@
 module ApplicationHelper
-
+    def troca_sucumbencia(processo)
+        if processo.tipo_sucumbencia.nome == "%"
+            SucumbenciaValor.where(:processo_id => processo.id).destroy_all
+        end
+    end
     def atualiza_meses(data_citacao, periodo, meses)
         @meses = meses
         month_dif = (periodo.year * 12 + periodo.month) - (data_citacao.year * 12 + data_citacao.month)

@@ -65,19 +65,6 @@ label:not(.checkbox, .radio):after {
     }
 }
 
-
-.btn-add-autor{
-    @extend .absolute;
-    top: 52px;
-    right: 4px;
-}
-
-.btn-add-custa{
-    @extend .absolute;
-    top: 4px;
-    right: 4px;
-}
-
 .panel-body-autor,
 .panel-body-custas,
 .panel-body-sucumbencia{

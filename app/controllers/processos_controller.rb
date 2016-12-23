@@ -50,8 +50,8 @@ class ProcessosController < ApplicationController
             end
 
             if @processo.update(processo_params)
+                troca_sucumbencia(@processo)
                 calcula_custas(@processo)
-
                 if @processo.autors.count > 0
                     if @old_ids.empty?
                         create_pagamentos(@processo.autors)
@@ -68,7 +68,11 @@ class ProcessosController < ApplicationController
                             @old_autores =  @processo.autors.where('id NOT IN (?)', @new_ids)
                         end
 
-                        update_autores(@old_autores)
+                        @old_autores.each do |o|
+                            if o.pagamentos.length > 0
+                                update_autores(@old_autores)
+                            end
+                        end
                     end
                 end
 
@@ -283,7 +287,8 @@ class ProcessosController < ApplicationController
         :sucumbencia,
         :tipo_sucumbencia_id,
         custas_attributes: [:id, :custas_data, :custas_valor, :custas_corrigida, :indice, :folhas, :_destroy],
-        autors_attributes: [:id, :nome, :periodo_inicial, :periodo_final, :folhas, :_destroy]
+        autors_attributes: [:id, :nome, :periodo_inicial, :periodo_final, :folhas, :_destroy],
+        sucumbencia_valors_attributes: [:id, :sucumbencia_data, :valor, :sucumbencia_corrigida, :indice, :folhas, :_destroy]
         )
     end
 end

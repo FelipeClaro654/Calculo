@@ -1,42 +1,49 @@
 <div class="nested-fields">
     <div class="row">
-        <div class="col-xs-2 margin-top-12">
-            <%= f.input :sucumbencia_data, label: "Data",
+        <div class="col-xs-2">
+            <%= f.input :sucumbencia_data,
             as: :string,
-            :input_html => { :placeholder => "__/__/__",
-                             :class => "calendario sucumbencia-data" }%>
-        </div>
-        <div class="col-xs-2 margin-top-12">
-            <%= f.input :valor, label: "Sucumbência",
-            as: :string,
+            label: false,
             :input_html => {
+                :placeholder => "__/__/__",
+                :class => "calendario sucumbencia-data"
+            }%>
+        </div>
+        <div class="col-xs-2 ">
+            <%= f.input :valor,
+            as: :string,
+            label: false,
+            :input_html => {
+                :placeholder => "valor",
                 :class => "sucumbencia-valor"
             }%>
         </div>
         <div class="col-xs-2">
-            <%= f.input :indice, label: "Índice Obrigação",
+            <%= f.input :indice,
             as: :string,
+            label: false,
             :input_html => {
                 :disabled => true,
                 :class => "sucumbencia-indice"
             }%>
         </div>
-        <div class="col-xs-2 margin-top-12">
-            <%= f.input :sucumbencia_corrigida, label: "Corrigida",
+        <div class="col-xs-2 ">
+            <%= f.input :sucumbencia_corrigida,
             as: :string,
+            label: false,
             :input_html => {
                 :disabled => true,
                 :class => "sucumbencia-corrigida"
             }%>
         </div>
-        <div class="col-xs-2 margin-top-12">
-            <%= f.input :folhas, label: "Fls"%>
+        <div class="col-xs-2 ">
+            <%= f.input :folhas, label: false, :input_html => {
+                :placeholder => "folhas"
+            }%>
         </div>
-        <div class="col-xs-1 margin-top-12">
+        <div class="col-xs-1 ">
             <%= link_to_remove_association "Remover", f,
-                  :class => "btn btn-danger pull-right margin-left-5 btn-remove-sucumbencia margin-top-14 neg-margin-right-38"%>
+                  :class => "btn btn-danger pull-right margin-left-5 btn-remove-sucumbencia neg-margin-right-38 neg-margin-top-3"%>
         </div>
     </div>
-    <hr>
-
 </div>

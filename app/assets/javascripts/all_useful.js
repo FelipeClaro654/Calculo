@@ -5,8 +5,10 @@ Useful = {
 }
 
 $(function () {
-    $(document).on("click",".toggle-panel", function() {
-        debugger;
+    $(document).on("click",".toggle-panel", function(e) {
+        if($(e.target).hasClass("add_fields")){
+            return false;
+        }
         var icon = $(this).find(".icon-toggle-panel");
 
         if(icon.hasClass("glyphicon-menu-right")){

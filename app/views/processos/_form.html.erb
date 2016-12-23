@@ -210,6 +210,11 @@
                         <h6 class="panel-title">
                             <span class="glyphicon glyphicon-menu-right pull-left icon-toggle-panel" aria-hidden="true"></span>
                             Sucumbências
+                            <div id="#add_sucumbencia_cocoon" class="cocoon-add toggle-optional hidden">
+                                <%= link_to_add_association "Adicionar", f, :sucumbencia_valors,
+                                :class => "btn btn-success pull-right btn-add-sucumbencia_valor" %>
+                            </div>
+
                         </h6>
                     </div>
                     <div class="panel-body hidden panel-body-sucumbencia">
@@ -229,26 +234,26 @@
                         <% unless @processo.sucumbencia_valors.empty?
                             @processo.sucumbencia_valors.each do |s| %>
                                 <% unless s.new_record? %>
-                                    <ul class="list-inline">
+                                    <ul class="list-inline sucumbencia-ul">
                                         <li>
-                                            <%= c.sucumbencia_data.nil? ? "<span class='custas-error text-danger'>Data Inválida!</span>".html_safe : c.custas_data.strftime("%d/%m/%Y")
+                                            <%= s.sucumbencia_data.nil? ? "<span class='sucumbencia-error text-danger'>Data Inválida!</span>".html_safe : s.sucumbencia_data.strftime("%d/%m/%Y")
                                             %>
                                         </li>
                                         <li>
-                                            <%= c.valor.nil? ? "<span class='custas-error text-danger'>Valor Inválido!<span>".html_safe : ('%.02f' % c.custas_valor).gsub(".", ",") %>
+                                            <%= s.valor.nil? ? "<span class='sucumbencia-error text-danger'>Valor Inválido!<span>".html_safe : ('%.02f' % s.valor).gsub(".", ",") %>
                                         </li>
                                         <li>
-                                            <%= c.indice.to_s.gsub(".", ",") %>
+                                            <%= s.indice.to_s.gsub(".", ",") %>
                                         </li>
                                         <li>
-                                            <%= ('%.02f' % c.sucumbencia_corrigida).gsub(".", ",") %>
+                                            <%= ('%.02f' % s.sucumbencia_corrigida).gsub(".", ",") %>
                                         </li>
                                         <li>
-                                            <%= (c.folhas.nil? || c.folhas.empty?) ? "<span class='custas-error text-danger'>Valor Inválido!<span>".html_safe :  c.folhas %>
-                                            <span data-id="<%= c.id %>" class="glyphicon glyphicon-trash text-danger cursor-pointer delete-custa pull-right"
-                                                aria-hidden="true" data-custa-id="<%= c.id %>"></span>
-                                            <span class="margin-right-10 glyphicon glyphicon-pencil text-info cursor-pointer edit-custa pull-right"
-                                                aria-hidden="true" data-custa-id="<%= c.id %>"></span>
+                                            <%= (s.folhas.nil? || s.folhas.empty?) ? "<span class='sucumbencia-error text-danger'>Valor Inválido!<span>".html_safe : s.folhas %>
+                                            <span data-id="<%= s.id %>" class="glyphicon glyphicon-trash text-danger cursor-pointer delete-sucumbencia pull-right"
+                                                aria-hidden="true" data-sucumbencia-id="<%= s.id %>"></span>
+                                            <span class="margin-right-10 glyphicon glyphicon-pencil text-info cursor-pointer edit-sucumbencia pull-right"
+                                                aria-hidden="true" data-sucumbencia-id="<%= s.id %>"></span>
 
                                         </li>
                                     </ul>
@@ -256,15 +261,13 @@
                             <% end %>
                         <% end %>
                         <hr>
+                        <div class="cocoon-container"></div>
                         <div id="sucumbencia_valors">
                             <div class="hidden-form-sucumbencia_valors hidden">
                                 <%= f.fields_for :sucumbencia_valors do |sucumbencia_valor| %>
                                   <%= render "sucumbencia_valor_fields", :f => sucumbencia_valor %>
                                 <% end %>
                             </div>
-
-                            <%= link_to_add_association "Adicionar", f, :sucumbencia_valors,
-                            :class => "btn btn-success pull-right btn-add-sucumbencia_valor" %>
                         </div>
                     </div>
                 </div>
@@ -275,6 +278,10 @@
                         <h6 class="panel-title">
                             <span class="glyphicon glyphicon-menu-right pull-left icon-toggle-panel" aria-hidden="true"></span>
                             Custas
+                            <div id="#add_custas_cocoon" class="cocoon-add toggle-optional hidden">
+                                <%= link_to_add_association "Adicionar", f, :custas,
+                                :class => "btn btn-success pull-right" %>
+                            </div>
                             <span class="custas-total toggle-optional pull-right">
                                 <% unless @processo.autors.empty? %>
                                     <%= @processo.autors.first.custas.nil? ? "0" : ('%.02f' % @processo.autors.first.custas).gsub(".", ",") %>
@@ -297,6 +304,7 @@
                             <li>Corrigida</li>
                             <li>Fls</li>
                         </ul>
+
                         <% unless @processo.custas.empty?
                             @processo.custas.each do |c| %>
                                 <% unless c.new_record? %>
@@ -327,15 +335,13 @@
                             <% end %>
                         <% end %>
                         <hr>
+                        <div class="cocoon-container"></div>
                         <div id="custas">
                             <div class="hidden-form-custas hidden">
                                 <%= f.fields_for :custas do |custa| %>
                                   <%= render "custa_fields", :f => custa %>
                                 <% end %>
                             </div>
-
-                            <%= link_to_add_association "Adicionar", f, :custas,
-                            :class => "btn btn-success pull-right btn-add-custa" %>
                         </div>
                     </div>
                 </div>
@@ -345,6 +351,10 @@
                     <div class="panel-heading">
                         <h6 class="panel-title">
                             Inserir Autores
+                            <div class="cocoon-add" id="add_autor_cocoon">
+                                <%= link_to_add_association "Adicionar", f, :autors,
+                                :class => "btn btn-success pull-right" %>
+                            </div>
                         </h6>
                     </div>
                     <div class="panel-body panel-body-autor">
@@ -392,15 +402,13 @@
                             <% end %>
                         <% end %>
                         <hr>
+                        <div class="cocoon-container"></div>
                         <div id="autors">
                             <div class="hidden-form-autors hidden">
                                 <%= f.fields_for :autors do |autor| %>
                                   <%= render "autor_fields", :f => autor %>
                                 <% end %>
                             </div>
-
-                            <%= link_to_add_association "Adicionar", f, :autors,
-                            :class => "btn btn-success pull-right btn-add-autor default-position" %>
                         </div>
                     </div>
                 </div>

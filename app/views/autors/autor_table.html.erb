@@ -196,12 +196,14 @@
                     <%= @autor.processo.data_citacao.strftime("%d/%m/%Y") %>
                     <% end %>
                 </th>
-                <th>
-                    Hon. Adv. <br> 10% <br> Sobre o <br>
-                    Valor <br>
-                    Principal <br>
-                    Atualizado
-                </th>
+                <% if @autor.processo.tipo_sucumbencia.nome == "%" %>
+                    <th>
+                        Hon. Adv. <br> 10% <br> Sobre o <br>
+                        Valor <br>
+                        Principal <br>
+                        Atualizado
+                    </th>
+                <% end %>
             </thead>
             <tbody>
                 <% @pagamentos.order("created_at asc").each_with_index do |p , p_index| %>
@@ -249,9 +251,11 @@
                     <td data-valor="<%= p.juros %>" class="juros">
                         <%= number_with_delimiter(('%.02f' %  p.juros), separator: ",", delimiter: ".") %>
                     </td>
-                    <td data-valor="<%= p.honorario %>" class="honorario">
-                        <%= number_with_delimiter(('%.02f' %  p.honorario), separator: ",", delimiter: ".") %>
-                    </td>
+                    <% if @autor.processo.tipo_sucumbencia.nome == "%" %>
+                        <td data-valor="<%= p.honorario %>" class="honorario">
+                            <%= number_with_delimiter(('%.02f' %  p.honorario), separator: ",", delimiter: ".") %>
+                        </td>
+                    <% end %>
                     <td class="hidden">
                         <%= hidden_field_tag("hidden_assistencia", p.assistencia, :class => "assistencia", "data-valor" => p.assistencia ) %>
                         <%= hidden_field_tag("hidden_previdencia", p.previdencia, :class => "previdencia", "data-valor" => p.previdencia) %>
@@ -280,8 +284,10 @@
                     </th>
                     <th class="total-juros text-right">
                     </th>
-                    <th class="total-honorario text-right">
-                    </th>
+                    <% if @autor.processo.tipo_sucumbencia.nome == "%" %>
+                        <th class="total-honorario text-right">
+                        </th>
+                    <% end %>
                 </tr>
             </tbody>
         </table>
@@ -342,7 +348,13 @@
                     <strong>Honorarios de 10% s/(Principal Atualizado + Juros)</strong>
                 </th>
                 <th>
-                    <strong class="total-honorario text-right pull-right"></strong>
+                    <% if @autor.processo.tipo_sucumbencia.nome == "%" %>
+                        <strong class="total-honorario text-right pull-right"></strong>
+                    <% else %>
+                        <strong class="text-right pull-right">
+                            <%= @autor.processo.sucumbencia_valors.nil? ? "0" : ('%.02f' % @autor.processo.sucumbencia_valors.sum("sucumbencia_corrigida")).gsub(".", ",") %>
+                        </strong>
+                    <% end %>
                 </th>
             </tr>
             <tr>

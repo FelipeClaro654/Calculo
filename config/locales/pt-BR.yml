@@ -9,6 +9,7 @@ pt-BR:
     models:
       tabela_atualizacao: "Tabela Atualização"
       cbpm_ipesp: "CBPM / IAMSPE"
+      sucumbencia_valor: "Sucumbência"
     attributes:
       processo:
         data_distribuicao: "Distribuição"
@@ -30,6 +31,23 @@ pt-BR:
         data_calculo_id: "Data cálculo"
         sucumbencia: "Sucumbência"
         tipo_sucumbencia_id: "Tipo Sucumbência"
+      sucumbencia_valors:
+        sucumbencia_data: "Data Sucumbência"
+        valor: "Valor Sucumbência"
+        sucumbencia_corrigida: "Sucumbência Corrigida"
+        indice: "Índice da Sucumbência"
+        folhas: "Folhas da Sucumbência"
+      custas:
+        custas_data: "Data Custas"
+        custas_valor: "Valor Custas"
+        custas_corrigida: "Custas Corrigida"
+        indice: "Índice das Custas"
+        folhas: "Folhas das Custas"
+      autors:
+        nome: "Nome do Autor"
+        periodo_inicial: "Período Inicial do Autor"
+        periodo_final: "Período Final do Autor"
+        folhas: Folhas do Autor
   date:
     abbr_day_names:
     - Dom

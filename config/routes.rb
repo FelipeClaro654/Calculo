@@ -11,6 +11,9 @@ Rails.application.routes.draw do
         post "salva_totais", on: :collection
         post "delete_autor", on: :collection
     end
+    resources :sucumbencia_valors do
+        post "destroy", on: :collection
+    end
     resources :custas do
         post "destroy", on: :collection
     end

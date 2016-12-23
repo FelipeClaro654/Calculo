@@ -1,26 +1,25 @@
 <div class="nested-fields">
     <div class="row">
         <div class="col-xs-4">
-            <%= f.input :nome %>
+            <%= f.input :nome, label: false,
+            :input_html => { :placeholder => "nome"} %>
         </div>
         <div class="col-xs-2">
-            <%= f.input :periodo_inicial, label: "Período",
+            <%= f.input :periodo_inicial, label: false,
             as: :string,
             :input_html => { :placeholder => "__/__/__", :class => "calendario" }%>
         </div>
         <div class="col-xs-2">
             <%= f.input :periodo_final, label: false,
             as: :string,
-            :input_html => { :placeholder => "__/__/__", :class => "calendario margin-top-17" }%>
+            :input_html => { :placeholder => "__/__/__", :class => "calendario" }%>
         </div>
         <div class="col-xs-2">
-            <%= f.input :folhas %>
+            <%= f.input :folhas, label: false, :input_html => { :placeholder => "folhas"}  %>
         </div>
         <div class="col-xs-1">
             <%= link_to_remove_association "Remover", f,
-                  :class => "btn btn-danger pull-right margin-left-5 btn-remove-autor margin-top-14 neg-margin-right-38"%>
+                  :class => "btn btn-danger pull-right margin-left-5 btn-remove-autor neg-margin-right-38 neg-margin-top-3"%>
         </div>
     </div>
-    <hr>
-
 </div>
